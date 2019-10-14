@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/line"
+    tools:context="com.guoyu.fusemanagerapp.page.RenzhengActivity">
+
+    <RelativeLayout
+        style="@style/rl_top_bar">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="申请认证"
+            style="@style/tv_top_title" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@color/white_ffffff"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="商家资质（支持JPG、PNG等图片格式）"
+                    android:textColor="#333333"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginTop="13dp"
+                        android:id="@+id/rl_add"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/text_sharp">
+
+                        <ImageView
+                            android:id="@+id/iv_upload"
+                            android:layout_width="match_parent"
+                            android:layout_height="29dp"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/upload3x" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_upload"
+                            android:layout_marginLeft="18dp"
+                            android:text="上传照片"
+                            android:textColor="#999999"
+                            android:textSize="11sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="8dp">
+
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:id="@+id/iv_img"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="-9dp"
+                        android:id="@+id/iv_del"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@mipmap/close_three3x"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+            
+            <View
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/black_333333"
+                    android:textSize="14sp"
+                    android:text="申请开通服务"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/more3x"
+                    android:layout_width="7dp"
+                    android:layout_height="12dp" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="34dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    android:text="请选择"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <View
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <RelativeLayout
+                android:descendantFocusability="blocksDescendants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:background="@color/line"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <Button
+                    android:textColor="@color/white_ffffff"
+                    android:textSize="17sp"
+                    android:text="提交认证信息"
+                    android:background="@color/theme"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

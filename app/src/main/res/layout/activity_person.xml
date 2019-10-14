@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/line"
+    tools:context="com.guoyu.fusemanagerapp.page.PersonActivity">
+
+    <RelativeLayout
+        style="@style/rl_top_bar">
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="我的" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_login"
+        android:layout_width="match_parent"
+        android:layout_height="101dp"
+        android:background="#D62424">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/iv_head"
+            android:text="未登录用户"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/iv_head"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="?android:selectableItemBackground"
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="我的信息管理"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_marginRight="16dp"
+                android:layout_width="7dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/more3x" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_marginTop="1dp"
+            android:background="?android:selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="我的信息审核"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_marginRight="16dp"
+                android:layout_width="7dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/more3x" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_marginTop="1dp"
+            android:background="?android:selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="我的信息反馈"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_marginRight="16dp"
+                android:layout_width="7dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/more3x" />
+        </LinearLayout>
+
+        <View
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_about"
+            android:background="?android:selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="关于"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_marginRight="16dp"
+                android:layout_width="7dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/more3x" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
