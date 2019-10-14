@@ -24,6 +24,7 @@
         android:background="#D62424">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@mipmap/timg"
             android:id="@+id/iv_head"
             android:layout_width="65dp"
             android:layout_height="65dp"
@@ -37,7 +38,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/iv_head"
-            android:text="未登录用户"
             android:textColor="#FFFFFF"
             android:textSize="24sp" />
 

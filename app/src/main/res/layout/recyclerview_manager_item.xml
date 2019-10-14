@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:background="@color/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="19dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginLeft="19dp"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:text="双鸭山中小学政务管理等级考试指南事业单位人员名单分析报告"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/gl_icon004"
+                    android:layout_width="11dp"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:textSize="11sp"
+                    android:textColor="#999999"
+                    android:text="信息类别：教育服务"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/gl_icon005"
+                    android:layout_width="11dp"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:textSize="11sp"
+                    android:textColor="#999999"
+                    android:text="管理状态：已发布"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginBottom="14dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="19dp"
+                android:gravity="center"
+                android:background="#F3F3F3"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:text="撤销发布"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

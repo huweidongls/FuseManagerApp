@@ -23,7 +23,7 @@
         <activity android:name=".page.PersonActivity" />
         <activity android:name=".page.RegistrationTwoActivity" />
         <activity android:name=".page.RegistrationThreeActivity" />
-        <activity android:name=".page.RenzhengActivity"/>
+        <activity android:name=".page.RenzhengActivity" />
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -47,7 +47,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".page.RenzhengListActivity"></activity>
+        <activity android:name=".page.RenzhengListActivity" />
+        <activity android:name=".page.ManagerActivity" />
+        <activity android:name=".page.AuditActivity" />
+        <activity android:name=".page.FeedbackActivity"></activity>
     </application>
 
 </manifest>
