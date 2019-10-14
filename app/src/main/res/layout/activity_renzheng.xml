@@ -171,6 +171,7 @@
                 android:layout_height="100dp">
 
                 <Button
+                    android:id="@+id/btn_commit"
                     android:textColor="@color/white_ffffff"
                     android:textSize="17sp"
                     android:text="提交认证信息"

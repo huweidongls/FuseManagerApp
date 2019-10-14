@@ -94,19 +94,24 @@ public class LoginActivity extends BaseActivity {
                         public void onReturn(String s) {
                             Gson gson = new Gson();
                             LoginBean bean = gson.fromJson(s, LoginBean.class);
-                            ToastUtil.showShort(context, bean.getErrorMsg());
-                            SpUtils.setToken(context, bean.getUserNameFromToken());
-                            SpUtils.setUserId(context, bean.getData().getId()+"");
-                            SpUtils.setPhoneNum(context, bean.getData().getUsername());
-                            Map<String, String> map = new LinkedHashMap<>();
-                            map.put("jnkjToken", bean.getUserNameFromToken());
-                            ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
-                                    .globalHeaders(map);
-
-
-
                             Intent intent1 = new Intent();
-                            intent1.setClass(context, MainActivity.class);
+                            if(bean.getData().getUserType() == 2&&bean.getData().getAppuserType() == 2&&bean.getData().getStatus()!=2){
+                                intent1.setClass(context, RenzhengActivity.class);
+                                intent1.putExtra("id", bean.getData().getId()+"");
+                                Map<String, String> map2 = new LinkedHashMap<>();
+                                map2.put("jnkjToken", bean.getUserNameFromToken());
+                                ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                                        .globalHeaders(map2);
+                            }else {
+                                intent1.setClass(context, MainActivity.class);
+                                SpUtils.setToken(context, bean.getUserNameFromToken());
+                                SpUtils.setUserId(context, bean.getData().getId()+"");
+                                SpUtils.setPhoneNum(context, bean.getData().getUsername());
+                                Map<String, String> map2 = new LinkedHashMap<>();
+                                map2.put("jnkjToken", bean.getUserNameFromToken());
+                                ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                                        .globalHeaders(map2);
+                            }
                             startActivity(intent1);
                             finish();
                         }

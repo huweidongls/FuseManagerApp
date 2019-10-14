@@ -23,6 +23,22 @@
         <TextView
             android:text="申请开通服务"
             style="@style/tv_top_title" />
+        
+        <RelativeLayout
+            android:id="@+id/rl_commit"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:text="提交"
+                android:textColor="@color/white_ffffff"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
