@@ -115,35 +115,36 @@
                 android:layout_height="10dp"/>
 
             <RelativeLayout
+                android:id="@+id/rl_list"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/black_333333"
-                    android:textSize="14sp"
                     android:text="申请开通服务"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/black_333333"
+                    android:textSize="14sp" />
 
                 <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="12dp"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/more3x"
-                    android:layout_width="7dp"
-                    android:layout_height="12dp" />
+                    android:src="@mipmap/more3x" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="34dp"
-                    android:layout_alignParentRight="true"
-                    android:textColor="#999999"
-                    android:textSize="12sp"
                     android:text="请选择"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
 
             </RelativeLayout>
 

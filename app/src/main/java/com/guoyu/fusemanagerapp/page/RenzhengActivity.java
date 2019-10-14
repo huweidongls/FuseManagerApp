@@ -49,8 +49,9 @@ public class RenzhengActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_add, R.id.iv_del})
+    @OnClick({R.id.rl_back, R.id.rl_add, R.id.iv_del, R.id.rl_list})
     public void onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
@@ -68,6 +69,10 @@ public class RenzhengActivity extends BaseActivity {
                 pic1 = "";
                 Glide.with(context).load("#ffffff").into(ivImg);//@mipmap/img0203x
                 ivDel.setVisibility(View.GONE);
+                break;
+            case R.id.rl_list:
+                intent.setClass(context, RenzhengListActivity.class);
+                startActivity(intent);
                 break;
         }
     }

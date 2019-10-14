@@ -10,9 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".page.WelcomeActivity">
-
-        </activity>
+        <activity android:name=".page.WelcomeActivity"></activity>
         <activity android:name=".page.MainActivity" />
         <activity android:name=".page.LoginActivity" />
         <activity android:name=".page.RegisterActivity" />
@@ -26,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -50,6 +47,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".page.RenzhengListActivity"></activity>
     </application>
 
 </manifest>
