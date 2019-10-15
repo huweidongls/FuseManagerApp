@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FuseManagerApp.iml" filepath="$PROJECT_DIR$/FuseManagerApp.iml" />
+      <module fileurl="file://D:\gitproject\FuseManagerApp\FuseManagerApp.iml" filepath="D:\gitproject\FuseManagerApp\FuseManagerApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\gitproject\FuseManagerApp\app\app.iml" filepath="D:\gitproject\FuseManagerApp\app\app.iml" />
     </modules>
   </component>
 </project>
