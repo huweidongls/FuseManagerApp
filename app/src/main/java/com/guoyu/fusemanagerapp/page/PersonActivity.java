@@ -59,20 +59,36 @@ public class PersonActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3})
+    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
             case R.id.ll1:
-                intent.setClass(context, ManagerActivity.class);
+                intent.setClass(context, MicroAuditActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll2:
-                intent.setClass(context, AuditActivity.class);
+                intent.setClass(context, MicroReplyActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll3:
+                intent.setClass(context, RealAuditActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll4:
                 intent.setClass(context, FeedbackActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll5:
+                intent.setClass(context, GovernmentServicesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll6:
+                intent.setClass(context, AcademicResourcesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll7:
+                intent.setClass(context, TicketServiceActivity.class);
                 startActivity(intent);
                 break;
         }

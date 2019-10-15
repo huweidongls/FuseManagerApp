@@ -49,8 +49,13 @@
 
         <activity android:name=".page.RenzhengListActivity" />
         <activity android:name=".page.ManagerActivity" />
-        <activity android:name=".page.AuditActivity" />
-        <activity android:name=".page.FeedbackActivity"></activity>
+        <activity android:name=".page.MicroAuditActivity" />
+        <activity android:name=".page.FeedbackActivity" />
+        <activity android:name=".page.MicroReplyActivity" />
+        <activity android:name=".page.RealAuditActivity" />
+        <activity android:name=".page.GovernmentServicesActivity" />
+        <activity android:name=".page.AcademicResourcesActivity" />
+        <activity android:name=".page.TicketServiceActivity"></activity>
     </application>
 
 </manifest>
