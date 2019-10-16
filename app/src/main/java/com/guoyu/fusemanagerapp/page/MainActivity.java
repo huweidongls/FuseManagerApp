@@ -10,14 +10,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.IndexAdapter;
 import com.guoyu.fusemanagerapp.adapter.IndexGongnengAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.bean.MenuBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.SpUtils;
+import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +54,7 @@ public class MainActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     private IndexGongnengAdapter gongnengAdapter;
-    private List<String> mList;
+    private List<MenuBean.DataBean> mList;
     private IndexAdapter indexAdapter;
     private List<String> mIndexList;
 
@@ -63,23 +70,25 @@ public class MainActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        gongnengAdapter = new IndexGongnengAdapter(mList);
-        GridLayoutManager manager = new GridLayoutManager(context, 4){
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", SpUtils.getUserId(context));
+        ViseUtil.Get(context, NetUrl.AppUseradminGetMuen, map, new ViseUtil.ViseListener() {
             @Override
-            public boolean canScrollVertically() {
-                return false;
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                MenuBean bean = gson.fromJson(s, MenuBean.class);
+                mList = bean.getData();
+                gongnengAdapter = new IndexGongnengAdapter(mList);
+                GridLayoutManager manager = new GridLayoutManager(context, 4){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                rvGongneng.setLayoutManager(manager);
+                rvGongneng.setAdapter(gongnengAdapter);
             }
-        };
-        rvGongneng.setLayoutManager(manager);
-        rvGongneng.setAdapter(gongnengAdapter);
+        });
 
         mIndexList = new ArrayList<>();
         mIndexList.add("");

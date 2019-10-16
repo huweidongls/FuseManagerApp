@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.MenuBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
 
 import java.util.List;
 
@@ -21,12 +24,10 @@ import java.util.List;
 public class IndexGongnengAdapter extends RecyclerView.Adapter<IndexGongnengAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
-    private int max;
+    private List<MenuBean.DataBean> data;
 
-    public IndexGongnengAdapter(List<String> data) {
+    public IndexGongnengAdapter(List<MenuBean.DataBean> data) {
         this.data = data;
-        max = data.size();
     }
 
     @Override
@@ -39,34 +40,13 @@ public class IndexGongnengAdapter extends RecyclerView.Adapter<IndexGongnengAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(position == max){
-            holder.ll.setVisibility(View.GONE);
-            holder.llMore.setVisibility(View.VISIBLE);
-        }else {
-            holder.ll.setVisibility(View.VISIBLE);
-            holder.llMore.setVisibility(View.GONE);
-        }
-//        holder.ll.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(context, ModuleWebViewActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
-//        holder.llMore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(context, MoreActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getLogoPic()).into(holder.iv);
+        holder.tv.setText(data.get(position).getFunName());
     }
 
     @Override
     public int getItemCount() {
-        return data == null ? 0 : data.size()+1;
+        return data == null ? 0 : data.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -74,14 +54,12 @@ public class IndexGongnengAdapter extends RecyclerView.Adapter<IndexGongnengAdap
         private ImageView iv;
         private TextView tv;
         private LinearLayout ll;
-        private LinearLayout llMore;
 
         public ViewHolder(View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
             tv = itemView.findViewById(R.id.tv);
             ll = itemView.findViewById(R.id.ll);
-            llMore = itemView.findViewById(R.id.ll_more);
         }
     }
 

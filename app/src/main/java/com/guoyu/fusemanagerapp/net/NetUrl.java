@@ -20,6 +20,6 @@ public class NetUrl {
     public static final String AppUseradmingetOne = "/AppUser/admingetOne";
     //app商户审核认证
     public static final String AppUsercommercialAudit = "/AppUser/commercialAudit";
-    //app商户审核认证
-    public static final String AppUserUpdateCommercialAudit = "/AppUser/UpdateCommercialAudit";
+    //app管理端获取权限
+    public static final String AppUseradminGetMuen = "/AppUser/adminGetMuen";
 }

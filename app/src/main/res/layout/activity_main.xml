@@ -48,6 +48,25 @@
             </com.youth.banner.Banner>
 
             <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:background="@color/white_ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="18dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:text="我的应用"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="1dp"
                 android:background="@color/white_ffffff"
                 android:descendantFocusability="blocksDescendants"
                 android:layout_width="match_parent"
