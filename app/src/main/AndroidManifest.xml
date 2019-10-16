@@ -67,7 +67,8 @@
         <activity android:name=".page.RealNameActivity" />
         <activity android:name=".page.AcademicResourcesInsertActivity" />
         <activity android:name=".page.FeedbackDetailsActivity" />
-        <activity android:name=".page.FeedbackContentActivity"></activity>
+        <activity android:name=".page.FeedbackContentActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
     </application>
 
 </manifest>

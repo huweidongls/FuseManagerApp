@@ -1,12 +1,14 @@
 package com.guoyu.fusemanagerapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.page.FeedbackDetailsActivity;
 
 import java.util.List;
 
@@ -33,7 +35,14 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, FeedbackDetailsActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
