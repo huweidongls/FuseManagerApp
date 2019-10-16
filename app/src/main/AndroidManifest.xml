@@ -65,7 +65,9 @@
             android:name=".page.ReplyWeiguanActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".page.RealNameActivity" />
-        <activity android:name=".page.AcademicResourcesInsertActivity"></activity>
+        <activity android:name=".page.AcademicResourcesInsertActivity" />
+        <activity android:name=".page.FeedbackDetailsActivity" />
+        <activity android:name=".page.FeedbackContentActivity"></activity>
     </application>
 
 </manifest>
