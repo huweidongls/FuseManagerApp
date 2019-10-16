@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GovernmentServicesActivity extends BaseActivity {
@@ -27,6 +28,7 @@ public class GovernmentServicesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_government_services);
+        ButterKnife.bind(GovernmentServicesActivity.this);
         initData();
     }
     private void initData(){
