@@ -12,6 +12,7 @@ import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.PersonBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 
@@ -47,6 +48,7 @@ public class PersonActivity extends BaseActivity {
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", SpUtils.getUserId(context));
+        Logger.e("123123", SpUtils.getUserId(context)+"id"+"token"+SpUtils.getToken(context));
         ViseUtil.Post(context, NetUrl.AppUseradmingetOne, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
