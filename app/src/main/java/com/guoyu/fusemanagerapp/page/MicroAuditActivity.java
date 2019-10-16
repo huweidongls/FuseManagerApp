@@ -43,7 +43,7 @@ public class MicroAuditActivity extends BaseActivity {
         mList.add("");
         mList.add("");
         mList.add("");
-        adapter = new MicroAuditAdapter(mList);
+        adapter = new MicroAuditAdapter(mList, 0);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);

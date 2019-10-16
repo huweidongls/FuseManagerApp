@@ -1,6 +1,7 @@
 package com.guoyu.fusemanagerapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.LinearLayout;
 
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
+import com.guoyu.fusemanagerapp.page.AuditWeiguanActivity;
+import com.guoyu.fusemanagerapp.page.ReplyWeiguanActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +24,11 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
 
     private Context context;
     private List<String> data;
+    private int type;
 
-    public MicroAuditAdapter(List<String> data) {
+    public MicroAuditAdapter(List<String> data, int type) {
         this.data = data;
+        this.type = type;
     }
 
     @Override
@@ -49,7 +54,13 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                if(type == 0){
+                    intent.setClass(context, AuditWeiguanActivity.class);
+                }else {
+                    intent.setClass(context, ReplyWeiguanActivity.class);
+                }
+                context.startActivity(intent);
             }
         });
 
