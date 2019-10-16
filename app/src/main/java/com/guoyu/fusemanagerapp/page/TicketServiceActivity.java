@@ -27,7 +27,7 @@ public class TicketServiceActivity extends BaseActivity {
     private List<String> mList2;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
-    @BindView(R.id.recycler_view2)
+    @BindView(R.id.recycler_viewj)
     RecyclerView recycler_view2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
