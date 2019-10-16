@@ -61,8 +61,10 @@
             android:screenOrientation="portrait" />
         <activity android:name=".page.GovernmentServiceInsertActivity" />
         <activity android:name=".page.AuditWeiguanActivity" />
-        <activity android:name=".page.ReplyWeiguanActivity"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
+        <activity
+            android:name=".page.ReplyWeiguanActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".page.RealNameActivity"></activity>
     </application>
 
 </manifest>
