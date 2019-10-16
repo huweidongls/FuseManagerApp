@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.guoyu.fusemanagerapp.page.GovernmentServiceInsertActivity">
+    <RelativeLayout style="@style/rl_top_bar">
+
+        <RelativeLayout
+            android:id="@+id/iv_black"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+            <ImageView style="@style/iv_top_back" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/tv_top_title"
+            android:text="政务指南发布" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="标题"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="17dp"
+                    android:background="@null"
+                    android:hint="请输入标题内容"
+                    android:textColorHint="#CCCCCC"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/line" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="选择类型"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:text="请选择"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/line" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="435dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="23dp"
+                    android:text="内容描述"
+                    android:textColor="#333333"
+                    android:textSize="13sp" />
+                <EditText
+                    android:id="@+id/et_content"
+                    android:gravity="start"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@null"
+                    android:hint="请输入投诉/咨询内容"
+                    android:textColorHint="#CCCCCC"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/line" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+              <Button
+                  android:layout_width="125dp"
+                  android:layout_height="45dp"
+                  android:text="暂存"
+                  android:textColor="#FFFFFF"
+                  android:textSize="17sp"
+                  android:background="#D62424"
+                  />
+                <Button
+                    android:layout_width="125dp"
+                    android:layout_height="45dp"
+                    android:text="发布"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:background="#FAA106"
+                    />
+                <Button
+                    android:layout_width="135dp"
+                    android:layout_height="45dp"
+                    android:text="暂存"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:background="#A7A7A7"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

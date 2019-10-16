@@ -55,10 +55,11 @@
         <activity android:name=".page.RealAuditActivity" />
         <activity android:name=".page.GovernmentServicesActivity" />
         <activity android:name=".page.AcademicResourcesActivity" />
-        <activity android:name=".page.TicketServiceActivity"/>
+        <activity android:name=".page.TicketServiceActivity" />
         <activity
             android:name=".imagepreview.ImagePreviewActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".page.GovernmentServiceInsertActivity"></activity>
     </application>
 
 </manifest>
