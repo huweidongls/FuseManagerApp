@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class GovernmentServiceInsertActivity extends AppCompatActivity {
     @BindView(R.id.spinner1)
@@ -21,6 +22,7 @@ public class GovernmentServiceInsertActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_government_service_insert);
+        ButterKnife.bind(GovernmentServiceInsertActivity.this);
         initData();
     }
     private void initData(){
