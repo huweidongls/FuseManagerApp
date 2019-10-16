@@ -18,7 +18,7 @@
 
         <TextView
             style="@style/tv_top_title"
-            android:text="政务指南发布" />
+            android:text="学科资源发布" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -121,37 +121,25 @@
                     android:textColorHint="#CCCCCC"
                     android:textSize="12sp" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/line" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
-              <Button
-                  android:layout_width="125dp"
-                  android:layout_height="45dp"
-                  android:text="暂存"
-                  android:textColor="#FFFFFF"
-                  android:textSize="17sp"
-                  android:background="#D62424"
-                  />
                 <Button
-                    android:layout_width="125dp"
+                    android:layout_width="188dp"
+                    android:layout_height="45dp"
+                    android:text="暂存"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:background="#D62424"
+                    />
+                <Button
+                    android:layout_width="197dp"
                     android:layout_height="45dp"
                     android:text="发布"
                     android:textColor="#FFFFFF"
                     android:textSize="17sp"
                     android:background="#FAA106"
-                    />
-                <Button
-                    android:layout_width="135dp"
-                    android:layout_height="45dp"
-                    android:text="暂存"
-                    android:textColor="#FFFFFF"
-                    android:textSize="17sp"
-                    android:background="#A7A7A7"
                     />
             </LinearLayout>
         </LinearLayout>
