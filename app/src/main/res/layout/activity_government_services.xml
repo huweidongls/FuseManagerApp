@@ -71,6 +71,32 @@
             />
     </RelativeLayout>
     <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/line" />
+    <RelativeLayout
+        android:id="@+id/"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:dividerHeight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/line" />
+  <!--  <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:layout_alignParentLeft="true"
@@ -117,5 +143,5 @@
             android:layout_marginTop="18dp"
             android:layout_centerInParent="true"
             />
-    </RelativeLayout>
+    </RelativeLayout>-->
 </LinearLayout>
