@@ -30,4 +30,10 @@ public class NetUrl {
     public static final String AppHomePageLatestNews = "/AppHomePage/LatestNews";
     //个人中心政务指南分类
     public static final String AppGovernmentInfofindType = "/AppGovernmentInfo/findType";
+    //查询待实名认证用户列表
+    public static final String AppUserqueryList = "/AppUser/queryList";
+    //实名认证详情
+    public static final String CitizenUsergetOne = "/CitizenUser/getOne";
+    //公民身份认证审核
+    public static final String AppUsercitizenUserAudit = "/AppUser/citizenUserAudit";
 }
