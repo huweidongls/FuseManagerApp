@@ -36,7 +36,7 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvName.setText(data.get(position).getRealName());
         holder.tvCard.setText(data.get(position).getAppuserId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +44,7 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.ViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, RealNameActivity.class);
+                intent.putExtra("id", data.get(position).getId()+"");
                 context.startActivity(intent);
             }
         });
