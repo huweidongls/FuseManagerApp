@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.GovernmentServiceListBean;
 
 import java.util.List;
 
@@ -16,9 +18,9 @@ import java.util.List;
 
 public class GovernmentServiceListAdapter extends RecyclerView.Adapter<GovernmentServiceListAdapter.ViewHolder>{
     private Context context;
-    private List<String> data;
+    private List<GovernmentServiceListBean.DataBean> data;
 
-    public GovernmentServiceListAdapter(List<String> data) {
+    public GovernmentServiceListAdapter(List<GovernmentServiceListBean.DataBean> data) {
         this.data = data;
     }
     @Override
@@ -31,7 +33,8 @@ public class GovernmentServiceListAdapter extends RecyclerView.Adapter<Governmen
 
     @Override
     public void onBindViewHolder(GovernmentServiceListAdapter.ViewHolder holder, int position) {
-
+        holder.tv_title.setText(data.get(position).getTitle());
+        holder.tv_tag.setText("【"+data.get(position).getGovTypeName()+"】");
     }
 
     @Override
@@ -40,8 +43,12 @@ public class GovernmentServiceListAdapter extends RecyclerView.Adapter<Governmen
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tv_title;
+        private TextView tv_tag;
         public ViewHolder(View itemView) {
             super(itemView);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            tv_tag = itemView.findViewById(R.id.tv_tag);
         }
     }
 }

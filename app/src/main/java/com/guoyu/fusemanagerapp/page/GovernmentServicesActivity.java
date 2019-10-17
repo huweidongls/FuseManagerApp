@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -15,8 +16,10 @@ import com.guoyu.fusemanagerapp.adapter.GovernmentServiceListAdapter;
 import com.guoyu.fusemanagerapp.adapter.GovernmentServiceTypeAdapter;
 import com.guoyu.fusemanagerapp.adapter.TicketHlistAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.bean.GovernmentServiceListBean;
 import com.guoyu.fusemanagerapp.bean.GovernmentServiceTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ public class GovernmentServicesActivity extends BaseActivity {
     private Context context = GovernmentServicesActivity.this;
     private GovernmentServiceListAdapter adapter;
     private GovernmentServiceTypeAdapter adapters;
-    private List<String> mList;
+    private List<GovernmentServiceListBean.DataBean> mList;
     private List<GovernmentServiceTypeBean.DataBean> mLists;
     private int radio=0;
     @BindView(R.id.recycler_view)
@@ -50,27 +53,31 @@ public class GovernmentServicesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_government_services);
         ButterKnife.bind(GovernmentServicesActivity.this);
+        Log.e("787878787878", SpUtils.getToken(context));
         initData();
     }
     private void initData(){
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new GovernmentServiceListAdapter(mList);
-        LinearLayoutManager manager = new LinearLayoutManager(context){
+        Map<String,String> map = new LinkedHashMap<>();
+        map.put("pageSize","10");
+        map.put("pageNum","1");
+        ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
             @Override
-            public boolean canScrollVertically() {
-                return false;
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                mList = bean.getData();
+                adapter = new GovernmentServiceListAdapter(mList);
+                LinearLayoutManager manager = new LinearLayoutManager(context){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                recycler_view.setLayoutManager(manager);
+                recycler_view.setAdapter(adapter);
             }
-        };
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recycler_view.setLayoutManager(manager);
-        recycler_view.setAdapter(adapter);
-
+        });
         ViseUtil.Get(context, NetUrl.AppGovernmentInfofindType, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {

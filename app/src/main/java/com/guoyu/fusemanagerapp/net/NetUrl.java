@@ -30,4 +30,6 @@ public class NetUrl {
     public static final String AppHomePageLatestNews = "/AppHomePage/LatestNews";
     //个人中心政务指南分类
     public static final String AppGovernmentInfofindType = "/AppGovernmentInfo/findType";
+    //个人中心政务指南列表
+    public static final String AppGovernmentInfoqueryList = "/AppGovernmentInfo/queryList";
 }

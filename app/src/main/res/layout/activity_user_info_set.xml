@@ -105,9 +105,9 @@
             />
         <EditText
             android:id="@+id/tv_username"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="888888"
+            android:text=""
             android:layout_gravity="center_vertical"
             android:textSize="12sp"
             android:background="@null"
@@ -138,9 +138,9 @@
             />
         <EditText
             android:id="@+id/tv_sex"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="男"
+            android:text=""
             android:background="@null"
             android:layout_gravity="center_vertical"
             android:textSize="12sp"
