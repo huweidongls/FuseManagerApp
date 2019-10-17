@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_title"
                     android:ellipsize="end"
                     android:lines="1"
                     android:text="国庆期间手机充值优惠活动最新消息...现在已经开始啦您的系统有最新到帐消息请注意查收..."
@@ -42,6 +43,7 @@
                         android:layout_height="11dp" />
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="6dp"
                         android:textColor="#AAAAAA"

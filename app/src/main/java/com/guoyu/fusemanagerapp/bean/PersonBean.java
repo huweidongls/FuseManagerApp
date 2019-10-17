@@ -6,9 +6,10 @@ package com.guoyu.fusemanagerapp.bean;
 
 public class PersonBean {
 
+
     /**
      * status : 200
-     * data : {"appuserPics":"1,2,3","appuserType":2,"realName":"测试名字","userSex":"男","funcame":"城市微观审核,市民实名审核,咨询投诉反馈,城市微观反馈","id":5,"username":"13045134573","status":4}
+     * data : {"appuserPics":"/upload/appHeadPhoto/450c633ea54f43f3aa9f6c3f2d4fb3f0.jpg,","USER_PIC":"/upload/appHeadPhoto/ec017de9b5646ad8f833ca7f34fd04d.jpg","appuserType":2,"realName":"东哥好几把大","userSex":"女","funcame":"市民实名审核,咨询投诉反馈","id":61,"username":"15561817068","status":2}
      * errorMsg : 查询成功
      */
 
@@ -42,17 +43,19 @@ public class PersonBean {
 
     public static class DataBean {
         /**
-         * appuserPics : 1,2,3
+         * appuserPics : /upload/appHeadPhoto/450c633ea54f43f3aa9f6c3f2d4fb3f0.jpg,
+         * USER_PIC : /upload/appHeadPhoto/ec017de9b5646ad8f833ca7f34fd04d.jpg
          * appuserType : 2
-         * realName : 测试名字
-         * userSex : 男
-         * funcame : 城市微观审核,市民实名审核,咨询投诉反馈,城市微观反馈
-         * id : 5
-         * username : 13045134573
-         * status : 4
+         * realName : 东哥好几把大
+         * userSex : 女
+         * funcame : 市民实名审核,咨询投诉反馈
+         * id : 61
+         * username : 15561817068
+         * status : 2
          */
 
         private String appuserPics;
+        private String USER_PIC;
         private int appuserType;
         private String realName;
         private String userSex;
@@ -67,6 +70,14 @@ public class PersonBean {
 
         public void setAppuserPics(String appuserPics) {
             this.appuserPics = appuserPics;
+        }
+
+        public String getUSER_PIC() {
+            return USER_PIC;
+        }
+
+        public void setUSER_PIC(String USER_PIC) {
+            this.USER_PIC = USER_PIC;
         }
 
         public int getAppuserType() {

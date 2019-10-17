@@ -1,10 +1,12 @@
 package com.guoyu.fusemanagerapp.page;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.DisciplineInfoAdapter;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TicketServiceActivity extends BaseActivity {
     private Context context = TicketServiceActivity.this;
@@ -68,5 +71,18 @@ public class TicketServiceActivity extends BaseActivity {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_view2.setLayoutManager(manager);
         recycler_view2.setAdapter(adapters);
+    }
+    @OnClick({R.id.iv_black,R.id.rr_add})
+    public void onClick(View view){
+        Intent intent = new Intent();
+        switch (view.getId()){
+            case R.id.iv_black:
+                finish();
+                break;
+            case R.id.rr_add:
+                intent.setClass(context,TicketInserActivity.class);
+                context.startActivity(intent);
+                break;
+        }
     }
 }

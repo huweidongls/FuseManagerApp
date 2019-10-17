@@ -22,4 +22,10 @@ public class NetUrl {
     public static final String AppUsercommercialAudit = "/AppUser/commercialAudit";
     //app管理端获取权限
     public static final String AppUseradminGetMuen = "/AppUser/adminGetMuen";
+    //上传头像
+    public static final String apiupdateheadPortrait = "/AppUser/adminUpdateheadPortrait";
+    //保存个人信息
+    public static final String AppUseradminUpdate = "/AppUser/adminUpdate";
+    //首页最新消息
+    public static final String AppHomePageLatestNews = "/AppHomePage/LatestNews";
 }

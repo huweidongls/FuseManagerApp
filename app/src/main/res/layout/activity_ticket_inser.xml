@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.guoyu.fusemanagerapp.page.TicketInserActivity">
+    <RelativeLayout style="@style/rl_top_bar">
+        <RelativeLayout
+            android:id="@+id/iv_black"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+            <ImageView style="@style/iv_top_back" />
+        </RelativeLayout>
+        <TextView
+            style="@style/tv_top_title"
+            android:text="门票服务发布" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="标题"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="17dp"
+            android:background="@null"
+            android:hint="请输入标题内容"
+            android:textColorHint="#CCCCCC"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/line" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="23dp"
+            android:text="景区简介"
+            android:textColor="#333333"
+            android:textSize="13sp" />
+        <EditText
+            android:id="@+id/et_content"
+            android:gravity="start"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:hint="请输入简介内容"
+            android:textColorHint="#CCCCCC"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/line" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text="景区主图"
+        android:textColor="#333333"
+        android:textSize="13sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_marginTop="9dp"
+            android:id="@+id/identitycard"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/text_sharp">
+
+            <ImageView
+                android:id="@+id/iv_upload"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/upload3x" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_upload"
+                android:layout_marginLeft="18dp"
+                android:text="上传照片"
+                android:textColor="#999999"
+                android:textSize="11sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="9dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="8dp">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/iv_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_marginLeft="-9dp"
+            android:id="@+id/iv_del1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/close_three3x"
+            android:visibility="gone" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/line" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="23dp"
+            android:text="门票"
+            android:textColor="#333333"
+            android:textSize="13sp" />
+        <EditText
+            android:id="@+id/et_desc"
+            android:gravity="start"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:hint="请输入门票信息"
+            android:textColorHint="#CCCCCC"
+            android:textSize="12sp" />
+    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="23dp"
+                    android:text="景区详情"
+                    android:textColor="#333333"
+                    android:textSize="13sp" />
+                <EditText
+                    android:id="@+id/et_jq_desc"
+                    android:gravity="start"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@null"
+                    android:hint="请输入景区详细介绍"
+                    android:textColorHint="#CCCCCC"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:text="景区图片"
+                android:textColor="#333333"
+                android:textSize="13sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_marginTop="9dp"
+                    android:id="@+id/identitycards"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/text_sharp">
+
+                    <ImageView
+                        android:id="@+id/iv_uploads"
+                        android:layout_width="match_parent"
+                        android:layout_height="29dp"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/upload3x" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_uploads"
+                        android:layout_marginLeft="18dp"
+                        android:text="上传照片"
+                        android:textColor="#999999"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="9dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="8dp">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:id="@+id/iv_imgs"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_marginLeft="-9dp"
+                    android:id="@+id/iv_del2"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/close_three3x"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="188dp"
+                    android:layout_height="45dp"
+                    android:text="发布"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:background="#D62424"
+                    />
+                <Button
+                    android:layout_width="195dp"
+                    android:layout_height="45dp"
+                    android:text="取消"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:background="#FAA106"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

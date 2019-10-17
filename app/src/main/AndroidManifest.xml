@@ -55,7 +55,8 @@
         <activity android:name=".page.RealAuditActivity" />
         <activity android:name=".page.GovernmentServicesActivity" />
         <activity android:name=".page.AcademicResourcesActivity" />
-        <activity android:name=".page.TicketServiceActivity"
+        <activity
+            android:name=".page.TicketServiceActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity
             android:name=".imagepreview.ImagePreviewActivity"
@@ -68,8 +69,11 @@
         <activity android:name=".page.RealNameActivity" />
         <activity android:name=".page.AcademicResourcesInsertActivity" />
         <activity android:name=".page.FeedbackDetailsActivity" />
-        <activity android:name=".page.FeedbackContentActivity"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
+        <activity
+            android:name=".page.FeedbackContentActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".page.TicketInserActivity" />
+        <activity android:name=".page.UserInfoSetActivity"></activity>
     </application>
 
 </manifest>

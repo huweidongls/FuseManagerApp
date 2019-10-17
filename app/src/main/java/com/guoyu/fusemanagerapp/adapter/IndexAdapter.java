@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.HomeNewsBean;
 
 import java.util.List;
 
@@ -17,9 +19,9 @@ import java.util.List;
 public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<HomeNewsBean.DataBean> data;
 
-    public IndexAdapter(List<String> data) {
+    public IndexAdapter(List<HomeNewsBean.DataBean> data) {
         this.data = data;
     }
 
@@ -33,7 +35,8 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.tv_title.setText(data.get(position).getTitle());
+        holder.tv_time.setText(data.get(position).getCreateDate());
     }
 
     @Override
@@ -42,9 +45,12 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-
+        private TextView tv_title;
+        private TextView tv_time;
         public ViewHolder(View itemView) {
             super(itemView);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            tv_time = itemView.findViewById(R.id.tv_time);
         }
     }
 
