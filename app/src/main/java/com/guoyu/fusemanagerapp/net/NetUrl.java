@@ -32,4 +32,10 @@ public class NetUrl {
     public static final String AppGovernmentInfofindType = "/AppGovernmentInfo/findType";
     //个人中心政务指南列表
     public static final String AppGovernmentInfoqueryList = "/AppGovernmentInfo/queryList";
+    //查询待实名认证用户列表
+    public static final String AppUserqueryList = "/AppUser/queryList";
+    //实名认证详情
+    public static final String CitizenUsergetOne = "/CitizenUser/getOne";
+    //公民身份认证审核
+    public static final String AppUsercitizenUserAudit = "/AppUser/citizenUserAudit";
 }
