@@ -62,6 +62,13 @@ public class AcademicResourcesActivity extends BaseActivity {
         initList();
         initRefreshs();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initList();
+    }
+
     private void initRefreshs() {
         refreshs.setRefreshHeader(new MaterialHeader(AcademicResourcesActivity.this
         ));

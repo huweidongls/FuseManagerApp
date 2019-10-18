@@ -45,8 +45,12 @@ public class TicketServiceActivity extends BaseActivity {
         mList.add("");
         mList.add("");
         mList.add("");
+        mList.add("");
+        mList.add("");
+        mList.add("");
         adapter = new TicketHlistAdapter(mList);
-        GridLayoutManager manager = new GridLayoutManager(context,3);
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recycler_view.setLayoutManager(manager);
         recycler_view.setAdapter(adapter);
     }

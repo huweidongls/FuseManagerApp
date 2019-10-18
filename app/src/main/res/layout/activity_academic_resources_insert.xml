@@ -127,17 +127,19 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <Button
+                    android:id="@+id/btn_save"
                     android:layout_width="188dp"
                     android:layout_height="45dp"
-                    android:text="暂存"
+                    android:text="发布"
                     android:textColor="#FFFFFF"
                     android:textSize="17sp"
                     android:background="#D62424"
                     />
                 <Button
+                    android:id="@+id/btn_canl"
                     android:layout_width="197dp"
                     android:layout_height="45dp"
-                    android:text="发布"
+                    android:text="取消"
                     android:textColor="#FFFFFF"
                     android:textSize="17sp"
                     android:background="#FAA106"

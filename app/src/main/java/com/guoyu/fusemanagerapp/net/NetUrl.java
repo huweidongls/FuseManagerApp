@@ -56,4 +56,8 @@ public class NetUrl {
     public static final String AppConsultationInfofindStatusid= "/AppConsultationInfo/findStatusid";
     //咨询投诉新增反馈
     public static final String AppConsultationInfoinsertFeedback= "/AppConsultationInfo/insertFeedback";
+    //推荐门票
+    public static final String AppEntranceTicketInfofindAllNew = "/AppEntranceTicketInfo/findAllNew";
+    //门表列表
+    public static final String AppEntranceTicketInfoqueryList = "/AppEntranceTicketInfo/queryList";
 }
