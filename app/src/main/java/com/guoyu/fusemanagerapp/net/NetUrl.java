@@ -42,4 +42,8 @@ public class NetUrl {
     public static final String AppMiniCityInfofindStatusid = "/AppMiniCityInfo/findStatusid";
     //发布政务指南
     public static final String AppGovernmentInfotoUpdate = "/AppGovernmentInfo/toUpdate";
+    //查询所有学科分类
+    public static final String AppEducationInfofindType = "/AppEducationInfo/findType";
+    //查询学科列表
+    public static final String AppEducationInfoqueryList = "/AppEducationInfo/queryList";
 }

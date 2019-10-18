@@ -14,9 +14,13 @@ import com.guoyu.fusemanagerapp.adapter.DisciplineInfoAdapter;
 import com.guoyu.fusemanagerapp.adapter.DisciplineInformationAdapter;
 import com.guoyu.fusemanagerapp.adapter.GovernmentServiceListAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.ViseUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +45,12 @@ public class AcademicResourcesActivity extends BaseActivity {
         initList();
     }
     private void initType(){
+        ViseUtil.Get(context, NetUrl.AppEducationInfofindType, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+
+            }
+        });
         mList = new ArrayList<>();
         mList.add("");
         mList.add("");
