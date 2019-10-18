@@ -27,7 +27,7 @@
         android:textColor="#333333"
         android:textSize="14sp"
         />
-    <TextView
+   <!-- <TextView
         android:id="@+id/tv_address"
         android:layout_toRightOf="@id/iv_img"
         android:layout_below="@id/tv_title"
@@ -38,11 +38,11 @@
         android:text="地址：双鸭山市闽南街道120号3门"
         android:textColor="#777777"
         android:textSize="11sp"
-        />
+        />-->
     <TextView
         android:id="@+id/tv_desc"
         android:layout_toRightOf="@id/iv_img"
-        android:layout_below="@id/tv_address"
+        android:layout_below="@id/tv_title"
         android:layout_width="wrap_content"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="6dp"
@@ -52,6 +52,7 @@
         android:textSize="10sp"
         />
     <TextView
+        android:id="@+id/tv_price"
         android:layout_toRightOf="@id/iv_img"
         android:layout_below="@id/tv_desc"
         android:layout_width="wrap_content"

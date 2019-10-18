@@ -60,4 +60,6 @@ public class NetUrl {
     public static final String AppEntranceTicketInfofindAllNew = "/AppEntranceTicketInfo/findAllNew";
     //门表列表
     public static final String AppEntranceTicketInfoqueryList = "/AppEntranceTicketInfo/queryList";
+    //发布门票接口
+    public static final String AppEntranceTicketInfoinsertEntranceTicketInfo = "/AppEntranceTicketInfo/insertEntranceTicketInfo";
 }

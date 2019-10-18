@@ -5,8 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.TicketServiceListBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
 
 import java.util.List;
 
@@ -16,9 +21,9 @@ import java.util.List;
 
 public class TickerSlistAdapter extends RecyclerView.Adapter<TickerSlistAdapter.ViewHolder>{
     private Context context;
-    private List<String> data;
+    private List<TicketServiceListBean.DataBean> data;
 
-    public TickerSlistAdapter(List<String> data) {
+    public TickerSlistAdapter(List<TicketServiceListBean.DataBean> data) {
         this.data = data;
     }
     @Override
@@ -31,7 +36,12 @@ public class TickerSlistAdapter extends RecyclerView.Adapter<TickerSlistAdapter.
 
     @Override
     public void onBindViewHolder(TickerSlistAdapter.ViewHolder holder, int position) {
-
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getMainPic()).into(holder.iv_img);
+        holder.tv_title.setText(data.get(position).getTitle());
+        String str=data.get(position).getContent();
+        //str=str.substring(0,15);
+        holder.tv_desc.setText(str+"...");
+        holder.tv_price.setText("¥"+data.get(position).getTicketMoney()+"元");
     }
 
     @Override
@@ -40,8 +50,16 @@ public class TickerSlistAdapter extends RecyclerView.Adapter<TickerSlistAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView iv_img;
+        private TextView tv_title;
+        private TextView tv_desc;
+        private TextView tv_price;
         public ViewHolder(View itemView) {
             super(itemView);
+            iv_img = itemView.findViewById(R.id.iv_img);
+            tv_title= itemView.findViewById(R.id.tv_title);
+            tv_desc = itemView.findViewById(R.id.tv_desc);
+            tv_price = itemView.findViewById(R.id.tv_price);
         }
     }
 }

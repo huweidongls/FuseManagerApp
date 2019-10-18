@@ -5,8 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.TicketServiceListBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
 
 import java.util.List;
 
@@ -16,9 +21,9 @@ import java.util.List;
 
 public class TicketHlistAdapter extends RecyclerView.Adapter<TicketHlistAdapter.ViewHolder>{
     private Context context;
-    private List<String> data;
+    private List<TicketServiceListBean.DataBean> data;
 
-    public TicketHlistAdapter(List<String> data) {
+    public TicketHlistAdapter(List<TicketServiceListBean.DataBean> data) {
         this.data = data;
     }
     @Override
@@ -31,7 +36,9 @@ public class TicketHlistAdapter extends RecyclerView.Adapter<TicketHlistAdapter.
 
     @Override
     public void onBindViewHolder(TicketHlistAdapter.ViewHolder holder, int position) {
-
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getMainPic()).into(holder.iv_imgs);
+        holder.tv_title.setText(data.get(position).getTitle());
+        holder.tv_price.setText("¥"+data.get(position).getTicketMoney()+"元起");
     }
 
     @Override
@@ -40,8 +47,14 @@ public class TicketHlistAdapter extends RecyclerView.Adapter<TicketHlistAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView iv_imgs;
+        private TextView tv_title;
+        private TextView tv_price;
         public ViewHolder(View itemView) {
             super(itemView);
+            iv_imgs = itemView.findViewById(R.id.iv_imgs);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            tv_price = itemView.findViewById(R.id.tv_price);
         }
     }
 }
