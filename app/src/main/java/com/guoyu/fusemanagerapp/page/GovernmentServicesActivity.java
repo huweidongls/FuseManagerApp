@@ -72,10 +72,12 @@ public class GovernmentServicesActivity extends BaseActivity {
         setContentView(R.layout.activity_government_services);
         ButterKnife.bind(GovernmentServicesActivity.this);
         Log.e("787878787878", SpUtils.getToken(context));
-        initData();
+        //initData();
+        initRefreshs();
         init_type();
     }
-    private void initData(){
+
+    private void initRefreshs() {
         refreshs.setRefreshHeader(new MaterialHeader(GovernmentServicesActivity.this
         ));
         refreshs.setRefreshFooter(new ClassicsFooter(GovernmentServicesActivity.this));
@@ -116,7 +118,7 @@ public class GovernmentServicesActivity extends BaseActivity {
                     public void onReturn(String s) {
                         Gson gson = new Gson();
                         GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
-                       // mList.clear();
+                        // mList.clear();
                         mList.addAll(bean.getData());
                         adapter.notifyDataSetChanged();
                         page = page+1;
@@ -125,6 +127,15 @@ public class GovernmentServicesActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
+    }
+
+    private void initData(){
         Map<String,String> map = new LinkedHashMap<>();
         map.put("pageSize","10");
         map.put("pageNum","1");

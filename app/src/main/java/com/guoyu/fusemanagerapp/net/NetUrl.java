@@ -40,4 +40,6 @@ public class NetUrl {
     public static final String AppUsercitizenUserAudit = "/AppUser/citizenUserAudit";
     //城市微观审核及未审核
     public static final String AppMiniCityInfofindStatusid = "/AppMiniCityInfo/findStatusid";
+    //发布政务指南
+    public static final String AppGovernmentInfotoUpdate = "/AppGovernmentInfo/toUpdate";
 }

@@ -131,25 +131,19 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
               <Button
-                  android:layout_width="125dp"
+                  android:id="@+id/btn_add"
+                  android:layout_width="188dp"
                   android:layout_height="45dp"
-                  android:text="暂存"
+                  android:text="发布"
                   android:textColor="#FFFFFF"
                   android:textSize="17sp"
                   android:background="#D62424"
                   />
                 <Button
-                    android:layout_width="125dp"
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="194dp"
                     android:layout_height="45dp"
-                    android:text="发布"
-                    android:textColor="#FFFFFF"
-                    android:textSize="17sp"
-                    android:background="#FAA106"
-                    />
-                <Button
-                    android:layout_width="135dp"
-                    android:layout_height="45dp"
-                    android:text="暂存"
+                    android:text="取消"
                     android:textColor="#FFFFFF"
                     android:textSize="17sp"
                     android:background="#A7A7A7"
