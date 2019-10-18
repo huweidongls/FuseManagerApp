@@ -62,6 +62,7 @@ public class PersonActivity extends BaseActivity {
 
     private void initData() {
 
+        Logger.e("123123", SpUtils.getToken(context));
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", SpUtils.getUserId(context));
 

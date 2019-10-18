@@ -48,4 +48,12 @@ public class NetUrl {
     public static final String AppEducationInfoqueryList = "/AppEducationInfo/queryList";
     //新增学科
     public static final String AppEducationInfotoUpdate= "AppEducationInfo/toUpdate";
+    //城市微观新增反馈
+    public static final String AppMiniCityInfoinsertFeedback= "/AppMiniCityInfo/insertFeedback";
+    //城市微观审核(是否通过)
+    public static final String AppMiniCityInfoupdateStatusid= "/AppMiniCityInfo/updateStatusid";
+    //咨询投诉审核及未审核
+    public static final String AppConsultationInfofindStatusid= "/AppConsultationInfo/findStatusid";
+    //咨询投诉新增反馈
+    public static final String AppConsultationInfoinsertFeedback= "/AppConsultationInfo/insertFeedback";
 }

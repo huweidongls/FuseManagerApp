@@ -129,29 +129,7 @@
                     app:sapcing="4dp" />
 
                 <LinearLayout
-                    android:id="@+id/ll_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="16dp"
-                        android:src="@mipmap/feedback" />
-
-                    <TextView
-                        android:id="@+id/tv_fff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="【反馈意见】我市对该项目很重视，推进大力做好后续工作。"
-                        android:textColor="#777777"
-                        android:textSize="11sp" />
-                </LinearLayout>
-
-                <LinearLayout
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="30dp">
@@ -166,6 +144,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_audit_name"
                         android:layout_gravity="center_vertical"
                         android:textColor="#999999"
                         android:textSize="11sp"
@@ -183,6 +162,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tv_audit_time"
                         android:layout_gravity="center_vertical"
                         android:textColor="#999999"
                         android:textSize="11sp"
@@ -202,6 +182,7 @@
                 android:layout_height="45dp">
 
                 <TextView
+                    android:id="@+id/tv_sure"
                     android:background="@drawable/bg_d62424_23dp"
                     android:gravity="center"
                     android:textColor="@color/white_ffffff"
@@ -213,6 +194,7 @@
                     android:layout_height="match_parent" />
 
                 <TextView
+                    android:id="@+id/tv_cancel"
                     android:background="@drawable/bg_d62424_bord_23dp"
                     android:gravity="center"
                     android:textColor="#D62424"

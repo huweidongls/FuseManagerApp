@@ -3,10 +3,18 @@ package com.guoyu.fusemanagerapp.page;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
+import com.guoyu.fusemanagerapp.util.StringUtils;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +29,25 @@ public class ReplyWeiguanActivity extends BaseActivity {
 
     @BindView(R.id.nine)
     NineGridTestLayout nine;
+    @BindView(R.id.iv_header)
+    ImageView ivHead;
+    @BindView(R.id.tv_user)
+    TextView tvName;
+    @BindView(R.id.tv_addtime)
+    TextView tvAddTime;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
+    @BindView(R.id.et_content)
+    EditText etContent;
+
+    private WeiguanListBean.DataBean bean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply_weiguan);
 
+        bean = (WeiguanListBean.DataBean) getIntent().getSerializableExtra("bean");
         ButterKnife.bind(ReplyWeiguanActivity.this);
         initData();
 
@@ -34,25 +55,43 @@ public class ReplyWeiguanActivity extends BaseActivity {
 
     private void initData() {
 
+        Glide.with(context).load(NetUrl.BASE_URL+bean.getNikePic()).into(ivHead);
+        tvName.setText(bean.getNickName());
+        tvAddTime.setText("发布时间："+bean.getPublishDate());
+        tvContent.setText(bean.getContent());
+        String[] s = bean.getContentPic().split(",");
         List<String> list = new ArrayList<>();
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
+        for (String ss : s){
+            list.add(NetUrl.BASE_URL+ss);
+        }
         nine.setUrlList(list);
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back, R.id.tv_sure, R.id.tv_cancel})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_back:
                 finish();
                 break;
+            case R.id.tv_sure:
+                onSure();
+                break;
+            case R.id.tv_cancel:
+                finish();
+                break;
         }
+    }
+
+    private void onSure() {
+
+        String content = etContent.getText().toString();
+        if(StringUtils.isEmpty(content)){
+            ToastUtil.showShort(context, "反馈意见不能为空");
+        }else {
+
+        }
+
     }
 
 }

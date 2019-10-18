@@ -6,13 +6,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
 import com.guoyu.fusemanagerapp.page.AuditWeiguanActivity;
 import com.guoyu.fusemanagerapp.page.ReplyWeiguanActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +29,10 @@ import java.util.List;
 public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> data;
+    private List<WeiguanListBean.DataBean> data;
     private int type;
 
-    public MicroAuditAdapter(List<String> data, int type) {
+    public MicroAuditAdapter(List<WeiguanListBean.DataBean> data, int type) {
         this.data = data;
         this.type = type;
     }
@@ -40,15 +46,44 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        if(type == 0){
+            holder.llShenhe.setVisibility(View.VISIBLE);
+            holder.llText.setVisibility(View.GONE);
+            int status = data.get(position).getStatusid();
+            if(status == 1){
+                holder.tvStatus.setText("待审核");
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_ffbc1a_9dp);
+            }else if(status == 2){
+                holder.tvStatus.setText("已审核");
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_bbbbbb_9dp);
+                holder.tvAuditName.setText(data.get(position).getApprUserName());
+                holder.tvAuditTime.setText(data.get(position).getApprDate());
+            }
+        }else if(type == 1){
+            holder.llShenhe.setVisibility(View.GONE);
+            holder.llText.setVisibility(View.VISIBLE);
+            int status = data.get(position).getStatusid();
+            if(status == 2){
+                holder.tvStatus.setText("待反馈");
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_ffbc1a_9dp);
+            }else if(status == 3){
+                holder.tvStatus.setText("已反馈");
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_bbbbbb_9dp);
+                holder.tvFankui.setText("【反馈意见】"+data.get(position).getFeeMemo());
+            }
+        }
+        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getNikePic()).into(holder.ivHead);
+        holder.tvName.setText(data.get(position).getNickName());
+
+        holder.tvAddTime.setText("发布时间："+data.get(position).getPublishDate());
+        holder.tvContent.setText(data.get(position).getContent());
+        String[] s = data.get(position).getContentPic().split(",");
         List<String> list = new ArrayList<>();
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
-        list.add("http://b-ssl.duitang.com/uploads/item/201410/20/20141020224133_Ur54c.jpeg");
+        for (String ss : s){
+            list.add(NetUrl.BASE_URL+ss);
+        }
         holder.nine.setUrlList(list);
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +92,12 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
                 Intent intent = new Intent();
                 if(type == 0){
                     intent.setClass(context, AuditWeiguanActivity.class);
+                    intent.putExtra("bean", data.get(position));
+
                 }else {
                     intent.setClass(context, ReplyWeiguanActivity.class);
+
+                    intent.putExtra("bean", data.get(position));
                 }
                 context.startActivity(intent);
             }
@@ -75,11 +114,31 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
 
         private NineGridTestLayout nine;
         private LinearLayout ll;
+        private ImageView ivHead;
+        private TextView tvName;
+        private TextView tvStatus;
+        private TextView tvAddTime;
+        private TextView tvContent;
+        private LinearLayout llText;
+        private TextView tvFankui;
+        private LinearLayout llShenhe;
+        private TextView tvAuditName;
+        private TextView tvAuditTime;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nine = itemView.findViewById(R.id.nine);
             ll = itemView.findViewById(R.id.ll);
+            ivHead = itemView.findViewById(R.id.iv_header);
+            tvName = itemView.findViewById(R.id.tv_user);
+            tvStatus = itemView.findViewById(R.id.tv_status);
+            tvAddTime = itemView.findViewById(R.id.tv_addtime);
+            tvContent = itemView.findViewById(R.id.tv_content);
+            llText = itemView.findViewById(R.id.ll_text);
+            tvFankui = itemView.findViewById(R.id.tv_fff);
+            llShenhe = itemView.findViewById(R.id.ll_shenhe);
+            tvAuditName = itemView.findViewById(R.id.tv_audit_name);
+            tvAuditTime = itemView.findViewById(R.id.tv_audit_time);
         }
     }
 

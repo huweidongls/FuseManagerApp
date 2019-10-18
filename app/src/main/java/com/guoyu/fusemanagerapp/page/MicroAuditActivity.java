@@ -6,12 +6,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.MicroAuditAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.SpUtils;
+import com.guoyu.fusemanagerapp.util.ViseUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +32,7 @@ public class MicroAuditActivity extends BaseActivity {
     RecyclerView recyclerView;
 
     private MicroAuditAdapter adapter;
-    private List<String> mList;
+    private List<WeiguanListBean.DataBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +46,22 @@ public class MicroAuditActivity extends BaseActivity {
 
     private void initData() {
 
-        mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        adapter = new MicroAuditAdapter(mList, 0);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("userId", SpUtils.getUserId(context));
+        map.put("type", "0");
+        ViseUtil.Get(context, NetUrl.AppMiniCityInfofindStatusid, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                WeiguanListBean bean = gson.fromJson(s, WeiguanListBean.class);
+                mList = bean.getData();
+                adapter = new MicroAuditAdapter(mList, 0);
+                LinearLayoutManager manager = new LinearLayoutManager(context);
+                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
     }
 
