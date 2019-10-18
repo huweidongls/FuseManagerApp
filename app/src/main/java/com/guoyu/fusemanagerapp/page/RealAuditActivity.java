@@ -54,6 +54,35 @@ public class RealAuditActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+    }
+
+    private void init() {
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("pageNum", "1");
+        map.put("pageSize", "10");
+        map.put("status", "4");
+        ViseUtil.Post(context, NetUrl.AppUserqueryList, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                RealAuditBean bean = gson.fromJson(s, RealAuditBean.class);
+                mList = bean.getData();
+                adapter = new RealAdapter(mList);
+                LinearLayoutManager manager = new LinearLayoutManager(context);
+                manager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(manager);
+                recyclerView.setAdapter(adapter);
+                page = 2;
+            }
+        });
+
+    }
+
     private void initData() {
 
         smartRefreshLayout.setRefreshHeader(new MaterialHeader(context));
@@ -97,25 +126,6 @@ public class RealAuditActivity extends BaseActivity {
                     }
                 });
                 refreshLayout.finishLoadMore(1000);
-            }
-        });
-
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("pageNum", "1");
-        map.put("pageSize", "10");
-        map.put("status", "4");
-        ViseUtil.Post(context, NetUrl.AppUserqueryList, map, new ViseUtil.ViseListener() {
-            @Override
-            public void onReturn(String s) {
-                Gson gson = new Gson();
-                RealAuditBean bean = gson.fromJson(s, RealAuditBean.class);
-                mList = bean.getData();
-                adapter = new RealAdapter(mList);
-                LinearLayoutManager manager = new LinearLayoutManager(context);
-                manager.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(manager);
-                recyclerView.setAdapter(adapter);
-                page = 2;
             }
         });
 

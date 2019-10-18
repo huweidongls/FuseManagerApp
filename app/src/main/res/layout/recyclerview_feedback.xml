@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_type"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="18dp"
             android:src="@mipmap/yifankui"
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:textSize="14sp"
                 android:textColor="#000000"
                 android:text="今年秋季是否有免费体检活动?"
@@ -48,6 +50,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tv_feed"
                     android:layout_gravity="center_vertical"
                     android:textColor="#aaaaaa"
                     android:textSize="11sp"
