@@ -38,4 +38,6 @@ public class NetUrl {
     public static final String CitizenUsergetOne = "/CitizenUser/getOne";
     //公民身份认证审核
     public static final String AppUsercitizenUserAudit = "/AppUser/citizenUserAudit";
+    //城市微观审核及未审核
+    public static final String AppMiniCityInfofindStatusid = "/AppMiniCityInfo/findStatusid";
 }

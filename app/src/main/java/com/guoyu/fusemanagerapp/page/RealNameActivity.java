@@ -1,5 +1,6 @@
 package com.guoyu.fusemanagerapp.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,9 @@ import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.UserGetoneBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.Logger;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -38,6 +41,8 @@ public class RealNameActivity extends BaseActivity {
     ImageView iv2;
 
     private String id = "";
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,6 @@ public class RealNameActivity extends BaseActivity {
                 String[] ss = bean.getData().getAppuserPics().split(",");
                 Glide.with(context).load(NetUrl.BASE_URL+ss[0]).into(iv1);
                 Glide.with(context).load(NetUrl.BASE_URL+ss[1]).into(iv2);
-                Logger.e("123123", ss[0]+"----"+ss[1]);
             }
         });
 
@@ -78,12 +82,50 @@ public class RealNameActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_sure:
-
+                onSure();
                 break;
             case R.id.tv_cancel:
-
+                onCancel();
                 break;
         }
+    }
+
+    /**
+     * 审核驳回
+     */
+    private void onCancel() {
+
+        dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", id);
+        map.put("status", "3");
+        ViseUtil.Get(context, NetUrl.AppUsercitizenUserAudit, map, dialog, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                ToastUtil.showShort(context, "审核驳回");
+                finish();
+            }
+        });
+
+    }
+
+    /**
+     * 审核通过
+     */
+    private void onSure() {
+
+        dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", id);
+        map.put("status", "2");
+        ViseUtil.Get(context, NetUrl.AppUsercitizenUserAudit, map, dialog, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                ToastUtil.showShort(context, "审核通过");
+                finish();
+            }
+        });
+
     }
 
 }
