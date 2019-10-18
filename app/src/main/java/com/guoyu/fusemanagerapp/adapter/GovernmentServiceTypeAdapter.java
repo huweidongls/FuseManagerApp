@@ -19,9 +19,10 @@ import java.util.List;
 public class GovernmentServiceTypeAdapter extends RecyclerView.Adapter<GovernmentServiceTypeAdapter.ViewHolder>{
     private Context context;
     private List<GovernmentServiceTypeBean.DataBean> data;
-
-    public GovernmentServiceTypeAdapter(List<GovernmentServiceTypeBean.DataBean> data) {
+    private ClickListener listener;
+    public GovernmentServiceTypeAdapter(List<GovernmentServiceTypeBean.DataBean> data,ClickListener listener) {
         this.data = data;
+        this.listener = listener;
     }
     @Override
     public GovernmentServiceTypeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,8 +33,14 @@ public class GovernmentServiceTypeAdapter extends RecyclerView.Adapter<Governmen
     }
 
     @Override
-    public void onBindViewHolder(GovernmentServiceTypeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(GovernmentServiceTypeAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(data.get(position).getSubName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickType(position);
+            }
+        });
     }
 
     @Override
@@ -47,5 +54,8 @@ public class GovernmentServiceTypeAdapter extends RecyclerView.Adapter<Governmen
             super(itemView);
             tv_title = itemView.findViewById(R.id.tv_title);
         }
+    }
+    public interface ClickListener{
+        void onClickType(int pos);
     }
 }

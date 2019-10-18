@@ -1,6 +1,7 @@
 package com.guoyu.fusemanagerapp.adapter;
 
 import android.content.Context;
+import android.net.sip.SipSession;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ import java.util.List;
 public class GovernmentServiceListAdapter extends RecyclerView.Adapter<GovernmentServiceListAdapter.ViewHolder>{
     private Context context;
     private List<GovernmentServiceListBean.DataBean> data;
-
     public GovernmentServiceListAdapter(List<GovernmentServiceListBean.DataBean> data) {
         this.data = data;
     }

@@ -3,11 +3,14 @@ package com.guoyu.fusemanagerapp.page;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
@@ -20,7 +23,14 @@ import com.guoyu.fusemanagerapp.bean.GovernmentServiceListBean;
 import com.guoyu.fusemanagerapp.bean.GovernmentServiceTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.SpUtils;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -48,6 +58,14 @@ public class GovernmentServicesActivity extends BaseActivity {
     View view2;
     @BindView(R.id.rl_type)
     RelativeLayout rl_type;
+    @BindView(R.id.empty_order_bloacks)
+    RelativeLayout empty_order_bloacks;
+    @BindView(R.id.refreshs)
+    SmartRefreshLayout refreshs;
+    private int page=1;
+    @BindView(R.id.et_titles)
+    EditText et_titles;
+    private int typeId=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +73,58 @@ public class GovernmentServicesActivity extends BaseActivity {
         ButterKnife.bind(GovernmentServicesActivity.this);
         Log.e("787878787878", SpUtils.getToken(context));
         initData();
+        init_type();
     }
     private void initData(){
+        refreshs.setRefreshHeader(new MaterialHeader(GovernmentServicesActivity.this
+        ));
+        refreshs.setRefreshFooter(new ClassicsFooter(GovernmentServicesActivity.this));
+        refreshs.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
+                Map<String,String> map = new LinkedHashMap<>();
+                map.put("pageSize","10");
+                map.put("pageNum","1");
+                if(typeId!=0){
+                    map.put("typeId",typeId+"");
+                }
+                ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
+                    @Override
+                    public void onReturn(String s) {
+                        Gson gson = new Gson();
+                        GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                        mList.clear();
+                        mList.addAll(bean.getData());
+                        adapter.notifyDataSetChanged();
+                        page = 2;
+                        refreshLayout.finishRefresh(500);
+                    }
+                });
+            }
+        });
+        refreshs.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
+                Map<String,String> map = new LinkedHashMap<>();
+                map.put("pageNum",page+"");
+                map.put("pageSize","10");
+                if(typeId!=0){
+                    map.put("typeId",typeId+"");
+                }
+                ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
+                    @Override
+                    public void onReturn(String s) {
+                        Gson gson = new Gson();
+                        GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                       // mList.clear();
+                        mList.addAll(bean.getData());
+                        adapter.notifyDataSetChanged();
+                        page = page+1;
+                        refreshLayout.finishLoadMore(500);
+                    }
+                });
+            }
+        });
         Map<String,String> map = new LinkedHashMap<>();
         map.put("pageSize","10");
         map.put("pageNum","1");
@@ -66,42 +134,114 @@ public class GovernmentServicesActivity extends BaseActivity {
                 Gson gson = new Gson();
                 GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
                 mList = bean.getData();
-                adapter = new GovernmentServiceListAdapter(mList);
-                LinearLayoutManager manager = new LinearLayoutManager(context){
-                    @Override
-                    public boolean canScrollVertically() {
-                        return false;
-                    }
-                };
-                manager.setOrientation(LinearLayoutManager.VERTICAL);
-                recycler_view.setLayoutManager(manager);
-                recycler_view.setAdapter(adapter);
+                if(mList.size()>0){
+                    adapter = new GovernmentServiceListAdapter(mList);
+                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                        @Override
+                        public boolean canScrollVertically() {
+                            return false;
+                        }
+                    };
+                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recycler_view.setLayoutManager(manager);
+                    recycler_view.setAdapter(adapter);
+                    empty_order_bloacks.setVisibility(View.GONE);
+                    refreshs.setVisibility(View.VISIBLE);
+                    page=2;
+                }else{
+                    empty_order_bloacks.setVisibility(View.VISIBLE);
+                    refreshs.setVisibility(View.GONE);
+                }
             }
         });
+
+    }
+    private void init_type(){
         ViseUtil.Get(context, NetUrl.AppGovernmentInfofindType, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 GovernmentServiceTypeBean bean = gson.fromJson(s,GovernmentServiceTypeBean.class);
                 mLists = bean.getData();
-                adapters = new GovernmentServiceTypeAdapter(mLists);
+                adapters = new GovernmentServiceTypeAdapter(mLists, new GovernmentServiceTypeAdapter.ClickListener() {
+                    @Override
+                    public void onClickType(int pos) {
+                        typeId = mLists.get(pos).getId();
+                        Map<String, String> map = new LinkedHashMap<>();
+                        map.put("pageNum","1");
+                        map.put("pageSize","10");
+                        map.put("typeId",mLists.get(pos).getId()+"");
+                        ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
+                            @Override
+                            public void onReturn(String s) {
+                                Gson gson = new Gson();
+                                GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                                mList = bean.getData();
+                                if(mList.size()>0){
+                                    adapter = new GovernmentServiceListAdapter(mList);
+                                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                                        @Override
+                                        public boolean canScrollVertically() {
+                                            return false;
+                                        }
+                                    };
+                                    manager.setOrientation(LinearLayoutManager.VERTICAL);
+                                    recycler_view.setLayoutManager(manager);
+                                    recycler_view.setAdapter(adapter);
+                                    empty_order_bloacks.setVisibility(View.GONE);
+                                    refreshs.setVisibility(View.VISIBLE);
+                                }else{
+                                    empty_order_bloacks.setVisibility(View.VISIBLE);
+                                    refreshs.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+                    }
+                });
                 GridLayoutManager managers = new GridLayoutManager(context,4);
                 recycler_viewtype.setLayoutManager(managers);
                 recycler_viewtype.setAdapter(adapters);
             }
         });
-        /*mLists = new ArrayList<>();
-        mLists.add("");
-        mLists.add("");
-        mLists.add("");
-        mLists.add("");
-        mLists.add("");
-        mLists.add("");
-        mLists.add("");
-        mLists.add("");*/
-
     }
-    @OnClick({R.id.iv_black,R.id.rr_add,R.id.iv_type})
+    private void show_search(){
+        String title = et_titles.getText().toString();//标题
+        if(TextUtils.isEmpty(title)){
+            ToastUtil.showShort(GovernmentServicesActivity.this,"请填写要搜索的内容!");
+        }else{
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("pageNum","1");
+            map.put("pageSize","10");
+            map.put("title",title);
+            ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
+                @Override
+                public void onReturn(String s) {
+                    Gson gson = new Gson();
+                    GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                    mList = bean.getData();
+                    if(mList.size()>0){
+                        adapter = new GovernmentServiceListAdapter(mList);
+                        LinearLayoutManager manager = new LinearLayoutManager(context){
+                            @Override
+                            public boolean canScrollVertically() {
+                                return false;
+                            }
+                        };
+                        manager.setOrientation(LinearLayoutManager.VERTICAL);
+                        recycler_view.setLayoutManager(manager);
+                        recycler_view.setAdapter(adapter);
+                        empty_order_bloacks.setVisibility(View.GONE);
+                        refreshs.setVisibility(View.VISIBLE);
+                        //page=2;
+                    }else{
+                        empty_order_bloacks.setVisibility(View.VISIBLE);
+                        refreshs.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+    }
+    @OnClick({R.id.iv_black,R.id.rr_add,R.id.iv_type,R.id.iv_btn})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -124,6 +264,9 @@ public class GovernmentServicesActivity extends BaseActivity {
                     rl_type.setVisibility(View.GONE);
                     radio=0;
                 }
+                break;
+            case R.id.iv_btn:
+                show_search();
                 break;
         }
     }
