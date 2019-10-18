@@ -17,6 +17,7 @@ import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
 import com.guoyu.fusemanagerapp.page.AuditWeiguanActivity;
 import com.guoyu.fusemanagerapp.page.ReplyWeiguanActivity;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -48,10 +49,10 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
+        final int status = data.get(position).getStatusid();
         if(type == 0){
             holder.llShenhe.setVisibility(View.VISIBLE);
             holder.llText.setVisibility(View.GONE);
-            int status = data.get(position).getStatusid();
             if(status == 1){
                 holder.tvStatus.setText("待审核");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_ffbc1a_9dp);
@@ -64,7 +65,6 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
         }else if(type == 1){
             holder.llShenhe.setVisibility(View.GONE);
             holder.llText.setVisibility(View.VISIBLE);
-            int status = data.get(position).getStatusid();
             if(status == 2){
                 holder.tvStatus.setText("待反馈");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_ffbc1a_9dp);
@@ -91,13 +91,19 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
             public void onClick(View v) {
                 Intent intent = new Intent();
                 if(type == 0){
-                    intent.setClass(context, AuditWeiguanActivity.class);
-                    intent.putExtra("bean", data.get(position));
-
+                    if(status == 1){
+                        intent.setClass(context, AuditWeiguanActivity.class);
+                        intent.putExtra("bean", data.get(position));
+                    }else {
+                        ToastUtil.showShort(context, "已审核");
+                    }
                 }else {
-                    intent.setClass(context, ReplyWeiguanActivity.class);
-
-                    intent.putExtra("bean", data.get(position));
+                    if(status == 2){
+                        intent.setClass(context, ReplyWeiguanActivity.class);
+                        intent.putExtra("bean", data.get(position));
+                    }else {
+                        ToastUtil.showShort(context, "已反馈");
+                    }
                 }
                 context.startActivity(intent);
             }

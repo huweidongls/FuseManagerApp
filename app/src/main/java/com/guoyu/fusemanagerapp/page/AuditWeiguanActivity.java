@@ -1,5 +1,6 @@
 package com.guoyu.fusemanagerapp.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,14 @@ import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
+import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +44,8 @@ public class AuditWeiguanActivity extends BaseActivity {
     TextView tvContent;
 
     private WeiguanListBean.DataBean bean;
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +71,6 @@ public class AuditWeiguanActivity extends BaseActivity {
         }
         nine.setUrlList(list);
 
-
     }
 
     @OnClick({R.id.rl_back, R.id.tv_sure, R.id.tv_cancel})
@@ -86,7 +93,17 @@ public class AuditWeiguanActivity extends BaseActivity {
      */
     private void onCancel() {
 
-
+        dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", bean.getId()+"");
+        map.put("state", "4");
+        ViseUtil.Get(context, NetUrl.AppMiniCityInfoupdateStatusid, map, dialog, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                ToastUtil.showShort(context, "审核驳回");
+                finish();
+            }
+        });
 
     }
 
@@ -95,7 +112,17 @@ public class AuditWeiguanActivity extends BaseActivity {
      */
     private void onSure() {
 
-
+        dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", bean.getId()+"");
+        map.put("state", "2");
+        ViseUtil.Get(context, NetUrl.AppMiniCityInfoupdateStatusid, map, dialog, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                ToastUtil.showShort(context, "审核通过");
+                finish();
+            }
+        });
 
     }
 

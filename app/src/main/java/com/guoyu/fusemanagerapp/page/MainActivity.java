@@ -15,11 +15,13 @@ import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.IndexAdapter;
 import com.guoyu.fusemanagerapp.adapter.IndexGongnengAdapter;
+import com.guoyu.fusemanagerapp.app.MyApplication;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.HomeNewsBean;
 import com.guoyu.fusemanagerapp.bean.MenuBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.SpUtils;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.youth.banner.Banner;
 
@@ -64,10 +66,13 @@ public class MainActivity extends BaseActivity {
     private IndexAdapter indexAdapter;
     private List<HomeNewsBean.DataBean> mIndexList;
 
+    private long exitTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyApplication.getInstance().addActivity(MainActivity.this);
         ButterKnife.bind(MainActivity.this);
         initData();
         initNews();
@@ -190,6 +195,24 @@ public class MainActivity extends BaseActivity {
                 intent.setClass(context, PersonActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        backtrack();
+    }
+
+    /**
+     * 退出销毁所有activity
+     */
+    private void backtrack() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            ToastUtil.showShort(context, "再按一次退出程序");
+            exitTime = System.currentTimeMillis();
+        } else {
+            MyApplication.getInstance().exit();
+            exitTime = 0;
         }
     }
 

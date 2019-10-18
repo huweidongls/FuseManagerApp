@@ -1,5 +1,6 @@
 package com.guoyu.fusemanagerapp.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +16,13 @@ import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
 import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
+import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +46,8 @@ public class ReplyWeiguanActivity extends BaseActivity {
     EditText etContent;
 
     private WeiguanListBean.DataBean bean;
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +96,17 @@ public class ReplyWeiguanActivity extends BaseActivity {
         if(StringUtils.isEmpty(content)){
             ToastUtil.showShort(context, "反馈意见不能为空");
         }else {
-
+            dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("id", bean.getId()+"");
+            map.put("feeMemo", content);
+            ViseUtil.Get(context, NetUrl.AppMiniCityInfoinsertFeedback, map, dialog, new ViseUtil.ViseListener() {
+                @Override
+                public void onReturn(String s) {
+                    ToastUtil.showShort(context, "反馈成功");
+                    finish();
+                }
+            });
         }
 
     }

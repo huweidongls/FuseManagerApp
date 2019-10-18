@@ -15,11 +15,14 @@ public class FeedbackDetailsActivity extends BaseActivity {
 
     private Context context = FeedbackDetailsActivity.this;
 
+    private String id = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback_details);
 
+        id = getIntent().getStringExtra("id");
         ButterKnife.bind(FeedbackDetailsActivity.this);
 
     }

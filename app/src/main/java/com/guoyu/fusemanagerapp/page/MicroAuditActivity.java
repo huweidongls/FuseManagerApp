@@ -40,8 +40,13 @@ public class MicroAuditActivity extends BaseActivity {
         setContentView(R.layout.activity_audit);
 
         ButterKnife.bind(MicroAuditActivity.this);
-        initData();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
     }
 
     private void initData() {

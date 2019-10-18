@@ -40,8 +40,13 @@ public class MicroReplyActivity extends BaseActivity {
         setContentView(R.layout.activity_micro_reply);
 
         ButterKnife.bind(MicroReplyActivity.this);
-        initData();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
     }
 
     private void initData() {
