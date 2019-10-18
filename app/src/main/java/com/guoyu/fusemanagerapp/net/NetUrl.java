@@ -46,4 +46,6 @@ public class NetUrl {
     public static final String AppEducationInfofindType = "/AppEducationInfo/findType";
     //查询学科列表
     public static final String AppEducationInfoqueryList = "/AppEducationInfo/queryList";
+    //新增学科
+    public static final String AppEducationInfotoUpdate= "AppEducationInfo/toUpdate";
 }

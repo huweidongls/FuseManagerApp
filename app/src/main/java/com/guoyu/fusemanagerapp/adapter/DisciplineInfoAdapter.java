@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.bean.AcademicResourcesListBean;
 
 import java.util.List;
 
@@ -16,9 +18,9 @@ import java.util.List;
 
 public class DisciplineInfoAdapter extends RecyclerView.Adapter<DisciplineInfoAdapter.ViewHolder> {
     private Context context;
-    private List<String> data;
+    private List<AcademicResourcesListBean.DataBean> data;
 
-    public DisciplineInfoAdapter(List<String> data) {
+    public DisciplineInfoAdapter(List<AcademicResourcesListBean.DataBean> data) {
         this.data = data;
     }
     @Override
@@ -31,7 +33,7 @@ public class DisciplineInfoAdapter extends RecyclerView.Adapter<DisciplineInfoAd
 
     @Override
     public void onBindViewHolder(DisciplineInfoAdapter.ViewHolder holder, int position) {
-
+        holder.tv_title.setText(data.get(position).getTitle());
     }
 
     @Override
@@ -40,8 +42,10 @@ public class DisciplineInfoAdapter extends RecyclerView.Adapter<DisciplineInfoAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tv_title;
         public ViewHolder(View itemView) {
             super(itemView);
+            tv_title = itemView.findViewById(R.id.tv_title);
         }
     }
 }
