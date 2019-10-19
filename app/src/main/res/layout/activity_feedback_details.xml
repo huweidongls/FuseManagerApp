@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="咨询类型"
+                    android:text="部门"
                     android:textColor="#333333"
                     android:textSize="14sp" />
 
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="15dp"
-                    android:text="请选择"
+                    android:text=""
                     android:textColor="#999999"
                     android:textSize="12sp" />
                <!-- <Spinner
@@ -119,6 +119,44 @@
                     android:entries="@array/languages"
                     android:layout_gravity="center_vertical"
                     />-->
+                <!-- <ImageView
+                     android:layout_width="13dp"
+                     android:layout_height="3dp"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginRight="17dp"
+                     android:src="@mipmap/icon0133x" />-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="咨询类型"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_leixing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dp"
+                    android:text=""
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+                <!-- <Spinner
+                     android:id="@+id/spinner1"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:entries="@array/languages"
+                     android:layout_gravity="center_vertical"
+                     />-->
                 <!-- <ImageView
                      android:layout_width="13dp"
                      android:layout_height="3dp"

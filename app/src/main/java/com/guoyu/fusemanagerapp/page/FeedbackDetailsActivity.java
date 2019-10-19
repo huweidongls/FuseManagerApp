@@ -43,6 +43,8 @@ public class FeedbackDetailsActivity extends BaseActivity {
     TextView tv_content;
     @BindView(R.id.rv_pic)
     RecyclerView rv_pic;
+    @BindView(R.id.tv_leixing)
+    TextView tv_leixing;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,17 @@ public class FeedbackDetailsActivity extends BaseActivity {
                 et_ftitle.setText(bean.getData().getContentTop());
                 tv_bumen.setText(bean.getData().getDeptName());
                 tv_content.setText(bean.getData().getContent());
+                switch (bean.getData().getConsType()){
+                    case 5:
+                        tv_leixing.setText("投诉");
+                        break;
+                    case 4:
+                        tv_leixing.setText("咨询");
+                        break;
+                    case 19:
+                        tv_leixing.setText("其他");
+                        break;
+                }
                    String str2=bean.getData().getContentPic().replace(" ", "");
                 List<String> list= Arrays.asList(str2.split(","));
                 adapter = new FeedbackDetailsImgAdapter(list);
