@@ -58,10 +58,14 @@ public class TicketInserActivity extends AppCompatActivity {
     EditText et_title;
     @BindView(R.id.et_content)
     EditText et_content;
-    @BindView(R.id.et_desc)
-    EditText et_desc;
+    /*@BindView(R.id.et_desc)
+    EditText et_desc;*/
     @BindView(R.id.et_jq_desc)
     EditText et_jq_desc;
+    @BindView(R.id.et_menpiao)
+    EditText et_menpiao;
+    @BindView(R.id.et_jq_desc_zi)
+    EditText et_jq_desc_zi;
     private int REQUEST_CODE = 101;
     private int REQUEST_CODES=102;
     private Dialog weiboDialog;
@@ -127,12 +131,21 @@ public class TicketInserActivity extends AppCompatActivity {
                 iv_del1.setVisibility(View.GONE);
                 break;
             case R.id.btn_add:
-               SaveInfo();
+                String title = et_title.getText().toString();//标题
+                String content = et_content.getText().toString();//景区简介
+                String menpiaozi = et_jq_desc_zi.getText().toString();//子门票信息
+                String jqxq = et_jq_desc.getText().toString();//景区详情
+                String menpiaos = et_menpiao.getText().toString();//门票价格
+                if(title.isEmpty()||content.isEmpty()||menpiaozi.isEmpty()||jqxq.isEmpty()||menpiaos.isEmpty()||pic.isEmpty()){
+                    ToastUtil.showShort(context,"请把信息填写完整!");
+                }else{
+                    SaveInfo();
+                }
                 break;
         }
     }
     private void SaveInfo(){
-        /*weiboDialog = WeiboDialogUtils.createLoadingDialog(context,"请等待...");
+        weiboDialog = WeiboDialogUtils.createLoadingDialog(context,"请等待...");
 
         Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
             @Override
@@ -160,7 +173,7 @@ public class TicketInserActivity extends AppCompatActivity {
                                 fileList.add(file);
                                 if(fileList.size() == mList.size()){
                                     for (int i = 0; i<fileList.size(); i++){
-                                        fileMap.put("file"+i, fileList.get(i));//[" + i + "]
+                                        fileMap.put("img"+i, fileList.get(i));//[" + i + "]
                                     }
                                     e.onNext(fileMap);
                                 }
@@ -181,15 +194,19 @@ public class TicketInserActivity extends AppCompatActivity {
 
             @Override
             public void onNext(Map<String, File> value) {
+                File file = new File(pic);
                 String title = et_title.getText().toString();//标题
-                String content = et_content.getText().toString();//副标题
-                String menpiao = et_desc.getText().toString();//内容
-                String jqxq = et_jq_desc.getText().toString();
+                String content = et_content.getText().toString();//景区简介
+                String menpiaozi = et_jq_desc_zi.getText().toString();//子门票信息
+                String jqxq = et_jq_desc.getText().toString();//景区详情
+                String menpiaos = et_menpiao.getText().toString();//门票价格
                 ViseHttp.UPLOAD(NetUrl.AppEntranceTicketInfoinsertEntranceTicketInfo)
                         .addParam("title", title)
-                        .addParam("contentShort", ftitle)
-                        .addParam("content", type)
-                        .addParam("content",content)
+                        .addParam("contentShort", content)
+                        .addParam("content", jqxq)
+                        .addParam("ticketMoney",menpiaos)
+                        .addParam("ticketMoneyMore",menpiaozi)
+                        .addFile("file0", file)
                         .addFiles(value)
                         .request(new ACallback<String>() {
                             @Override
@@ -227,7 +244,7 @@ public class TicketInserActivity extends AppCompatActivity {
         };
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);*/
+                .subscribe(observer);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

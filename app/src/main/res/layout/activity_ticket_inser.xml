@@ -153,33 +153,65 @@
         android:layout_height="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/line" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginTop="23dp"
-            android:text="门票"
-            android:textColor="#333333"
-            android:textSize="13sp" />
-        <EditText
-            android:id="@+id/et_desc"
-            android:gravity="start"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@null"
-            android:hint="请输入门票信息"
-            android:textColorHint="#CCCCCC"
-            android:textSize="12sp" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="门票"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_menpiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="17dp"
+                    android:background="@null"
+                    android:hint="请输入门票价格"
+                    android:textColorHint="#CCCCCC"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/line" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="23dp"
+                    android:text="子项目票价"
+                    android:textColor="#333333"
+                    android:textSize="13sp" />
+                <EditText
+                    android:id="@+id/et_jq_desc_zi"
+                    android:gravity="start"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@null"
+                    android:hint="请输入子项目票价信息"
+                    android:textColorHint="#CCCCCC"
+                    android:textSize="12sp" />
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"

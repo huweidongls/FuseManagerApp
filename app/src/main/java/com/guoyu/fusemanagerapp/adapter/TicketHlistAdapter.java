@@ -36,7 +36,9 @@ public class TicketHlistAdapter extends RecyclerView.Adapter<TicketHlistAdapter.
 
     @Override
     public void onBindViewHolder(TicketHlistAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getMainPic()).into(holder.iv_imgs);
+        String b = data.get(position).getMainPic();
+        b=b.substring(0, b.lastIndexOf(","));
+        Glide.with(context).load(NetUrl.BASE_URL+b).into(holder.iv_imgs);
         holder.tv_title.setText(data.get(position).getTitle());
         holder.tv_price.setText("¥"+data.get(position).getTicketMoney()+"元起");
     }

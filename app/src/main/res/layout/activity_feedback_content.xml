@@ -44,6 +44,7 @@
             android:layout_height="30dp" />
 
         <EditText
+            android:id="@+id/et_feemo"
             android:gravity="start"
             android:layout_margin="20dp"
             android:textColor="@color/black_333333"
@@ -56,6 +57,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_save"
         android:layout_margin="15dp"
         android:background="@color/theme"
         android:textColor="@color/white_ffffff"

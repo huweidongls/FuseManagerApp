@@ -62,4 +62,6 @@ public class NetUrl {
     public static final String AppEntranceTicketInfoqueryList = "/AppEntranceTicketInfo/queryList";
     //发布门票接口
     public static final String AppEntranceTicketInfoinsertEntranceTicketInfo = "/AppEntranceTicketInfo/insertEntranceTicketInfo";
+    //投诉咨询详情
+    public static final String AppConsultationInfogetOne = "/AppConsultationInfo/getOne";
 }

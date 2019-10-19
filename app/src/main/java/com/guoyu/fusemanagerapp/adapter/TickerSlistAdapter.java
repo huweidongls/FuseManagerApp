@@ -36,11 +36,13 @@ public class TickerSlistAdapter extends RecyclerView.Adapter<TickerSlistAdapter.
 
     @Override
     public void onBindViewHolder(TickerSlistAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getMainPic()).into(holder.iv_img);
+        String b = data.get(position).getMainPic();
+        b=b.substring(0, b.lastIndexOf(","));
+        Glide.with(context).load(NetUrl.BASE_URL+b).into(holder.iv_img);
         holder.tv_title.setText(data.get(position).getTitle());
-        String str=data.get(position).getContent();
+        String str=data.get(position).getContentShort();
         //str=str.substring(0,15);
-        holder.tv_desc.setText(str+"...");
+        holder.tv_desc.setText(str);
         holder.tv_price.setText("¥"+data.get(position).getTicketMoney()+"元");
     }
 

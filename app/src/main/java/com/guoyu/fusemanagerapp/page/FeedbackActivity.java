@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -44,10 +45,15 @@ public class FeedbackActivity extends BaseActivity {
 
     }
 
-    private void initData() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
+    }
 
+    private void initData() {
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("userId", SpUtils.getUserId(context));
+        map.put("userId",SpUtils.getUserId(context));//SpUtils.getUserId(context)
         ViseUtil.Get(context, NetUrl.AppConsultationInfofindStatusid, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
