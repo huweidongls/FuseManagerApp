@@ -16,10 +16,12 @@ import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.PersonBean;
+import com.guoyu.fusemanagerapp.bean.VersionBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
+import com.guoyu.fusemanagerapp.util.VersionUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
@@ -47,9 +49,13 @@ public class PersonActivity extends BaseActivity {
     TextView tvName;
     @BindView(R.id.tv_phone)
     TextView tvPhone;
+    @BindView(R.id.tv_version)
+    TextView tvVersion;
+
     private String pic="";
     private String b="";
     private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +67,8 @@ public class PersonActivity extends BaseActivity {
     }
 
     private void initData() {
+
+        tvVersion.setText("v "+ VersionUtils.packageName(context));
 
         Logger.e("123123", SpUtils.getToken(context));
         Map<String, String> map = new LinkedHashMap<>();
@@ -81,7 +89,8 @@ public class PersonActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7,R.id.rl_login,R.id.iv_head})
+    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7,R.id.rl_login,R.id.iv_head, R.id.ll_version
+    , R.id.ll_about})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -125,6 +134,23 @@ public class PersonActivity extends BaseActivity {
                         .setMaxSelectCount(1) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PersonActivity.this, REQUEST_CODE); // 打开相册
+                break;
+            case R.id.ll_version:
+                final int versionCode = VersionUtils.packageCode(context);
+                ViseUtil.Get(context, NetUrl.AppVersionInfonewVersionManage, null, new ViseUtil.ViseListener() {
+                    @Override
+                    public void onReturn(String s) {
+                        Gson gson = new Gson();
+                        VersionBean bean = gson.fromJson(s, VersionBean.class);
+                        if(bean.getData().getVersioncode()>versionCode){
+                            ToastUtil.showShort(context, "有新版本！");
+                        }
+                    }
+                });
+                break;
+            case R.id.ll_about:
+                intent.setClass(context, AboutActivity.class);
+                startActivity(intent);
                 break;
         }
     }

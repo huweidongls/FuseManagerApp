@@ -72,9 +72,11 @@
         <activity
             android:name=".page.FeedbackContentActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name=".page.TicketInserActivity"
+        <activity
+            android:name=".page.TicketInserActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name=".page.UserInfoSetActivity"></activity>
+        <activity android:name=".page.UserInfoSetActivity" />
+        <activity android:name=".page.AboutActivity"></activity>
     </application>
 
 </manifest>
