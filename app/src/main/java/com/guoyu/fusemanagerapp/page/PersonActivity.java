@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +17,10 @@ import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
+import com.guoyu.fusemanagerapp.adapter.IndexGongnengAdapter;
+import com.guoyu.fusemanagerapp.adapter.MyServiceAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.bean.MenuBean;
 import com.guoyu.fusemanagerapp.bean.PersonBean;
 import com.guoyu.fusemanagerapp.bean.VersionBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
@@ -33,6 +39,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -51,10 +58,15 @@ public class PersonActivity extends BaseActivity {
     TextView tvPhone;
     @BindView(R.id.tv_version)
     TextView tvVersion;
+    @BindView(R.id.rv)
+    RecyclerView rv;
 
     private String pic="";
     private String b="";
     private Dialog dialog;
+
+    private MyServiceAdapter adapter;
+    private List<MenuBean.DataBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +75,34 @@ public class PersonActivity extends BaseActivity {
 
         ButterKnife.bind(PersonActivity.this);
         initData();
+        initService();
+
+    }
+
+    /**
+     * 初始化权限
+     */
+    private void initService() {
+
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", SpUtils.getUserId(context));
+        ViseUtil.Get(context, NetUrl.AppUseradminGetMuen, map, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                MenuBean bean = gson.fromJson(s, MenuBean.class);
+                mList = bean.getData();
+                adapter = new MyServiceAdapter(mList);
+                LinearLayoutManager manager = new LinearLayoutManager(context){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                rv.setLayoutManager(manager);
+                rv.setAdapter(adapter);
+            }
+        });
 
     }
 
@@ -89,39 +129,11 @@ public class PersonActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.ll1, R.id.ll2, R.id.ll3, R.id.ll4, R.id.ll5, R.id.ll6, R.id.ll7,R.id.rl_login,R.id.iv_head, R.id.ll_version
+    @OnClick({R.id.rl_login,R.id.iv_head, R.id.ll_version
     , R.id.ll_about})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
-            case R.id.ll1:
-                intent.setClass(context, MicroAuditActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll2:
-                intent.setClass(context, MicroReplyActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll3:
-                intent.setClass(context, RealAuditActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll4:
-                intent.setClass(context, FeedbackActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll5:
-                intent.setClass(context, GovernmentServicesActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll6:
-                intent.setClass(context, AcademicResourcesActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ll7:
-                intent.setClass(context, TicketServiceActivity.class);
-                startActivity(intent);
-                break;
             case R.id.rl_login:
                 intent.setClass(context, UserInfoSetActivity.class);
                 startActivity(intent);

@@ -54,7 +54,6 @@
                     android:layout_gravity="center_vertical"
                     android:textColor="#aaaaaa"
                     android:textSize="11sp"
-                    android:text="我市对该项目推进大力做好后续工作。"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

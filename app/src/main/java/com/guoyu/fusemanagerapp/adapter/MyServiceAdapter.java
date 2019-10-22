@@ -6,43 +6,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.MenuBean;
-import com.guoyu.fusemanagerapp.net.NetUrl;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2019/10/9.
+ * Created by Administrator on 2019/10/22.
  */
 
-public class IndexGongnengAdapter extends RecyclerView.Adapter<IndexGongnengAdapter.ViewHolder> {
+public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.ViewHolder> {
 
     private Context context;
     private List<MenuBean.DataBean> data;
 
-    public IndexGongnengAdapter(List<MenuBean.DataBean> data) {
+    public MyServiceAdapter(List<MenuBean.DataBean> data) {
         this.data = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_index_gongneng, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_my_service, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getLogoPic()).into(holder.iv);
         holder.tv.setText(data.get(position).getFunName());
-        holder.ll.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -63,15 +58,11 @@ public class IndexGongnengAdapter extends RecyclerView.Adapter<IndexGongnengAdap
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView iv;
         private TextView tv;
-        private LinearLayout ll;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            iv = itemView.findViewById(R.id.iv);
             tv = itemView.findViewById(R.id.tv);
-            ll = itemView.findViewById(R.id.ll);
         }
     }
 

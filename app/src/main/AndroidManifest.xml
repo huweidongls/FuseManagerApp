@@ -75,8 +75,9 @@
         <activity
             android:name=".page.TicketInserActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity android:name=".page.UserInfoSetActivity" />
-        <activity android:name=".page.AboutActivity"></activity>
+        <activity android:name=".page.UserInfoSetActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".page.AboutActivity"/>
     </application>
 
 </manifest>
