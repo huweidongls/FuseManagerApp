@@ -64,6 +64,6 @@ public class NetUrl {
     public static final String AppEntranceTicketInfoinsertEntranceTicketInfo = "/AppEntranceTicketInfo/insertEntranceTicketInfo";
     //投诉咨询详情
     public static final String AppConsultationInfogetOne = "/AppConsultationInfo/getOne";
-    //投诉咨询详情
+    //最新版本信息
     public static final String AppVersionInfonewVersionManage = "/AppVersionInfo/newVersionManage";
 }
