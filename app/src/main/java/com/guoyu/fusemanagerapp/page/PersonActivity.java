@@ -3,7 +3,11 @@ package com.guoyu.fusemanagerapp.page;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,10 +23,13 @@ import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.IndexGongnengAdapter;
 import com.guoyu.fusemanagerapp.adapter.MyServiceAdapter;
+import com.guoyu.fusemanagerapp.app.MyApplication;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.MenuBean;
 import com.guoyu.fusemanagerapp.bean.PersonBean;
 import com.guoyu.fusemanagerapp.bean.VersionBean;
+import com.guoyu.fusemanagerapp.dialog.DialogVersion;
+import com.guoyu.fusemanagerapp.dialog.ProgressDialog;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
@@ -32,6 +39,7 @@ import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
+import com.vise.xsnow.http.mode.DownProgress;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -153,9 +161,50 @@ public class PersonActivity extends BaseActivity {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        VersionBean bean = gson.fromJson(s, VersionBean.class);
+                        final VersionBean bean = gson.fromJson(s, VersionBean.class);
                         if(bean.getData().getVersioncode()>versionCode){
-                            ToastUtil.showShort(context, "有新版本！");
+                            DialogVersion dialogVersion = new DialogVersion(context, bean.getData().getVersionname(), bean.getData().getVerDesc()
+                                    , new DialogVersion.ClickListener() {
+                                @Override
+                                public void onSure() {
+                                    final ProgressDialog progressDialog = new ProgressDialog(context);
+                                    progressDialog.setCancelable(false);
+                                    progressDialog.setCanceledOnTouchOutside(false);
+                                    progressDialog.show();
+                                    String downloadUrl = bean.getData().getDownloadAdd();
+                                    String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+                                    ViseHttp.DOWNLOAD(downloadUrl)
+                                            .setRootName(path)
+                                            .setDirName("fusemanager")
+                                            .setFileName("FuseManager.apk")
+                                            .request(new ACallback<DownProgress>() {
+                                                @Override
+                                                public void onSuccess(DownProgress data) {
+                                                    progressDialog.setInfo(data.getFormatStatusString(), data.getPercent());
+                                                    if (data.isDownComplete()){
+                                                        progressDialog.dismiss();
+                                                        String appFile = Environment.getExternalStorageDirectory().getAbsolutePath()+"/fusemanager/"+"FuseManager.apk";
+                                                        openAPK(appFile);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFail(int errCode, String errMsg) {
+
+                                                }
+                                            });
+                                }
+
+                                @Override
+                                public void onCancel() {
+                                    if(bean.getData().getIsAutoupdate() == 1){
+                                        MyApplication.getInstance().exit();
+                                    }
+                                }
+                            });
+                            dialogVersion.setCancelable(false);
+                            dialogVersion.setCanceledOnTouchOutside(false);
+                            dialogVersion.show();
                         }
                     }
                 });
@@ -166,6 +215,29 @@ public class PersonActivity extends BaseActivity {
                 break;
         }
     }
+
+    /**
+     * 安装apk
+     * @param fileSavePath
+     */
+    private void openAPK(String fileSavePath){
+        File file=new File(Uri.parse(fileSavePath).getPath());
+        String filePath = file.getAbsolutePath();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri data = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//判断版本大于等于7.0
+            // 生成文件的uri，，
+            // 注意 下面参数com.ausee.fileprovider 为apk的包名加上.fileprovider，
+            data = FileProvider.getUriForFile(context, "com.guoyu.fusemanagerapp.fileprovider", new File(filePath));
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);// 给目标应用一个临时授权
+        } else {
+            data = Uri.fromFile(file);
+        }
+
+        intent.setDataAndType(data, "application/vnd.android.package-archive");
+        startActivity(intent);
+    }
+
     private void upload_head(){//上传头像
         //提交接口
         dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
@@ -195,6 +267,7 @@ public class PersonActivity extends BaseActivity {
                     }
                 });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -8,7 +8,7 @@ public class VersionBean {
 
     /**
      * status : 200
-     * data : {"id":752,"versionname":"1.0.2","versioncode":2,"verDesc":"版本描述1"}
+     * data : {"id":702,"versionname":"1.0.2","versioncode":2,"downloadAdd":"下载地址1","verDesc":"版本描述1","isAutoupdate":0}
      */
 
     private String status;
@@ -32,16 +32,20 @@ public class VersionBean {
 
     public static class DataBean {
         /**
-         * id : 752
+         * id : 702
          * versionname : 1.0.2
          * versioncode : 2
+         * downloadAdd : 下载地址1
          * verDesc : 版本描述1
+         * isAutoupdate : 0
          */
 
         private int id;
         private String versionname;
         private int versioncode;
+        private String downloadAdd;
         private String verDesc;
+        private int isAutoupdate;
 
         public int getId() {
             return id;
@@ -67,12 +71,28 @@ public class VersionBean {
             this.versioncode = versioncode;
         }
 
+        public String getDownloadAdd() {
+            return downloadAdd;
+        }
+
+        public void setDownloadAdd(String downloadAdd) {
+            this.downloadAdd = downloadAdd;
+        }
+
         public String getVerDesc() {
             return verDesc;
         }
 
         public void setVerDesc(String verDesc) {
             this.verDesc = verDesc;
+        }
+
+        public int getIsAutoupdate() {
+            return isAutoupdate;
+        }
+
+        public void setIsAutoupdate(int isAutoupdate) {
+            this.isAutoupdate = isAutoupdate;
         }
     }
 }
