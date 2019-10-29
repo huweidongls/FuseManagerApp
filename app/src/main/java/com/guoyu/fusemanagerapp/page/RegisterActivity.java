@@ -97,25 +97,25 @@ public class RegisterActivity extends BaseActivity {
                             }
                         });
                     }else {
-//                        Map<String, String> map = new LinkedHashMap<>();
-//                        map.put("phone", phone);
-//                        ViseUtil.Get(context, NetUrl.CitizenUserregisterPhoneWjmm, map, dialog, new ViseUtil.ViseListener() {
-//                            @Override
-//                            public void onReturn(String s) {
-//                                try {
-//                                    JSONObject jsonObject = new JSONObject(s);
-//                                    ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
-//                                    Intent intent = new Intent();
-//                                    intent.setClass(context, RegistrationTwoActivity.class);
-//                                    intent.putExtra("phone", phone);
-//                                    intent.putExtra("type", type);
-//                                    startActivity(intent);
-//                                    finish();
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        });
+                        Map<String, String> map = new LinkedHashMap<>();
+                        map.put("phone", phone);
+                        ViseUtil.Get(context, NetUrl.AppUseradminrPhoneWjmm, map, dialog, new ViseUtil.ViseListener() {
+                            @Override
+                            public void onReturn(String s) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(s);
+                                    ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
+                                    Intent intent = new Intent();
+                                    intent.setClass(context, RegistrationTwoActivity.class);
+                                    intent.putExtra("phone", phone);
+                                    intent.putExtra("type", type);
+                                    startActivity(intent);
+                                    finish();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                 }
                 break;

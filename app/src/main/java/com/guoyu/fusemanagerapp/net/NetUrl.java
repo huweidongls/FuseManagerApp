@@ -66,4 +66,10 @@ public class NetUrl {
     public static final String AppConsultationInfogetOne = "/AppConsultationInfo/getOne";
     //最新版本信息
     public static final String AppVersionInfonewVersionManage = "/AppVersionInfo/newVersionManage";
+    //管理端用户手机号验证码发送(忘记密码)
+    public static final String AppUseradminrPhoneWjmm = "/AppUser/adminrPhoneWjmm";
+    //修改密码
+    public static final String AppUseradminforgetThePassword = "/AppUser/adminforgetThePassword";
+    //查询全部轮播图
+    public static final String AppBannerInfoqueryList = "/AppBannerInfo/queryList";
 }

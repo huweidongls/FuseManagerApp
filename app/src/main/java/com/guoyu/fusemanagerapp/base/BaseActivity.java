@@ -59,7 +59,7 @@ public class BaseActivity extends AppCompatActivity {
         normalDialog.show();
     }
 
-    public void initBanner(Banner banner, List<String> images) {
+    public void init(Banner banner, List<String> images) {
 
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);

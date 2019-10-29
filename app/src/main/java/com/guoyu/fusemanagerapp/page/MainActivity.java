@@ -22,6 +22,7 @@ import com.guoyu.fusemanagerapp.adapter.IndexAdapter;
 import com.guoyu.fusemanagerapp.adapter.IndexGongnengAdapter;
 import com.guoyu.fusemanagerapp.app.MyApplication;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.bean.BannerBean;
 import com.guoyu.fusemanagerapp.bean.HomeNewsBean;
 import com.guoyu.fusemanagerapp.bean.MenuBean;
 import com.guoyu.fusemanagerapp.bean.VersionBean;
@@ -110,10 +111,31 @@ public class MainActivity extends BaseActivity {
                 Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE);
         MyApplication.getInstance().addActivity(MainActivity.this);
         ButterKnife.bind(MainActivity.this);
+        initBanner();
         initData();
         initNews();
         Log.e("02020202020",SpUtils.getToken(context));
         initVersion();
+
+    }
+
+    /**
+     * 轮播图
+     */
+    private void initBanner() {
+
+        ViseUtil.Post(context, NetUrl.AppBannerInfoqueryList, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                BannerBean bean = gson.fromJson(s, BannerBean.class);
+                List<String> list = new ArrayList<>();
+                for (BannerBean.DataBean bean1 : bean.getData()){
+                    list.add(NetUrl.BASE_URL+bean1.getBannerPic());
+                }
+                init(banner, list);
+            }
+        });
 
     }
 

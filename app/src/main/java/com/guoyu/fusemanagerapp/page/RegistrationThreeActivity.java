@@ -166,38 +166,44 @@ public class RegistrationThreeActivity extends BaseActivity {
                         });
                     }else {
                         //修改密码
-//                        Map<String, String> map = new LinkedHashMap<>();
-//                        map.put("phone", phone);
-//                        map.put("psd", pwd1);
-//                        ViseUtil.Post(context, NetUrl.CitizenUserforgetThePassword, map, new ViseUtil.ViseListener() {
-//                            @Override
-//                            public void onReturn(String s) {
-//                                Map<String, String> map1 = new LinkedHashMap<>();
-//                                map1.put("phone", phone);
-//                                map1.put("psd", pwd1);
-//                                ViseUtil.Get(context, NetUrl.loginApp, map1, dialog, new ViseUtil.ViseListener() {
-//                                    @Override
-//                                    public void onReturn(String s) {
-//                                        try {
-//                                            JSONObject jsonObject = new JSONObject(s);
-//                                            ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
-//                                            Gson gson = new Gson();
-//                                            LoginBean bean = gson.fromJson(s, LoginBean.class);
-//                                            SpUtils.setToken(context, bean.getAppToken());
-//                                            SpUtils.setUserId(context, bean.getData().getId()+"");
-//                                            SpUtils.setPhoneNum(context, bean.getData().getPhone());
-//                                            Map<String, String> map2 = new LinkedHashMap<>();
-//                                            map2.put("jnkjToken", bean.getAppToken());
-//                                            ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
-//                                                    .globalHeaders(map2);
-//                                            finish();
-//                                        } catch (JSONException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        });
+                        Map<String, String> map = new LinkedHashMap<>();
+                        map.put("phone", phone);
+                        map.put("psd", pwd1);
+                        ViseUtil.Post(context, NetUrl.AppUseradminforgetThePassword, map, new ViseUtil.ViseListener() {
+                            @Override
+                            public void onReturn(String s) {
+                                Map<String, String> map1 = new LinkedHashMap<>();
+                                map1.put("phone", phone);
+                                map1.put("psd", pwd1);
+                                ViseUtil.Post(context, NetUrl.AppUserappAdmuinLogin, map1, dialog, new ViseUtil.ViseListener() {
+                                    @Override
+                                    public void onReturn(String s) {
+                                        Gson gson = new Gson();
+                                        LoginBean bean = gson.fromJson(s, LoginBean.class);
+                                        Intent intent1 = new Intent();
+                                        if(bean.getData().getUserType() == 2&&bean.getData().getAppuserType() == 2&&bean.getData().getStatus()!=2){
+                                            intent1.setClass(context, RenzhengActivity.class);
+                                            intent1.putExtra("id", bean.getData().getId()+"");
+                                            Map<String, String> map2 = new LinkedHashMap<>();
+                                            map2.put("jnkjToken", bean.getUserNameFromToken());
+                                            ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                                                    .globalHeaders(map2);
+                                        }else {
+                                            intent1.setClass(context, MainActivity.class);
+                                            SpUtils.setToken(context, bean.getUserNameFromToken());
+                                            SpUtils.setUserId(context, bean.getData().getId()+"");
+                                            SpUtils.setPhoneNum(context, bean.getData().getUsername());
+                                            Map<String, String> map2 = new LinkedHashMap<>();
+                                            map2.put("jnkjToken", bean.getUserNameFromToken());
+                                            ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                                                    .globalHeaders(map2);
+                                        }
+                                        startActivity(intent1);
+                                        finish();
+                                    }
+                                });
+                            }
+                        });
                     }
                 }
                 break;
