@@ -28,6 +28,7 @@ import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.MenuBean;
 import com.guoyu.fusemanagerapp.bean.PersonBean;
 import com.guoyu.fusemanagerapp.bean.VersionBean;
+import com.guoyu.fusemanagerapp.dialog.DialogCustom;
 import com.guoyu.fusemanagerapp.dialog.DialogVersion;
 import com.guoyu.fusemanagerapp.dialog.ProgressDialog;
 import com.guoyu.fusemanagerapp.net.NetUrl;
@@ -82,9 +83,14 @@ public class PersonActivity extends BaseActivity {
         setContentView(R.layout.activity_person);
 
         ButterKnife.bind(PersonActivity.this);
-        initData();
         initService();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
     }
 
     /**
@@ -138,7 +144,7 @@ public class PersonActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rl_login,R.id.iv_head, R.id.ll_version
-    , R.id.ll_about})
+    , R.id.ll_about, R.id.rl_back, R.id.btn_exit})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
@@ -212,6 +218,23 @@ public class PersonActivity extends BaseActivity {
             case R.id.ll_about:
                 intent.setClass(context, AboutActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.rl_back:
+                finish();
+                break;
+            case R.id.btn_exit:
+                DialogCustom dialogCustom = new DialogCustom(context, "是否退出登录", new DialogCustom.OnYesListener() {
+                    @Override
+                    public void onYes() {
+                        SpUtils.clear(context);
+                        Map<String, String> map = new LinkedHashMap<>();
+                        map.put("jnkjToken", "");
+                        ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
+                                .globalHeaders(map);
+                        finish();
+                    }
+                });
+                dialogCustom.show();
                 break;
         }
     }

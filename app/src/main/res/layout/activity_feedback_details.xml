@@ -17,14 +17,16 @@
             <ImageView style="@style/iv_top_back" />
         </RelativeLayout>
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -41,28 +43,32 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:gravity="end"
+                    android:layout_weight="1"
                     android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="17dp"
                     android:background="@null"
-                    android:hint="请输入标题内容"
                     android:textColorHint="#CCCCCC"
                     android:textSize="12sp" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/line" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="16dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,23 +77,28 @@
                     android:text="副标题"
                     android:textColor="#333333"
                     android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/et_ftitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="17dp"
+                    android:layout_weight="1"
                     android:background="@null"
+                    android:gravity="end"
                     android:hint="请输入副标题内容"
                     android:textColorHint="#CCCCCC"
                     android:textSize="12sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/line" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -104,50 +115,13 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_bumen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:text=""
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-               <!-- <Spinner
-                    android:id="@+id/spinner1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/languages"
-                    android:layout_gravity="center_vertical"
-                    />-->
-                <!-- <ImageView
-                     android:layout_width="13dp"
-                     android:layout_height="3dp"
-                     android:layout_gravity="center_vertical"
-                     android:layout_marginRight="17dp"
-                     android:src="@mipmap/icon0133x" />-->
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="16dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
                     android:layout_weight="1"
-                    android:text="咨询类型"
-                    android:textColor="#333333"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_leixing"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_bumen"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="15dp"
-                    android:text=""
                     android:textColor="#999999"
                     android:textSize="12sp" />
                 <!-- <Spinner
@@ -164,50 +138,95 @@
                      android:layout_marginRight="17dp"
                      android:src="@mipmap/icon0133x" />-->
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="咨询类型"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:gravity="end"
+                    android:layout_weight="1"
+                    android:id="@+id/tv_leixing"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+                <!-- <Spinner
+                     android:id="@+id/spinner1"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:entries="@array/languages"
+                     android:layout_gravity="center_vertical"
+                     />-->
+                <!-- <ImageView
+                     android:layout_width="13dp"
+                     android:layout_height="3dp"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginRight="17dp"
+                     android:src="@mipmap/icon0133x" />-->
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/line" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
                     android:text="爱上大快递那数据库的号角"
                     android:textColor="#333"
-                    />
-               <!-- <EditText
-                    android:id="@+id/et_content"
-                    android:gravity="start"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@null"
-                    android:hint="请输入投诉/咨询内容"
-                    android:textColorHint="#CCCCCC"
-                    android:textSize="12sp" />-->
+                    android:textSize="12sp" />
+                <!-- <EditText
+                     android:id="@+id/et_content"
+                     android:gravity="start"
+                     android:layout_marginTop="12dp"
+                     android:layout_marginBottom="12dp"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_marginLeft="16dp"
+                     android:layout_marginRight="16dp"
+                     android:background="@null"
+                     android:hint="请输入投诉/咨询内容"
+                     android:textColorHint="#CCCCCC"
+                     android:textSize="12sp" />-->
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/line" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="23dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -215,18 +234,22 @@
                     android:textColor="#333333"
                     android:textSize="13sp" />
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginTop="13dp"
                 android:descendantFocusability="blocksDescendants">
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_pic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
+
             <Button
+                android:layout_marginBottom="16dp"
                 android:id="@+id/btn_sure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

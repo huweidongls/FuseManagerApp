@@ -74,13 +74,25 @@ public class MainActivity extends BaseActivity {
     TextView tv3;
     @BindView(R.id.tv4)
     TextView tv4;
-    @BindView(R.id.rv)
-    RecyclerView recyclerView;
-    private int type=0;
+    @BindView(R.id.rv0)
+    RecyclerView rv0;
+    @BindView(R.id.rv1)
+    RecyclerView rv1;
+    @BindView(R.id.rv2)
+    RecyclerView rv2;
+    @BindView(R.id.rv3)
+    RecyclerView rv3;
+
     private IndexGongnengAdapter gongnengAdapter;
     private List<MenuBean.DataBean> mList;
-    private IndexAdapter indexAdapter;
-    private List<HomeNewsBean.DataBean> mIndexList;
+    private IndexAdapter adapter0;
+    private List<HomeNewsBean.DataBean> mList0;
+    private IndexAdapter adapter1;
+    private List<HomeNewsBean.DataBean> mList1;
+    private IndexAdapter adapter2;
+    private List<HomeNewsBean.DataBean> mList2;
+    private IndexAdapter adapter3;
+    private List<HomeNewsBean.DataBean> mList3;
 
     private long exitTime = 0;
 
@@ -239,34 +251,19 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-       /* mIndexList = new ArrayList<>();
-        mIndexList.add("");
-        mIndexList.add("");
-        mIndexList.add("");
-        mIndexList.add("");
-        mIndexList.add("");
-        indexAdapter = new IndexAdapter(mIndexList);
-        LinearLayoutManager manager1 = new LinearLayoutManager(context){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        manager1.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager1);
-        recyclerView.setAdapter(indexAdapter);*/
-
     }
+
     private void initNews(){
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("type",type+"");
-        ViseUtil.Get(context, NetUrl.AppHomePageLatestNews, map, new ViseUtil.ViseListener() {
+
+        Map<String,String> map0 = new LinkedHashMap<>();
+        map0.put("type","0");
+        ViseUtil.Get(context, NetUrl.AppHomePageLatestNews, map0, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 HomeNewsBean bean = gson.fromJson(s,HomeNewsBean.class);
-                mIndexList = bean.getData();
-                indexAdapter = new IndexAdapter(mIndexList);
+                mList0 = bean.getData();
+                adapter0 = new IndexAdapter(mList0, 0);
                 LinearLayoutManager manager1 = new LinearLayoutManager(context){
                     @Override
                     public boolean canScrollVertically() {
@@ -274,10 +271,74 @@ public class MainActivity extends BaseActivity {
                     }
                 };
                 manager1.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(manager1);
-                recyclerView.setAdapter(indexAdapter);
+                rv0.setLayoutManager(manager1);
+                rv0.setAdapter(adapter0);
             }
         });
+
+        Map<String,String> map1 = new LinkedHashMap<>();
+        map1.put("type","1");
+        ViseUtil.Get(context, NetUrl.AppHomePageLatestNews, map1, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                HomeNewsBean bean = gson.fromJson(s,HomeNewsBean.class);
+                mList1 = bean.getData();
+                adapter1 = new IndexAdapter(mList1, 1);
+                LinearLayoutManager manager1 = new LinearLayoutManager(context){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                manager1.setOrientation(LinearLayoutManager.VERTICAL);
+                rv1.setLayoutManager(manager1);
+                rv1.setAdapter(adapter1);
+            }
+        });
+
+        Map<String,String> map2 = new LinkedHashMap<>();
+        map2.put("type","2");
+        ViseUtil.Get(context, NetUrl.AppHomePageLatestNews, map2, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                HomeNewsBean bean = gson.fromJson(s,HomeNewsBean.class);
+                mList2 = bean.getData();
+                adapter2 = new IndexAdapter(mList2, 2);
+                LinearLayoutManager manager1 = new LinearLayoutManager(context){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                manager1.setOrientation(LinearLayoutManager.VERTICAL);
+                rv2.setLayoutManager(manager1);
+                rv2.setAdapter(adapter2);
+            }
+        });
+
+        Map<String,String> map3 = new LinkedHashMap<>();
+        map3.put("type","3");
+        ViseUtil.Get(context, NetUrl.AppHomePageLatestNews, map3, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                HomeNewsBean bean = gson.fromJson(s,HomeNewsBean.class);
+                mList3 = bean.getData();
+                adapter3 = new IndexAdapter(mList3, 3);
+                LinearLayoutManager manager1 = new LinearLayoutManager(context){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+                manager1.setOrientation(LinearLayoutManager.VERTICAL);
+                rv3.setLayoutManager(manager1);
+                rv3.setAdapter(adapter3);
+            }
+        });
+
     }
     @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl_person,R.id.rl4})
     public void onClick(View view){
@@ -292,8 +353,10 @@ public class MainActivity extends BaseActivity {
                 view2.setVisibility(View.GONE);
                 view3.setVisibility(View.GONE);
                 view4.setVisibility(View.GONE);
-                type=0;
-                initNews();
+                rv0.setVisibility(View.VISIBLE);
+                rv1.setVisibility(View.GONE);
+                rv2.setVisibility(View.GONE);
+                rv3.setVisibility(View.GONE);
                 break;
             case R.id.rl2:
                 tv1.setTextColor(Color.parseColor("#000000"));
@@ -304,8 +367,10 @@ public class MainActivity extends BaseActivity {
                 view2.setVisibility(View.VISIBLE);
                 view3.setVisibility(View.GONE);
                 view4.setVisibility(View.GONE);
-                type=1;
-                initNews();
+                rv0.setVisibility(View.GONE);
+                rv1.setVisibility(View.VISIBLE);
+                rv2.setVisibility(View.GONE);
+                rv3.setVisibility(View.GONE);
                 break;
             case R.id.rl3:
                 tv1.setTextColor(Color.parseColor("#000000"));
@@ -316,8 +381,10 @@ public class MainActivity extends BaseActivity {
                 view2.setVisibility(View.GONE);
                 view3.setVisibility(View.VISIBLE);
                 view4.setVisibility(View.GONE);
-                type=2;
-                initNews();
+                rv0.setVisibility(View.GONE);
+                rv1.setVisibility(View.GONE);
+                rv2.setVisibility(View.VISIBLE);
+                rv3.setVisibility(View.GONE);
                 break;
             case R.id.rl4:
                 tv1.setTextColor(Color.parseColor("#000000"));
@@ -328,12 +395,19 @@ public class MainActivity extends BaseActivity {
                 view2.setVisibility(View.GONE);
                 view3.setVisibility(View.GONE);
                 view4.setVisibility(View.VISIBLE);
-                type=3;
-                initNews();
+                rv0.setVisibility(View.GONE);
+                rv1.setVisibility(View.GONE);
+                rv2.setVisibility(View.GONE);
+                rv3.setVisibility(View.VISIBLE);
                 break;
             case R.id.rl_person:
-                intent.setClass(context, PersonActivity.class);
-                startActivity(intent);
+                if(SpUtils.getUserId(context).equals("0")){
+                    intent.setClass(context, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent.setClass(context, PersonActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
     }

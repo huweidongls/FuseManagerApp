@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 
 public class WelcomeActivity extends BaseActivity {

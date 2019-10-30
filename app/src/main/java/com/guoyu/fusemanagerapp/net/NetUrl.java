@@ -72,4 +72,6 @@ public class NetUrl {
     public static final String AppUseradminforgetThePassword = "/AppUser/adminforgetThePassword";
     //查询全部轮播图
     public static final String AppBannerInfoqueryList = "/AppBannerInfo/queryList";
+    //便民通知详情
+    public static final String AppConvenienceNoticegetOne="/AppConvenienceNotice/getOne";
 }

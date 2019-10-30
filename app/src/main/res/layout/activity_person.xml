@@ -11,6 +11,16 @@
     <RelativeLayout
         style="@style/rl_top_bar">
 
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/iv_top_back" />
+
+        </RelativeLayout>
+
         <TextView
             style="@style/tv_top_title"
             android:text="我的" />
@@ -166,6 +176,15 @@
                         android:layout_gravity="center_vertical"
                         android:src="@mipmap/more3x" />
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_exit"
+                    android:background="@color/theme"
+                    android:textColor="@color/white_ffffff"
+                    android:text="退出登录"
+                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" />
 
             </LinearLayout>
 

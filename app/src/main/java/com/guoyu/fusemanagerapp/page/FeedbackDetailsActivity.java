@@ -102,6 +102,7 @@ public class FeedbackDetailsActivity extends BaseActivity {
                 intent.setClass(context, FeedbackContentActivity.class);
                 intent.putExtra("cid",id);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

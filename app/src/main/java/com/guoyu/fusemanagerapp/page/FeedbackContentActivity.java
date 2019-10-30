@@ -1,5 +1,6 @@
 package com.guoyu.fusemanagerapp.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +32,9 @@ public class FeedbackContentActivity extends BaseActivity {
     private String cid = "";
     @BindView(R.id.et_feemo)
     EditText et_feemo;
+
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +48,11 @@ public class FeedbackContentActivity extends BaseActivity {
         if(s.isEmpty()){
             ToastUtil.showShort(context,"请填写反馈信息!");
         }else{
+            dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
             Map<String,String> map = new LinkedHashMap<>();
             map.put("id",cid);
             map.put("feeMemo",s);
-            ViseUtil.Get(context, NetUrl.AppConsultationInfoinsertFeedback, map, new ViseUtil.ViseListener() {
+            ViseUtil.Get(context, NetUrl.AppConsultationInfoinsertFeedback, map, dialog, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     try {
@@ -54,9 +60,6 @@ public class FeedbackContentActivity extends BaseActivity {
                         if(jsonObject.optString("status").equals("200")){
                             ToastUtil.showShort(context,"反馈成功!");
                             finish();
-                            Intent intent = new Intent();
-                            intent.setClass(context, FeedbackActivity.class);
-                            startActivity(intent);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
