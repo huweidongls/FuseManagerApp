@@ -57,7 +57,8 @@ public class TicketServiceActivity extends BaseActivity {
     RecyclerView recycler_view2;
     @BindView(R.id.et_titles)
     EditText et_titles;
-    private int page=1;
+    private int page = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,7 @@ public class TicketServiceActivity extends BaseActivity {
         initSList();
         initRefreshs();
     }
+
     private void initRefreshs() {
         refreshs.setRefreshHeader(new MaterialHeader(TicketServiceActivity.this
         ));
@@ -74,14 +76,14 @@ public class TicketServiceActivity extends BaseActivity {
         refreshs.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
-                Map<String,String> map = new LinkedHashMap<>();
-                map.put("pageSize","10");
-                map.put("pageNum","1");
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("pageSize", "10");
+                map.put("pageNum", "1");
                 ViseUtil.Get(context, NetUrl.AppEntranceTicketInfoqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        TicketServiceListBean bean = gson.fromJson(s,TicketServiceListBean.class);
+                        TicketServiceListBean bean = gson.fromJson(s, TicketServiceListBean.class);
                         mList2.clear();
                         mList2.addAll(bean.getData());
                         adapters.notifyDataSetChanged();
@@ -94,31 +96,32 @@ public class TicketServiceActivity extends BaseActivity {
         refreshs.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
-                Map<String,String> map = new LinkedHashMap<>();
-                map.put("pageNum",page+"");
-                map.put("pageSize","10");
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("pageNum", page + "");
+                map.put("pageSize", "10");
                 ViseUtil.Get(context, NetUrl.AppEntranceTicketInfoqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        TicketServiceListBean bean = gson.fromJson(s,TicketServiceListBean.class);
+                        TicketServiceListBean bean = gson.fromJson(s, TicketServiceListBean.class);
                         mList2.addAll(bean.getData());
                         adapters.notifyDataSetChanged();
-                        page = page+1;
+                        page = page + 1;
                         refreshLayout.finishLoadMore(500);
                     }
                 });
             }
         });
     }
-    private void initHlist(){
+
+    private void initHlist() {
         ViseUtil.Get(context, NetUrl.AppEntranceTicketInfofindAllNew, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                TicketServiceListBean bean = gson.fromJson(s,TicketServiceListBean.class);
+                TicketServiceListBean bean = gson.fromJson(s, TicketServiceListBean.class);
                 mList = bean.getData();
-                if(mList.size()>0){//empty_order_bloackss
+                if (mList.size() > 0) {//empty_order_bloackss
                     adapter = new TicketHlistAdapter(mList);
                     LinearLayoutManager manager = new LinearLayoutManager(context);
                     manager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -126,7 +129,7 @@ public class TicketServiceActivity extends BaseActivity {
                     recycler_view.setAdapter(adapter);
                     empty_order_bloackss.setVisibility(View.GONE);
                     recycler_view.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     empty_order_bloackss.setVisibility(View.VISIBLE);
                     recycler_view.setVisibility(View.GONE);
                 }
@@ -134,19 +137,20 @@ public class TicketServiceActivity extends BaseActivity {
             }
         });
     }
-    private void initSList(){
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("pageSize","10");
-        map.put("pageNum","1");
+
+    private void initSList() {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("pageSize", "10");
+        map.put("pageNum", "1");
         ViseUtil.Get(context, NetUrl.AppEntranceTicketInfoqueryList, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                TicketServiceListBean bean = gson.fromJson(s,TicketServiceListBean.class);
+                TicketServiceListBean bean = gson.fromJson(s, TicketServiceListBean.class);
                 mList2 = bean.getData();
-                if(mList2.size()>0){
+                if (mList2.size() > 0) {
                     adapters = new TickerSlistAdapter(mList2);
-                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                    LinearLayoutManager manager = new LinearLayoutManager(context) {
                         @Override
                         public boolean canScrollVertically() {
                             return false;
@@ -157,8 +161,8 @@ public class TicketServiceActivity extends BaseActivity {
                     recycler_view2.setAdapter(adapters);
                     empty_order_bloacks.setVisibility(View.GONE);
                     refreshs.setVisibility(View.VISIBLE);
-                    page=2;
-                }else{
+                    page = 2;
+                } else {
                     empty_order_bloacks.setVisibility(View.VISIBLE);
                     refreshs.setVisibility(View.GONE);
                 }
@@ -167,24 +171,25 @@ public class TicketServiceActivity extends BaseActivity {
         });
 
     }
-    private void show_search(){
+
+    private void show_search() {
         String s = et_titles.getText().toString();
-        if (s.isEmpty()){
-            ToastUtil.showShort(TicketServiceActivity.this,"请填写要搜索的内容!");
-        }else{
-            Map<String,String> map = new LinkedHashMap<>();
-            map.put("pageSize","10");
-            map.put("pageNum","1");
-            map.put("title",s);
+        if (s.isEmpty()) {
+            ToastUtil.showShort(TicketServiceActivity.this, "请填写要搜索的内容!");
+        } else {
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("pageSize", "10");
+            map.put("pageNum", "1");
+            map.put("title", s);
             ViseUtil.Get(context, NetUrl.AppEntranceTicketInfoqueryList, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     Gson gson = new Gson();
-                    TicketServiceListBean bean = gson.fromJson(s,TicketServiceListBean.class);
+                    TicketServiceListBean bean = gson.fromJson(s, TicketServiceListBean.class);
                     mList2 = bean.getData();
-                    if(mList2.size()>0){
+                    if (mList2.size() > 0) {
                         adapters = new TickerSlistAdapter(mList2);
-                        LinearLayoutManager manager = new LinearLayoutManager(context){
+                        LinearLayoutManager manager = new LinearLayoutManager(context) {
                             @Override
                             public boolean canScrollVertically() {
                                 return false;
@@ -195,8 +200,8 @@ public class TicketServiceActivity extends BaseActivity {
                         recycler_view2.setAdapter(adapters);
                         empty_order_bloacks.setVisibility(View.GONE);
                         refreshs.setVisibility(View.VISIBLE);
-                        page=2;
-                    }else{
+                        page = 2;
+                    } else {
                         empty_order_bloacks.setVisibility(View.VISIBLE);
                         refreshs.setVisibility(View.GONE);
                     }
@@ -206,15 +211,16 @@ public class TicketServiceActivity extends BaseActivity {
         }
 
     }
-    @OnClick({R.id.iv_black,R.id.rr_add,R.id.iv_btn})
-    public void onClick(View view){
+
+    @OnClick({R.id.iv_black, R.id.rr_add, R.id.iv_btn})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.iv_black:
                 finish();
                 break;
             case R.id.rr_add:
-                intent.setClass(context,TicketInserActivity.class);
+                intent.setClass(context, TicketInserActivity.class);
                 context.startActivity(intent);
                 break;
             case R.id.iv_btn:

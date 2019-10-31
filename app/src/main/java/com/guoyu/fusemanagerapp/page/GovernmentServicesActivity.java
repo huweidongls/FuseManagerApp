@@ -42,12 +42,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GovernmentServicesActivity extends BaseActivity {
+
     private Context context = GovernmentServicesActivity.this;
     private GovernmentServiceListAdapter adapter;
     private GovernmentServiceTypeAdapter adapters;
     private List<GovernmentServiceListBean.DataBean> mList;
     private List<GovernmentServiceTypeBean.DataBean> mLists;
-    private int radio=0;
+    private int radio = 0;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
     @BindView(R.id.recycler_viewtype)
@@ -62,10 +63,11 @@ public class GovernmentServicesActivity extends BaseActivity {
     RelativeLayout empty_order_bloacks;
     @BindView(R.id.refreshs)
     SmartRefreshLayout refreshs;
-    private int page=1;
+    private int page = 1;
     @BindView(R.id.et_titles)
     EditText et_titles;
-    private int typeId=0;
+    private int typeId = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,17 +86,17 @@ public class GovernmentServicesActivity extends BaseActivity {
         refreshs.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
-                Map<String,String> map = new LinkedHashMap<>();
-                map.put("pageSize","10");
-                map.put("pageNum","1");
-                if(typeId!=0){
-                    map.put("typeId",typeId+"");
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("pageSize", "10");
+                map.put("pageNum", "1");
+                if (typeId != 0) {
+                    map.put("typeId", typeId + "");
                 }
                 ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                        GovernmentServiceListBean bean = gson.fromJson(s, GovernmentServiceListBean.class);
                         mList.clear();
                         mList.addAll(bean.getData());
                         adapter.notifyDataSetChanged();
@@ -107,21 +109,21 @@ public class GovernmentServicesActivity extends BaseActivity {
         refreshs.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
-                Map<String,String> map = new LinkedHashMap<>();
-                map.put("pageNum",page+"");
-                map.put("pageSize","10");
-                if(typeId!=0){
-                    map.put("typeId",typeId+"");
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("pageNum", page + "");
+                map.put("pageSize", "10");
+                if (typeId != 0) {
+                    map.put("typeId", typeId + "");
                 }
                 ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                        GovernmentServiceListBean bean = gson.fromJson(s, GovernmentServiceListBean.class);
                         // mList.clear();
                         mList.addAll(bean.getData());
                         adapter.notifyDataSetChanged();
-                        page = page+1;
+                        page = page + 1;
                         refreshLayout.finishLoadMore(500);
                     }
                 });
@@ -135,19 +137,19 @@ public class GovernmentServicesActivity extends BaseActivity {
         initData();
     }
 
-    private void initData(){
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("pageSize","10");
-        map.put("pageNum","1");
+    private void initData() {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("pageSize", "10");
+        map.put("pageNum", "1");
         ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                GovernmentServiceListBean bean = gson.fromJson(s, GovernmentServiceListBean.class);
                 mList = bean.getData();
-                if(mList.size()>0){
+                if (mList.size() > 0) {
                     adapter = new GovernmentServiceListAdapter(mList);
-                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                    LinearLayoutManager manager = new LinearLayoutManager(context) {
                         @Override
                         public boolean canScrollVertically() {
                             return false;
@@ -158,8 +160,8 @@ public class GovernmentServicesActivity extends BaseActivity {
                     recycler_view.setAdapter(adapter);
                     empty_order_bloacks.setVisibility(View.GONE);
                     refreshs.setVisibility(View.VISIBLE);
-                    page=2;
-                }else{
+                    page = 2;
+                } else {
                     empty_order_bloacks.setVisibility(View.VISIBLE);
                     refreshs.setVisibility(View.GONE);
                 }
@@ -167,30 +169,31 @@ public class GovernmentServicesActivity extends BaseActivity {
         });
 
     }
-    private void init_type(){
+
+    private void init_type() {
         ViseUtil.Get(context, NetUrl.AppGovernmentInfofindType, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                GovernmentServiceTypeBean bean = gson.fromJson(s,GovernmentServiceTypeBean.class);
+                GovernmentServiceTypeBean bean = gson.fromJson(s, GovernmentServiceTypeBean.class);
                 mLists = bean.getData();
                 adapters = new GovernmentServiceTypeAdapter(mLists, new GovernmentServiceTypeAdapter.ClickListener() {
                     @Override
                     public void onClickType(int pos) {
                         typeId = mLists.get(pos).getId();
                         Map<String, String> map = new LinkedHashMap<>();
-                        map.put("pageNum","1");
-                        map.put("pageSize","10");
-                        map.put("typeId",mLists.get(pos).getId()+"");
+                        map.put("pageNum", "1");
+                        map.put("pageSize", "10");
+                        map.put("typeId", mLists.get(pos).getId() + "");
                         ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
                             @Override
                             public void onReturn(String s) {
                                 Gson gson = new Gson();
-                                GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                                GovernmentServiceListBean bean = gson.fromJson(s, GovernmentServiceListBean.class);
                                 mList = bean.getData();
-                                if(mList.size()>0){
+                                if (mList.size() > 0) {
                                     adapter = new GovernmentServiceListAdapter(mList);
-                                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                                    LinearLayoutManager manager = new LinearLayoutManager(context) {
                                         @Override
                                         public boolean canScrollVertically() {
                                             return false;
@@ -201,7 +204,7 @@ public class GovernmentServicesActivity extends BaseActivity {
                                     recycler_view.setAdapter(adapter);
                                     empty_order_bloacks.setVisibility(View.GONE);
                                     refreshs.setVisibility(View.VISIBLE);
-                                }else{
+                                } else {
                                     empty_order_bloacks.setVisibility(View.VISIBLE);
                                     refreshs.setVisibility(View.GONE);
                                 }
@@ -209,30 +212,31 @@ public class GovernmentServicesActivity extends BaseActivity {
                         });
                     }
                 });
-                GridLayoutManager managers = new GridLayoutManager(context,4);
+                GridLayoutManager managers = new GridLayoutManager(context, 4);
                 recycler_viewtype.setLayoutManager(managers);
                 recycler_viewtype.setAdapter(adapters);
             }
         });
     }
-    private void show_search(){
+
+    private void show_search() {
         String title = et_titles.getText().toString();//标题
-        if(TextUtils.isEmpty(title)){
-            ToastUtil.showShort(GovernmentServicesActivity.this,"请填写要搜索的内容!");
-        }else{
+        if (TextUtils.isEmpty(title)) {
+            ToastUtil.showShort(GovernmentServicesActivity.this, "请填写要搜索的内容!");
+        } else {
             Map<String, String> map = new LinkedHashMap<>();
-            map.put("pageNum","1");
-            map.put("pageSize","10");
-            map.put("title",title);
+            map.put("pageNum", "1");
+            map.put("pageSize", "10");
+            map.put("title", title);
             ViseUtil.Get(context, NetUrl.AppGovernmentInfoqueryList, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     Gson gson = new Gson();
-                    GovernmentServiceListBean bean = gson.fromJson(s,GovernmentServiceListBean.class);
+                    GovernmentServiceListBean bean = gson.fromJson(s, GovernmentServiceListBean.class);
                     mList = bean.getData();
-                    if(mList.size()>0){
+                    if (mList.size() > 0) {
                         adapter = new GovernmentServiceListAdapter(mList);
-                        LinearLayoutManager manager = new LinearLayoutManager(context){
+                        LinearLayoutManager manager = new LinearLayoutManager(context) {
                             @Override
                             public boolean canScrollVertically() {
                                 return false;
@@ -244,7 +248,7 @@ public class GovernmentServicesActivity extends BaseActivity {
                         empty_order_bloacks.setVisibility(View.GONE);
                         refreshs.setVisibility(View.VISIBLE);
                         //page=2;
-                    }else{
+                    } else {
                         empty_order_bloacks.setVisibility(View.VISIBLE);
                         refreshs.setVisibility(View.GONE);
                     }
@@ -252,28 +256,29 @@ public class GovernmentServicesActivity extends BaseActivity {
             });
         }
     }
-    @OnClick({R.id.iv_black,R.id.rr_add,R.id.iv_type,R.id.iv_btn})
-    public void onClick(View view){
+
+    @OnClick({R.id.iv_black, R.id.rr_add, R.id.iv_type, R.id.iv_btn})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.iv_black:
                 finish();
                 break;
             case R.id.rr_add:
-                intent.setClass(context,GovernmentServiceInsertActivity.class);
+                intent.setClass(context, GovernmentServiceInsertActivity.class);
                 context.startActivity(intent);
                 break;
             case R.id.iv_type:
-                if(radio==0){
+                if (radio == 0) {
                     view1.setVisibility(View.VISIBLE);
                     view2.setVisibility(View.VISIBLE);
                     rl_type.setVisibility(View.VISIBLE);
-                    radio=1;
-                }else{
+                    radio = 1;
+                } else {
                     view1.setVisibility(View.GONE);
                     view2.setVisibility(View.GONE);
                     rl_type.setVisibility(View.GONE);
-                    radio=0;
+                    radio = 0;
                 }
                 break;
             case R.id.iv_btn:

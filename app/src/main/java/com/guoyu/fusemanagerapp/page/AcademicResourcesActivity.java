@@ -44,7 +44,7 @@ public class AcademicResourcesActivity extends BaseActivity {
     private DisciplineInfoAdapter adapters;
     private List<AcademicResourcesTypeBean.DataBean> mList;
     private List<AcademicResourcesListBean.DataBean> mList2;
-    private int page=1;
+    private int page = 1;
     @BindView(R.id.refreshs)
     SmartRefreshLayout refreshs;
     @BindView(R.id.recycler_view)
@@ -53,6 +53,7 @@ public class AcademicResourcesActivity extends BaseActivity {
     RecyclerView recycler_view2;
     @BindView(R.id.empty_order_bloacks)
     RelativeLayout empty_order_bloacks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,14 +77,14 @@ public class AcademicResourcesActivity extends BaseActivity {
         refreshs.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull final RefreshLayout refreshLayout) {
-                Map<String,String> map = new LinkedHashMap<>();
-                map.put("pageSize","10");
-                map.put("pageNum","1");
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("pageSize", "10");
+                map.put("pageNum", "1");
                 ViseUtil.Get(context, NetUrl.AppEducationInfoqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        AcademicResourcesListBean bean = gson.fromJson(s,AcademicResourcesListBean.class);
+                        AcademicResourcesListBean bean = gson.fromJson(s, AcademicResourcesListBean.class);
                         mList2.clear();
                         mList2.addAll(bean.getData());
                         adapters.notifyDataSetChanged();
@@ -96,51 +97,53 @@ public class AcademicResourcesActivity extends BaseActivity {
         refreshs.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
-                Map<String,String> map = new LinkedHashMap<>();
-                map.put("pageNum",page+"");
-                map.put("pageSize","10");
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("pageNum", page + "");
+                map.put("pageSize", "10");
                 ViseUtil.Get(context, NetUrl.AppEducationInfoqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
                         Gson gson = new Gson();
-                        AcademicResourcesListBean bean = gson.fromJson(s,AcademicResourcesListBean.class);
+                        AcademicResourcesListBean bean = gson.fromJson(s, AcademicResourcesListBean.class);
                         // mList.clear();
                         mList2.addAll(bean.getData());
                         adapters.notifyDataSetChanged();
-                        page = page+1;
+                        page = page + 1;
                         refreshLayout.finishLoadMore(500);
                     }
                 });
             }
         });
     }
-    private void initType(){
+
+    private void initType() {
         ViseUtil.Get(context, NetUrl.AppEducationInfofindType, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                AcademicResourcesTypeBean bean = gson.fromJson(s,AcademicResourcesTypeBean.class);
+                AcademicResourcesTypeBean bean = gson.fromJson(s, AcademicResourcesTypeBean.class);
                 mList = bean.getData();
                 adapter = new DisciplineInformationAdapter(mList);
-                GridLayoutManager manager = new GridLayoutManager(context,3);
+                GridLayoutManager manager = new GridLayoutManager(context, 3);
                 recycler_view.setLayoutManager(manager);
                 recycler_view.setAdapter(adapter);
             }
         });
     }
-        private void initList(){
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("pageSize","10");
-        map.put("pageNum","1");
+
+    private void initList() {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("pageSize", "10");
+        map.put("pageNum", "1");
         ViseUtil.Get(context, NetUrl.AppEducationInfoqueryList, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                AcademicResourcesListBean bean = gson.fromJson(s,AcademicResourcesListBean.class);
+                AcademicResourcesListBean bean = gson.fromJson(s, AcademicResourcesListBean.class);
                 mList2 = bean.getData();
-                if(mList2.size()>0){
+                if (mList2.size() > 0) {
                     adapters = new DisciplineInfoAdapter(mList2);
-                    LinearLayoutManager manager = new LinearLayoutManager(context){
+                    LinearLayoutManager manager = new LinearLayoutManager(context) {
                         @Override
                         public boolean canScrollVertically() {
                             return false;
@@ -151,8 +154,8 @@ public class AcademicResourcesActivity extends BaseActivity {
                     recycler_view2.setAdapter(adapters);
                     empty_order_bloacks.setVisibility(View.GONE);
                     refreshs.setVisibility(View.VISIBLE);
-                    page=2;
-                }else{
+                    page = 2;
+                } else {
                     empty_order_bloacks.setVisibility(View.VISIBLE);
                     refreshs.setVisibility(View.GONE);
                 }
@@ -160,15 +163,16 @@ public class AcademicResourcesActivity extends BaseActivity {
             }
         });
     }
-    @OnClick({R.id.iv_black,R.id.rr_add})
-    public void onClick(View view){
+
+    @OnClick({R.id.iv_black, R.id.rr_add})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.iv_black:
                 finish();
                 break;
             case R.id.rr_add:
-                intent.setClass(context,AcademicResourcesInsertActivity.class);
+                intent.setClass(context, AcademicResourcesInsertActivity.class);
                 context.startActivity(intent);
                 break;
         }
