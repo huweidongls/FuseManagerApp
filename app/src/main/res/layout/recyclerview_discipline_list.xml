@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
     android:orientation="vertical"
     >
     <LinearLayout
@@ -17,11 +18,13 @@
             android:layout_gravity="center_vertical"
             />
         <TextView
+            android:gravity="center_vertical"
+            android:layout_marginRight="10dp"
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="庆祝新中国70周年华诞活动现场"
+            android:layout_marginLeft="10dp"
+            android:text="庆祝新中国70周年华诞活动现场庆祝新中国70周年华诞活动现场庆祝新中国70周年华诞活动现场"
             android:textColor="#333333"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
@@ -38,6 +41,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ECECEC"
+        android:background="@color/line"
         />
 </LinearLayout>
