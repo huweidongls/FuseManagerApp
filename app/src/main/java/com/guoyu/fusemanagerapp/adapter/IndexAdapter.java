@@ -55,6 +55,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
                 }else if(type == 1){
                     intent.setClass(context, ModuleWebViewActivity.class);
                     intent.putExtra("url", "1");
+                    //intent.putExtra("title", "便民通知");
                     context.startActivity(intent);
                 }else if(type == 2){
                     intent.setClass(context, ModuleWebViewActivity.class);
@@ -63,6 +64,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
                 }else if(type == 3){
                     intent.setClass(context, GobernmentContentActivity.class);
                     intent.putExtra("id", data.get(position).getId()+"");
+                    intent.putExtra("title", "政务信息");
                     context.startActivity(intent);
                 }
             }
