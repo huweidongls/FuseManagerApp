@@ -46,11 +46,21 @@ public class IndexGongnengAdapter extends RecyclerView.Adapter<IndexGongnengAdap
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                try {
-                    intent.setClass(context, Class.forName(data.get(position).getAndroidUrl()));
-                    context.startActivity(intent);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                if(data.get(position).getUrl() == null){
+                    try {
+                        intent.setClass(context, Class.forName(data.get(position).getAndroidUrl()));
+                        context.startActivity(intent);
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    try {
+                        intent.setClass(context, Class.forName(data.get(position).getAndroidUrl()));
+                        intent.putExtra("url", data.get(position).getUrl());
+                        context.startActivity(intent);
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

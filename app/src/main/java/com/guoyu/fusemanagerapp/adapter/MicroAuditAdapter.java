@@ -17,6 +17,7 @@ import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
 import com.guoyu.fusemanagerapp.page.AuditWeiguanActivity;
 import com.guoyu.fusemanagerapp.page.ReplyWeiguanActivity;
+import com.guoyu.fusemanagerapp.util.GlideUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 
 import java.io.Serializable;
@@ -74,7 +75,12 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
                 holder.tvFankui.setText("【反馈意见】"+data.get(position).getFeeMemo());
             }
         }
-        Glide.with(context).load(NetUrl.BASE_URL+data.get(position).getNikePic()).into(holder.ivHead);
+        if(data.get(position).getNikePic()!=null){
+            String[] pics = data.get(position).getNikePic().split(",");
+            if(pics.length>0){
+                GlideUtils.into(context, NetUrl.BASE_URL+pics[0], holder.ivHead);
+            }
+        }
         holder.tvName.setText(data.get(position).getNickName());
 
         holder.tvAddTime.setText("发布时间："+data.get(position).getPublishDate());
