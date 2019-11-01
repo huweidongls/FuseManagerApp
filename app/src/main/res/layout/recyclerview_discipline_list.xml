@@ -3,44 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:selectableItemBackground"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="3dp"
             android:layout_height="3dp"
-            android:background="#999999"
-            android:layout_marginLeft="16dp"
             android:layout_gravity="center_vertical"
-            />
+            android:layout_marginLeft="16dp"
+            android:background="#999999" />
+
         <TextView
-            android:gravity="center_vertical"
-            android:layout_marginRight="10dp"
+            android:ellipsize="end"
+            android:lines="2"
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:text="庆祝新中国70周年华诞活动现场庆祝新中国70周年华诞活动现场庆祝新中国70周年华诞活动现场"
             android:textColor="#333333"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
+
         <ImageView
             android:layout_width="8dp"
             android:layout_height="12dp"
-            android:layout_marginRight="16dp"
-            android:src="@mipmap/more3x"
             android:layout_gravity="center_vertical"
-            />
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/more3x" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        />
+        android:background="@color/line" />
 </LinearLayout>

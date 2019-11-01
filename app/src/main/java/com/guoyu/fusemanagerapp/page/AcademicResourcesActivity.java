@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AcademicResourcesActivity extends BaseActivity {
+
     private Context context = AcademicResourcesActivity.this;
     private DisciplineInformationAdapter adapter;
     private DisciplineInfoAdapter adapters;
@@ -89,9 +90,9 @@ public class AcademicResourcesActivity extends BaseActivity {
                         mList2.addAll(bean.getData());
                         adapters.notifyDataSetChanged();
                         page = 2;
-                        refreshLayout.finishRefresh(500);
                     }
                 });
+                refreshLayout.finishRefresh(1000);
             }
         });
         refreshs.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -109,9 +110,9 @@ public class AcademicResourcesActivity extends BaseActivity {
                         mList2.addAll(bean.getData());
                         adapters.notifyDataSetChanged();
                         page = page + 1;
-                        refreshLayout.finishLoadMore(500);
                     }
                 });
+                refreshLayout.finishLoadMore(1000);
             }
         });
     }
