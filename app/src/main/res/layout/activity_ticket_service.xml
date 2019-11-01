@@ -31,6 +31,19 @@
                 />
         </RelativeLayout>
     </RelativeLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp">
@@ -155,16 +168,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/line" />
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshs"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_viewj"
-        android:dividerHeight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_viewj"
+            android:dividerHeight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     <RelativeLayout
         android:id="@+id/empty_order_bloacks"
         android:layout_width="match_parent"
@@ -190,4 +198,9 @@
             android:layout_centerInParent="true"
             />
     </RelativeLayout>
+       </LinearLayout>
+    </ScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

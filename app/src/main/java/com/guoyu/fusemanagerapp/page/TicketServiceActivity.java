@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -145,6 +146,7 @@ public class TicketServiceActivity extends BaseActivity {
         ViseUtil.Get(context, NetUrl.AppEntranceTicketInfoqueryList, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
+                Log.e("454545454545",s);
                 Gson gson = new Gson();
                 TicketServiceListBean bean = gson.fromJson(s, TicketServiceListBean.class);
                 mList2 = bean.getData();
