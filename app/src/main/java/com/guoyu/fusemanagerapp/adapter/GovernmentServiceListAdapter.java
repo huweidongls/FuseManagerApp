@@ -1,6 +1,7 @@
 package com.guoyu.fusemanagerapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.sip.SipSession;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.GovernmentServiceListBean;
+import com.guoyu.fusemanagerapp.page.GobernmentContentActivity;
 
 import java.util.List;
 
@@ -32,9 +34,19 @@ public class GovernmentServiceListAdapter extends RecyclerView.Adapter<Governmen
     }
 
     @Override
-    public void onBindViewHolder(GovernmentServiceListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(GovernmentServiceListAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(data.get(position).getTitle());
         holder.tv_tag.setText("【"+data.get(position).getGovTypeName()+"】");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, GobernmentContentActivity.class);
+                intent.putExtra("id", data.get(position).getId()+"");
+                intent.putExtra("title", "政务信息");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
