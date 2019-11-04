@@ -33,7 +33,7 @@ public class DisciplineInformationAdapter extends RecyclerView.Adapter<Disciplin
 
     @Override
     public void onBindViewHolder(DisciplineInformationAdapter.ViewHolder holder, int position) {
-        holder.tv_title.setText(data.get(position).getSubName());
+        //holder.tv_title.setText(data.get(position).getSubName());
     }
 
     @Override

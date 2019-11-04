@@ -63,6 +63,12 @@ public class AcademicResourcesActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initWebview();
+    }
+
     private void initWebview() {
 
         webview.getSettings().setJavaScriptEnabled(true);

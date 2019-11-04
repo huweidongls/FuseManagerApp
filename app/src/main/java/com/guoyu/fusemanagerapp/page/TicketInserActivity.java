@@ -58,8 +58,12 @@ public class TicketInserActivity extends AppCompatActivity {
     EditText et_title;
     @BindView(R.id.et_content)
     EditText et_content;
-    /*@BindView(R.id.et_desc)
-    EditText et_desc;*/
+    /*@BindView(R.id.et_jdxx)
+    EditText et_jdxx;*/
+    @BindView(R.id.et_address)
+    EditText et_address;
+    @BindView(R.id.et_sheshi)
+    EditText et_sheshi;
     @BindView(R.id.et_jq_desc)
     EditText et_jq_desc;
     @BindView(R.id.et_menpiao)
@@ -136,7 +140,10 @@ public class TicketInserActivity extends AppCompatActivity {
                 String menpiaozi = et_jq_desc_zi.getText().toString();//子门票信息
                 String jqxq = et_jq_desc.getText().toString();//景区详情
                 String menpiaos = et_menpiao.getText().toString();//门票价格
-                if(title.isEmpty()||content.isEmpty()||menpiaozi.isEmpty()||jqxq.isEmpty()||menpiaos.isEmpty()||pic.isEmpty()){
+                /*String jdxx = et_jdxx.getText().toString();//景點信息*/
+                String jddz = et_address.getText().toString();//景點地址
+                String et_sheshi = et_menpiao.getText().toString();//景點設施
+                if(title.isEmpty()||content.isEmpty()||menpiaozi.isEmpty()||jqxq.isEmpty()||menpiaos.isEmpty()||pic.isEmpty()||jddz.isEmpty()||et_sheshi.isEmpty()){
                     ToastUtil.showShort(context,"请把信息填写完整!");
                 }else{
                     SaveInfo();
@@ -200,11 +207,16 @@ public class TicketInserActivity extends AppCompatActivity {
                 String menpiaozi = et_jq_desc_zi.getText().toString();//子门票信息
                 String jqxq = et_jq_desc.getText().toString();//景区详情
                 String menpiaos = et_menpiao.getText().toString();//门票价格
+                //String jdxx = et_jdxx.getText().toString();//景點信息
+                String jddz = et_address.getText().toString();//景點地址
+                String jdss = et_sheshi.getText().toString();//景點設施
                 ViseHttp.UPLOAD(NetUrl.AppEntranceTicketInfoinsertEntranceTicketInfo)
                         .addParam("title", title)
                         .addParam("contentShort", content)
                         .addParam("content", jqxq)
                         .addParam("ticketMoney",menpiaos)
+                        .addParam("facilities",jdss)
+                        .addParam(" address",jddz)
                         .addParam("ticketMoneyMore",menpiaozi)
                         .addFile("file0", file)
                         .addFiles(value)
