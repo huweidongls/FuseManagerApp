@@ -76,4 +76,6 @@ public class NetUrl {
     public static final String AppConvenienceNoticegetOne="/AppConvenienceNotice/getOne";
     //政务指南详情
     public static final String AppGovernmentInfogetOne = "/AppGovernmentInfo/getOne";
+    //教育发布部门信息
+    public static final String AppConsultationInfofindDepartment = "/AppConsultationInfo/findDepartment";
 }
