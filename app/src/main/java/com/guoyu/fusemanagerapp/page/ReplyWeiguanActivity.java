@@ -14,6 +14,7 @@ import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
+import com.guoyu.fusemanagerapp.util.GlideUtils;
 import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
@@ -62,7 +63,12 @@ public class ReplyWeiguanActivity extends BaseActivity {
 
     private void initData() {
 
-        Glide.with(context).load(NetUrl.BASE_URL+bean.getNikePic()).into(ivHead);
+        if(bean.getNikePic()!=null){
+            String[] pics = bean.getNikePic().split(",");
+            if(pics.length>0){
+                GlideUtils.into(context, NetUrl.BASE_URL+pics[0], ivHead);
+            }
+        }
         tvName.setText(bean.getNickName());
         tvAddTime.setText("发布时间："+bean.getPublishDate());
         tvContent.setText(bean.getContent());

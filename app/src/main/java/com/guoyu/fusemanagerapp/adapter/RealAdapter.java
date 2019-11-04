@@ -39,12 +39,23 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvName.setText(data.get(position).getRealName());
         holder.tvCard.setText(data.get(position).getAppuserId());
+
+        final int status = data.get(position).getStatus();
+        if(status == 2){
+            holder.tvStatus.setText("已审核");
+        }else if(status == 3){
+            holder.tvStatus.setText("已拒绝");
+        }else if(status == 4){
+            holder.tvStatus.setText("待审核");
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, RealNameActivity.class);
                 intent.putExtra("id", data.get(position).getId()+"");
+                intent.putExtra("status", status+"");
                 context.startActivity(intent);
             }
         });
@@ -59,11 +70,13 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.ViewHolder> {
 
         private TextView tvName;
         private TextView tvCard;
+        private TextView tvStatus;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvCard = itemView.findViewById(R.id.tv_card);
+            tvStatus = itemView.findViewById(R.id.tv_status);
         }
     }
 

@@ -150,7 +150,6 @@
 
                 <ImageView
                     android:id="@+id/iv1"
-                    android:src="@mipmap/gl_img002"
                     android:layout_marginBottom="35dp"
                     android:layout_marginRight="45dp"
                     android:layout_marginLeft="45dp"
@@ -182,7 +181,6 @@
 
                 <ImageView
                     android:id="@+id/iv2"
-                    android:src="@mipmap/gl_img003"
                     android:layout_marginBottom="35dp"
                     android:layout_marginRight="45dp"
                     android:layout_marginLeft="45dp"
@@ -202,6 +200,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/ll_bottom"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="45dp">

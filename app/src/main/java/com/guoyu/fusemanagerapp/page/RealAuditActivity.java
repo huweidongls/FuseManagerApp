@@ -13,6 +13,7 @@ import com.guoyu.fusemanagerapp.adapter.RealAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.RealAuditBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -65,7 +66,7 @@ public class RealAuditActivity extends BaseActivity {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("pageNum", "1");
         map.put("pageSize", "10");
-        map.put("status", "4");
+        map.put("userId", SpUtils.getUserId(context));
         ViseUtil.Post(context, NetUrl.AppUserqueryList, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
@@ -93,7 +94,7 @@ public class RealAuditActivity extends BaseActivity {
                 Map<String, String> map = new LinkedHashMap<>();
                 map.put("pageNum", "1");
                 map.put("pageSize", "10");
-                map.put("status", "4");
+                map.put("userId", SpUtils.getUserId(context));
                 ViseUtil.Post(context, NetUrl.AppUserqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
@@ -114,7 +115,7 @@ public class RealAuditActivity extends BaseActivity {
                 Map<String, String> map = new LinkedHashMap<>();
                 map.put("pageNum", page+"");
                 map.put("pageSize", "10");
-                map.put("status", "4");
+                map.put("userId", SpUtils.getUserId(context));
                 ViseUtil.Post(context, NetUrl.AppUserqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {

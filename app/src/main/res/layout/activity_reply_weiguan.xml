@@ -52,8 +52,7 @@
                         android:id="@+id/iv_header"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="15dp"
-                        android:src="@mipmap/gl_img0013x" />
+                        android:layout_marginLeft="15dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -73,7 +72,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="杨海峰"
                                 android:textColor="@color/black_333333"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -99,7 +97,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="发布时间：2019/09/02 10:40:58"
                             android:textColor="#CCCCCC"
                             android:textSize="10sp" />
 
@@ -114,7 +111,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="16dp"
-                    android:text="进入新时代,双鸭山市紧扣转型发展主线,抢抓全面振兴全方位振兴发展机遇,做好三篇大文章,做实四头四尾,实现了由一煤独大向现代煤电化、粮食和绿色。"
                     android:textColor="@color/black_333333"
                     android:textSize="12sp" />
 

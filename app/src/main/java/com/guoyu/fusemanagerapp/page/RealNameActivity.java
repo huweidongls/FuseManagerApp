@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -13,6 +14,7 @@ import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.UserGetoneBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.GlideUtils;
 import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
@@ -39,9 +41,11 @@ public class RealNameActivity extends BaseActivity {
     ImageView iv1;
     @BindView(R.id.iv2)
     ImageView iv2;
+    @BindView(R.id.ll_bottom)
+    LinearLayout llBottom;
 
     private String id = "";
-
+    private String status = "";
     private Dialog dialog;
 
     @Override
@@ -49,6 +53,7 @@ public class RealNameActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_real_name);
 
+        status = getIntent().getStringExtra("status");
         id = getIntent().getStringExtra("id");
         ButterKnife.bind(RealNameActivity.this);
         initData();
@@ -56,6 +61,10 @@ public class RealNameActivity extends BaseActivity {
     }
 
     private void initData() {
+
+        if(!status.equals("4")){
+            llBottom.setVisibility(View.GONE);
+        }
 
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", id);
@@ -68,8 +77,8 @@ public class RealNameActivity extends BaseActivity {
                 tvCard.setText(bean.getData().getAppuserId());
                 tvPhone.setText(bean.getData().getPhone());
                 String[] ss = bean.getData().getAppuserPics().split(",");
-                Glide.with(context).load(NetUrl.BASE_URL+ss[0]).into(iv1);
-                Glide.with(context).load(NetUrl.BASE_URL+ss[1]).into(iv2);
+                GlideUtils.into(context, NetUrl.BASE_URL+ss[0], iv1);
+                GlideUtils.into(context, NetUrl.BASE_URL+ss[1], iv2);
             }
         });
 
