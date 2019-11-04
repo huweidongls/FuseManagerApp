@@ -6,6 +6,7 @@ package com.guoyu.fusemanagerapp.net;
 
 public class NetUrl {
     public static final String BASE_URL = "http://192.168.2.103:8080/";//http://192.168.2.211:8080/
+    public static final String H5BASE_URL = "http://xfsysh5.5ijiaoyu.cn/";
     //app商户登录/管理员登录
     public static final String AppUserappAdmuinLogin = "/AppUser/appAdmuinLogin";
     //管理端用户手机号验证码发送(注册)

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.HomeNewsBean;
+import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.page.ConvenienceNoticeDetailsActivity;
 import com.guoyu.fusemanagerapp.page.GobernmentContentActivity;
 import com.guoyu.fusemanagerapp.page.ModuleWebViewActivity;
@@ -54,12 +55,12 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
                     context.startActivity(intent);
                 }else if(type == 1){
                     intent.setClass(context, ModuleWebViewActivity.class);
-                    intent.putExtra("url", "1");
+                    intent.putExtra("url", NetUrl.H5BASE_URL+"pages/jd_pages/jd_detail.html?jdId="+data.get(position).getId());
                     //intent.putExtra("title", "便民通知");
                     context.startActivity(intent);
                 }else if(type == 2){
                     intent.setClass(context, ModuleWebViewActivity.class);
-                    intent.putExtra("url", "1");
+                    intent.putExtra("url", NetUrl.H5BASE_URL+"pages/jyo_pages/jyo_detail.html?jyoId="+data.get(position).getId());
                     context.startActivity(intent);
                 }else if(type == 3){
                     intent.setClass(context, GobernmentContentActivity.class);
