@@ -106,7 +106,8 @@
         <activity android:name=".page.AboutActivity" />
         <activity android:name=".page.ConvenienceNoticeDetailsActivity" />
         <activity android:name=".page.GobernmentContentActivity" />
-        <activity android:name=".page.ModuleWebViewActivity"></activity>
+        <activity android:name=".page.ModuleWebViewActivity" />
+        <activity android:name=".page.FuwenbenActivity"></activity>
     </application>
 
 </manifest>

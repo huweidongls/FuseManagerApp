@@ -340,10 +340,14 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-    @OnClick({R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl_person,R.id.rl4})
+    @OnClick({R.id.fu, R.id.rl1, R.id.rl2, R.id.rl3, R.id.rl_person,R.id.rl4})
     public void onClick(View view){
         Intent intent = new Intent();
         switch (view.getId()){
+            case R.id.fu:
+                intent.setClass(context, FuwenbenActivity.class);
+                startActivity(intent);
+                break;
             case R.id.rl1:
                 tv1.setTextColor(getResources().getColor(R.color.theme));
                 tv2.setTextColor(Color.parseColor("#000000"));
