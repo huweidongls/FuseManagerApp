@@ -79,4 +79,6 @@ public class NetUrl {
     public static final String AppGovernmentInfogetOne = "/AppGovernmentInfo/getOne";
     //教育发布部门信息
     public static final String AppConsultationInfofindDepartment = "/AppConsultationInfo/findDepartment";
+    //教育发布部门信息
+    public static final String UploadImgappPicture = "UploadImg/appPicture";
 }

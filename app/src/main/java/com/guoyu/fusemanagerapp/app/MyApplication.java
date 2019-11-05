@@ -2,10 +2,24 @@ package com.guoyu.fusemanagerapp.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.GlideUtils;
 import com.guoyu.fusemanagerapp.util.RegisterTimeCount;
 import com.guoyu.fusemanagerapp.util.SpUtils;
+import com.sendtion.xrichtext.IImageLoader;
+import com.sendtion.xrichtext.XRichText;
 import com.vise.xsnow.http.ViseHttp;
 
 import java.util.LinkedHashMap;
@@ -43,6 +57,19 @@ public class MyApplication extends Application {
 //        JPushInterface.setDebugMode(true);
 //        JPushInterface.init(this);
         registerTimeCount = new RegisterTimeCount(60000, 1000);
+
+        XRichText.getInstance().setImageLoader(new IImageLoader() {
+            @Override
+            public void loadImage(final String imagePath, final ImageView imageView, final int imageHeight) {
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);//固定图片高度，记得设置裁剪剧中
+                lp.bottomMargin = 10;//图片的底边距
+                imageView.setAdjustViewBounds(true);
+                imageView.setLayoutParams(lp);
+                GlideUtils.into(getApplicationContext(), imagePath, imageView);
+            }
+        });
+
     }
 
     public synchronized static MyApplication getInstance() {

@@ -47,7 +47,9 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
 public class TicketInserActivity extends AppCompatActivity {
+
     private Context context = TicketInserActivity.this;
+
     @BindView(R.id.iv_img)
     ImageView iv_img;
     @BindView(R.id.iv_del1)
@@ -70,12 +72,14 @@ public class TicketInserActivity extends AppCompatActivity {
     EditText et_menpiao;
     @BindView(R.id.et_jq_desc_zi)
     EditText et_jq_desc_zi;
+
     private int REQUEST_CODE = 101;
-    private int REQUEST_CODES=102;
+    private int REQUEST_CODES = 102;
     private Dialog weiboDialog;
-    private String pic="";
+    private String pic = "";
     private ComplaintInsertPicAdapter adapter;
     private List<String> mList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +87,11 @@ public class TicketInserActivity extends AppCompatActivity {
         ButterKnife.bind(TicketInserActivity.this);
         initData();
     }
-    private void initData(){
+
+    private void initData() {
         mList = new ArrayList<>();
         adapter = new ComplaintInsertPicAdapter(mList);
-        GridLayoutManager manager = new GridLayoutManager(TicketInserActivity.this, 3){
+        GridLayoutManager manager = new GridLayoutManager(TicketInserActivity.this, 3) {
             @Override
             public boolean canScrollVertically() {
                 return false;
@@ -101,7 +106,7 @@ public class TicketInserActivity extends AppCompatActivity {
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9-mList.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 - mList.size()) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(TicketInserActivity.this, REQUEST_CODES); // 打开相册
             }
@@ -113,10 +118,11 @@ public class TicketInserActivity extends AppCompatActivity {
             }
         });
     }
-    @OnClick({R.id.iv_black, R.id.identitycard,R.id.iv_del1,R.id.btn_add})
-    public void onClick(View view){
+
+    @OnClick({R.id.iv_black, R.id.identitycard, R.id.iv_del1, R.id.btn_add})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.iv_black:
                 finish();
                 break;
@@ -130,7 +136,7 @@ public class TicketInserActivity extends AppCompatActivity {
                         .start(TicketInserActivity.this, REQUEST_CODE); // 打开相册
                 break;
             case R.id.iv_del1:
-                pic="";
+                pic = "";
                 Glide.with(TicketInserActivity.this).load("").into(iv_img);
                 iv_del1.setVisibility(View.GONE);
                 break;
@@ -143,16 +149,17 @@ public class TicketInserActivity extends AppCompatActivity {
                 /*String jdxx = et_jdxx.getText().toString();//景點信息*/
                 String jddz = et_address.getText().toString();//景點地址
                 String et_sheshi = et_menpiao.getText().toString();//景點設施
-                if(title.isEmpty()||content.isEmpty()||menpiaozi.isEmpty()||jqxq.isEmpty()||menpiaos.isEmpty()||pic.isEmpty()||jddz.isEmpty()||et_sheshi.isEmpty()){
-                    ToastUtil.showShort(context,"请把信息填写完整!");
-                }else{
+                if (title.isEmpty() || content.isEmpty() || menpiaozi.isEmpty() || jqxq.isEmpty() || menpiaos.isEmpty() || pic.isEmpty() || jddz.isEmpty() || et_sheshi.isEmpty()) {
+                    ToastUtil.showShort(context, "请把信息填写完整!");
+                } else {
                     SaveInfo();
                 }
                 break;
         }
     }
-    private void SaveInfo(){
-        weiboDialog = WeiboDialogUtils.createLoadingDialog(context,"请等待...");
+
+    private void SaveInfo() {
+        weiboDialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
 
         Observable<Map<String, File>> observable = Observable.create(new ObservableOnSubscribe<Map<String, File>>() {
             @Override
@@ -178,9 +185,9 @@ public class TicketInserActivity extends AppCompatActivity {
                             public void onSuccess(File file) {
                                 // TODO 压缩成功后调用，返回压缩后的图片文件
                                 fileList.add(file);
-                                if(fileList.size() == mList.size()){
-                                    for (int i = 0; i<fileList.size(); i++){
-                                        fileMap.put("img"+i, fileList.get(i));//[" + i + "]
+                                if (fileList.size() == mList.size()) {
+                                    for (int i = 0; i < fileList.size(); i++) {
+                                        fileMap.put("img" + i, fileList.get(i));//[" + i + "]
                                     }
                                     e.onNext(fileMap);
                                 }
@@ -214,10 +221,10 @@ public class TicketInserActivity extends AppCompatActivity {
                         .addParam("title", title)
                         .addParam("contentShort", content)
                         .addParam("content", jqxq)
-                        .addParam("ticketMoney",menpiaos)
-                        .addParam("facilities",jdss)
-                        .addParam(" address",jddz)
-                        .addParam("ticketMoneyMore",menpiaozi)
+                        .addParam("ticketMoney", menpiaos)
+                        .addParam("facilities", jdss)
+                        .addParam(" address", jddz)
+                        .addParam("ticketMoneyMore", menpiaozi)
                         .addFile("file0", file)
                         .addFiles(value)
                         .request(new ACallback<String>() {
@@ -225,11 +232,11 @@ public class TicketInserActivity extends AppCompatActivity {
                             public void onSuccess(String data) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(data);
-                                    if(jsonObject.optString("status").equals("200")){
-                                        ToastUtil.showShort(context,"发布成功");
+                                    if (jsonObject.optString("status").equals("200")) {
+                                        ToastUtil.showShort(context, "发布成功");
                                         finish();
-                                    }else {
-                                        ToastUtil.showShort(context,jsonObject.optString("errorMsg"));
+                                    } else {
+                                        ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -258,6 +265,7 @@ public class TicketInserActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -266,11 +274,11 @@ public class TicketInserActivity extends AppCompatActivity {
             ArrayList<String> images = data.getStringArrayListExtra(
                     ImageSelectorUtils.SELECT_RESULT);
             if (images.size() > 0) {
-                 Glide.with(TicketInserActivity.this).load(images.get(0)).into(iv_img);
+                Glide.with(TicketInserActivity.this).load(images.get(0)).into(iv_img);
                 iv_del1.setVisibility(View.VISIBLE);
                 pic = images.get(0);
             }
-        }else if(requestCode == REQUEST_CODES && data != null){
+        } else if (requestCode == REQUEST_CODES && data != null) {
             ArrayList<String> images = data.getStringArrayListExtra(
                     ImageSelectorUtils.SELECT_RESULT);
 
