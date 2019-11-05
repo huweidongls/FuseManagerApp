@@ -2,6 +2,7 @@ package com.guoyu.fusemanagerapp.page;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +15,10 @@ import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,6 +35,8 @@ public class MicroAuditActivity extends BaseActivity {
 
     @BindView(R.id.rv)
     RecyclerView recyclerView;
+    @BindView(R.id.refresh)
+    SmartRefreshLayout smartRefreshLayout;
 
     private MicroAuditAdapter adapter;
     private List<WeiguanListBean.DataBean> mList;
@@ -40,13 +47,23 @@ public class MicroAuditActivity extends BaseActivity {
         setContentView(R.layout.activity_audit);
 
         ButterKnife.bind(MicroAuditActivity.this);
+        initRefresh();
+        initData();
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        initData();
+    private void initRefresh() {
+
+        smartRefreshLayout.setRefreshHeader(new MaterialHeader(context));
+        smartRefreshLayout.setEnableLoadMore(false);
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                initData();
+                refreshLayout.finishRefresh(1000);
+            }
+        });
+
     }
 
     private void initData() {

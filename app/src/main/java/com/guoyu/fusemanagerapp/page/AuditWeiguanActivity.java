@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -43,8 +44,15 @@ public class AuditWeiguanActivity extends BaseActivity {
     TextView tvAddTime;
     @BindView(R.id.tv_content)
     TextView tvContent;
+    @BindView(R.id.ll_bottom)
+    LinearLayout llBottom;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_sub_title)
+    TextView tvSubTitle;
 
     private WeiguanListBean.DataBean bean;
+    private String type = "";
 
     private Dialog dialog;
 
@@ -53,6 +61,7 @@ public class AuditWeiguanActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audit_weiguan);
 
+        type = getIntent().getStringExtra("type");
         bean = (WeiguanListBean.DataBean) getIntent().getSerializableExtra("bean");
         ButterKnife.bind(AuditWeiguanActivity.this);
         initData();
@@ -61,6 +70,12 @@ public class AuditWeiguanActivity extends BaseActivity {
 
     private void initData() {
 
+        if(type.equals("0")){
+            llBottom.setVisibility(View.VISIBLE);
+        }else {
+            llBottom.setVisibility(View.GONE);
+        }
+
         if(bean.getNikePic()!=null){
             String[] pics = bean.getNikePic().split(",");
             if(pics.length>0){
@@ -68,7 +83,9 @@ public class AuditWeiguanActivity extends BaseActivity {
             }
         }
         tvName.setText(bean.getNickName());
-        tvAddTime.setText("发布时间："+bean.getPublishDate());
+        tvAddTime.setText("发布时间："+bean.getCreateDate());
+        tvTitle.setText(bean.getTitle());
+        tvSubTitle.setText(bean.getContentTop());
         tvContent.setText(bean.getContent());
         String[] s = bean.getContentPic().split(",");
         List<String> list = new ArrayList<>();

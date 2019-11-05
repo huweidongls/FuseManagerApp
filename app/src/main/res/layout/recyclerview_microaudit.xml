@@ -97,6 +97,13 @@
             android:layout_marginTop="8dp"
             app:sapcing="4dp" />
 
+        <ImageView
+            android:id="@+id/iv"
+            android:scaleType="centerCrop"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
         <LinearLayout
             android:id="@+id/ll_text"
             android:layout_width="match_parent"

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.WeiguanListBean;
+import com.guoyu.fusemanagerapp.imagepreview.Consts;
+import com.guoyu.fusemanagerapp.imagepreview.ImagePreviewActivity;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.nine.NineGridTestLayout;
 import com.guoyu.fusemanagerapp.page.AuditWeiguanActivity;
@@ -55,9 +57,11 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
             holder.llShenhe.setVisibility(View.VISIBLE);
             holder.llText.setVisibility(View.GONE);
             if(status == 1){
+                holder.llShenhe.setVisibility(View.GONE);
                 holder.tvStatus.setText("待审核");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_ffbc1a_9dp);
             }else if(status == 2){
+                holder.llShenhe.setVisibility(View.VISIBLE);
                 holder.tvStatus.setText("已审核");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_bbbbbb_9dp);
                 holder.tvAuditName.setText(data.get(position).getApprUserName());
@@ -67,9 +71,11 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
             holder.llShenhe.setVisibility(View.GONE);
             holder.llText.setVisibility(View.VISIBLE);
             if(status == 2){
+                holder.llText.setVisibility(View.GONE);
                 holder.tvStatus.setText("待反馈");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_ffbc1a_9dp);
             }else if(status == 3){
+                holder.llText.setVisibility(View.VISIBLE);
                 holder.tvStatus.setText("已反馈");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_bbbbbb_9dp);
                 holder.tvFankui.setText("【反馈意见】"+data.get(position).getFeeMemo());
@@ -83,14 +89,33 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
         }
         holder.tvName.setText(data.get(position).getNickName());
 
-        holder.tvAddTime.setText("发布时间："+data.get(position).getPublishDate());
-        holder.tvContent.setText(data.get(position).getContent());
+        holder.tvAddTime.setText("创建时间："+data.get(position).getCreateDate());
+        holder.tvContent.setText("【"+data.get(position).getTitle()+"】"+data.get(position).getContent());
         String[] s = data.get(position).getContentPic().split(",");
-        List<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
         for (String ss : s){
             list.add(NetUrl.BASE_URL+ss);
         }
-        holder.nine.setUrlList(list);
+        if(list.size()>0&&list.size()<2){
+            holder.iv.setVisibility(View.VISIBLE);
+            holder.nine.setVisibility(View.GONE);
+            GlideUtils.into(context, list.get(0), holder.iv);
+        }else if(list.size()>1){
+            holder.iv.setVisibility(View.GONE);
+            holder.nine.setVisibility(View.VISIBLE);
+            holder.nine.setUrlList(list);
+        }
+
+        holder.iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ImagePreviewActivity.class);
+                intent.putExtra("imageList", (Serializable) list);
+                intent.putExtra(Consts.START_ITEM_POSITION, 0);
+                intent.putExtra(Consts.START_IAMGE_POSITION, 0);
+                context.startActivity(intent);
+            }
+        });
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,18 +125,23 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
                     if(status == 1){
                         intent.setClass(context, AuditWeiguanActivity.class);
                         intent.putExtra("bean", data.get(position));
+                        intent.putExtra("type", "0");
+                        context.startActivity(intent);
                     }else {
-                        ToastUtil.showShort(context, "已审核");
+                        intent.setClass(context, AuditWeiguanActivity.class);
+                        intent.putExtra("bean", data.get(position));
+                        intent.putExtra("type", "1");
+                        context.startActivity(intent);
                     }
                 }else {
                     if(status == 2){
                         intent.setClass(context, ReplyWeiguanActivity.class);
                         intent.putExtra("bean", data.get(position));
+                        context.startActivity(intent);
                     }else {
                         ToastUtil.showShort(context, "已反馈");
                     }
                 }
-                context.startActivity(intent);
             }
         });
 
@@ -136,6 +166,7 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
         private LinearLayout llShenhe;
         private TextView tvAuditName;
         private TextView tvAuditTime;
+        private ImageView iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -151,6 +182,7 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
             llShenhe = itemView.findViewById(R.id.ll_shenhe);
             tvAuditName = itemView.findViewById(R.id.tv_audit_name);
             tvAuditTime = itemView.findViewById(R.id.tv_audit_time);
+            iv = itemView.findViewById(R.id.iv);
         }
     }
 

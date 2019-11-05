@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +46,10 @@ public class ReplyWeiguanActivity extends BaseActivity {
     TextView tvContent;
     @BindView(R.id.et_content)
     EditText etContent;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_sub_title)
+    TextView tvSubTitle;
 
     private WeiguanListBean.DataBean bean;
 
@@ -70,7 +75,9 @@ public class ReplyWeiguanActivity extends BaseActivity {
             }
         }
         tvName.setText(bean.getNickName());
-        tvAddTime.setText("发布时间："+bean.getPublishDate());
+        tvAddTime.setText("发布时间："+bean.getCreateDate());
+        tvTitle.setText(bean.getTitle());
+        tvSubTitle.setText(bean.getContentTop());
         tvContent.setText(bean.getContent());
         String[] s = bean.getContentPic().split(",");
         List<String> list = new ArrayList<>();
