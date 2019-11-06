@@ -45,6 +45,7 @@ public class FeedbackDetailsActivity extends BaseActivity {
     RecyclerView rv_pic;
     @BindView(R.id.tv_leixing)
     TextView tv_leixing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,19 +55,20 @@ public class FeedbackDetailsActivity extends BaseActivity {
         initData();
         //initImgList();
     }
-    private void initData(){//FeedbackDetailsBean
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("id",id);
+
+    private void initData() {//FeedbackDetailsBean
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", id);
         ViseUtil.Get(context, NetUrl.AppConsultationInfogetOne, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                FeedbackDetailsBean bean = gson.fromJson(s,FeedbackDetailsBean.class);
+                FeedbackDetailsBean bean = gson.fromJson(s, FeedbackDetailsBean.class);
                 tv_title.setText(bean.getData().getTitle());
                 et_ftitle.setText(bean.getData().getContentTop());
                 tv_bumen.setText(bean.getData().getDeptName());
                 tv_content.setText(bean.getData().getContent());
-                switch (bean.getData().getConsType()){
+                switch (bean.getData().getConsType()) {
                     case 5:
                         tv_leixing.setText("投诉");
                         break;
@@ -77,10 +79,10 @@ public class FeedbackDetailsActivity extends BaseActivity {
                         tv_leixing.setText("其他");
                         break;
                 }
-                   String str2=bean.getData().getContentPic().replace(" ", "");
-                List<String> list= Arrays.asList(str2.split(","));
+                String str2 = bean.getData().getContentPic().replace(" ", "");
+                List<String> list = Arrays.asList(str2.split(","));
                 adapter = new FeedbackDetailsImgAdapter(list);
-                GridLayoutManager manager = new GridLayoutManager(FeedbackDetailsActivity.this, 3){
+                GridLayoutManager manager = new GridLayoutManager(FeedbackDetailsActivity.this, 3) {
                     @Override
                     public boolean canScrollVertically() {
                         return false;
@@ -91,16 +93,17 @@ public class FeedbackDetailsActivity extends BaseActivity {
             }
         });
     }
+
     @OnClick({R.id.rl_back, R.id.btn_sure})
-    public void onClick(View view){
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.rl_back:
                 finish();
                 break;
             case R.id.btn_sure:
                 intent.setClass(context, FeedbackContentActivity.class);
-                intent.putExtra("cid",id);
+                intent.putExtra("cid", id);
                 startActivity(intent);
                 finish();
                 break;

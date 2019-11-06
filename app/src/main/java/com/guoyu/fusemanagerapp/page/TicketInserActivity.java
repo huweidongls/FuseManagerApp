@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.donkingliang.imageselector.utils.ImageSelector;
@@ -18,6 +19,8 @@ import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.ComplaintInsertPicAdapter;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
+import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
@@ -66,12 +69,16 @@ public class TicketInserActivity extends AppCompatActivity {
     EditText et_address;
     @BindView(R.id.et_sheshi)
     EditText et_sheshi;
-    @BindView(R.id.et_jq_desc)
-    EditText et_jq_desc;
+//    @BindView(R.id.et_jq_desc)
+//    EditText et_jq_desc;
     @BindView(R.id.et_menpiao)
     EditText et_menpiao;
     @BindView(R.id.et_jq_desc_zi)
     EditText et_jq_desc_zi;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
+    @BindView(R.id.et_jingqujiaotong)
+    EditText etJingqujiaotong;
 
     private int REQUEST_CODE = 101;
     private int REQUEST_CODES = 102;
@@ -79,6 +86,7 @@ public class TicketInserActivity extends AppCompatActivity {
     private String pic = "";
     private ComplaintInsertPicAdapter adapter;
     private List<String> mList;
+    private String content = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +127,14 @@ public class TicketInserActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick({R.id.iv_black, R.id.identitycard, R.id.iv_del1, R.id.btn_add})
+    @OnClick({R.id.tv_add_fuwenben, R.id.iv_black, R.id.identitycard, R.id.iv_del1, R.id.btn_add})
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.tv_add_fuwenben:
+                intent.setClass(context, FuwenbenActivity.class);
+                startActivityForResult(intent, 1001);
+                break;
             case R.id.iv_black:
                 finish();
                 break;
@@ -142,14 +154,15 @@ public class TicketInserActivity extends AppCompatActivity {
                 break;
             case R.id.btn_add:
                 String title = et_title.getText().toString();//标题
-                String content = et_content.getText().toString();//景区简介
+                String subTitle = et_content.getText().toString();//景区简介
                 String menpiaozi = et_jq_desc_zi.getText().toString();//子门票信息
-                String jqxq = et_jq_desc.getText().toString();//景区详情
                 String menpiaos = et_menpiao.getText().toString();//门票价格
                 /*String jdxx = et_jdxx.getText().toString();//景點信息*/
                 String jddz = et_address.getText().toString();//景點地址
                 String et_sheshi = et_menpiao.getText().toString();//景點設施
-                if (title.isEmpty() || content.isEmpty() || menpiaozi.isEmpty() || jqxq.isEmpty() || menpiaos.isEmpty() || pic.isEmpty() || jddz.isEmpty() || et_sheshi.isEmpty()) {
+                String jingqujiaotong = etJingqujiaotong.getText().toString();//景区交通
+                if (StringUtils.isEmpty(title) || StringUtils.isEmpty(subTitle) || StringUtils.isEmpty(menpiaozi) || StringUtils.isEmpty(content) || StringUtils.isEmpty(menpiaos) || StringUtils.isEmpty(pic)
+                        || StringUtils.isEmpty(jddz) || StringUtils.isEmpty(et_sheshi) || StringUtils.isEmpty(jingqujiaotong)) {
                     ToastUtil.showShort(context, "请把信息填写完整!");
                 } else {
                     SaveInfo();
@@ -210,21 +223,22 @@ public class TicketInserActivity extends AppCompatActivity {
             public void onNext(Map<String, File> value) {
                 File file = new File(pic);
                 String title = et_title.getText().toString();//标题
-                String content = et_content.getText().toString();//景区简介
+                String subTitle = et_content.getText().toString();//景区简介
                 String menpiaozi = et_jq_desc_zi.getText().toString();//子门票信息
-                String jqxq = et_jq_desc.getText().toString();//景区详情
                 String menpiaos = et_menpiao.getText().toString();//门票价格
                 //String jdxx = et_jdxx.getText().toString();//景點信息
                 String jddz = et_address.getText().toString();//景點地址
                 String jdss = et_sheshi.getText().toString();//景點設施
+                String jingqujiaotong = etJingqujiaotong.getText().toString();//景区交通
                 ViseHttp.UPLOAD(NetUrl.AppEntranceTicketInfoinsertEntranceTicketInfo)
                         .addParam("title", title)
-                        .addParam("contentShort", content)
-                        .addParam("content", jqxq)
+                        .addParam("contentShort", subTitle)
+                        .addParam("content", content)
                         .addParam("ticketMoney", menpiaos)
                         .addParam("facilities", jdss)
-                        .addParam(" address", jddz)
+                        .addParam("address", jddz)
                         .addParam("ticketMoneyMore", menpiaozi)
+                        .addParam("areaTraffic", jingqujiaotong)
                         .addFile("file0", file)
                         .addFiles(value)
                         .request(new ACallback<String>() {
@@ -285,6 +299,10 @@ public class TicketInserActivity extends AppCompatActivity {
             rv_pic.setVisibility(View.VISIBLE);
             mList.addAll(images);
             adapter.notifyDataSetChanged();
+        }
+        if(requestCode == 1001 && data != null){
+            content = data.getStringExtra("content");
+            HtmlFromUtils.setTextFromHtml(TicketInserActivity.this, tvContent, content);
         }
     }
 }

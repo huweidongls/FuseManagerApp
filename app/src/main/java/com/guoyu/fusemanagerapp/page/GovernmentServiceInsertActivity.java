@@ -11,14 +11,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.GovernmentServiceTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
+import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
+import com.zzhoujay.richtext.ImageHolder;
+import com.zzhoujay.richtext.RichText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,18 +40,23 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GovernmentServiceInsertActivity extends AppCompatActivity {
+
     private GovernmentServiceInsertActivity context = GovernmentServiceInsertActivity.this;
+
     @BindView(R.id.spinner1)
-    Spinner spinnertext ;
+    Spinner spinnertext;
+    @BindView(R.id.et_title)
+    EditText et_title;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
+
     private ArrayAdapter<String> adapters;
     private List<String> list = new ArrayList<String>();
     private List<GovernmentServiceTypeBean.DataBean> mList;
-    private int typeId =0;
+    private int typeId = 0;
     private Dialog dialog;
-    @BindView(R.id.et_content)
-    EditText et_content;
-    @BindView(R.id.et_title)
-    EditText et_title;
+    private String content = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,19 +69,21 @@ public class GovernmentServiceInsertActivity extends AppCompatActivity {
                 typeId = mList.get(position).getId();
                 //ToastUtil.showShort(GovernmentServiceInsertActivity.this,"你点击的是:"+typeId);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-    private void initData(){
+
+    private void initData() {
         ViseUtil.Get(GovernmentServiceInsertActivity.this, NetUrl.AppGovernmentInfofindType, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                GovernmentServiceTypeBean bean = gson.fromJson(s,GovernmentServiceTypeBean.class);
+                GovernmentServiceTypeBean bean = gson.fromJson(s, GovernmentServiceTypeBean.class);
                 mList = bean.getData();
-                for (GovernmentServiceTypeBean.DataBean bean2 : bean.getData()){
+                for (GovernmentServiceTypeBean.DataBean bean2 : bean.getData()) {
                     list.add(bean2.getSubName());
                 }
                 adapters = new ArrayAdapter<String>(GovernmentServiceInsertActivity.this, android.R.layout.simple_spinner_item, list);
@@ -80,10 +94,15 @@ public class GovernmentServiceInsertActivity extends AppCompatActivity {
             }
         });
     }
-    @OnClick({R.id.iv_black,R.id.btn_cancel,R.id.btn_add})
-    public void onClick(View view){
+
+    @OnClick({R.id.tv_add, R.id.iv_black, R.id.btn_cancel, R.id.btn_add})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
+            case R.id.tv_add:
+                intent.setClass(context, FuwenbenActivity.class);
+                startActivityForResult(intent, 1001);
+                break;
             case R.id.iv_black:
                 finish();
                 break;
@@ -95,25 +114,25 @@ public class GovernmentServiceInsertActivity extends AppCompatActivity {
                 break;
         }
     }
-    private void SaveAdd(){
+
+    private void SaveAdd() {
         String s = et_title.getText().toString();
-        String b = et_content.getText().toString();
-        if(s.isEmpty() || b.isEmpty() || typeId==0){
-            ToastUtil.showShort(GovernmentServiceInsertActivity.this,"请将信息补充完整!");
-        }else{
+        if (StringUtils.isEmpty(s) || StringUtils.isEmpty(content) || typeId == 0) {
+            ToastUtil.showShort(GovernmentServiceInsertActivity.this, "请将信息补充完整!");
+        } else {
             dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
-            Map<String,String> map = new LinkedHashMap<>();
-            map.put("title",s);
-            map.put("content",b);
-            map.put("govType",typeId+"");
+            Map<String, String> map = new LinkedHashMap<>();
+            map.put("title", s);
+            map.put("content", content);
+            map.put("govType", typeId + "");
             ViseUtil.Post(context, NetUrl.AppGovernmentInfotoUpdate, map, new ViseUtil.ViseListener() {
                 @Override
                 public void onReturn(String s) {
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-                        if (jsonObject.optString("status").equals("200")){
+                        if (jsonObject.optString("status").equals("200")) {
                             WeiboDialogUtils.closeDialog(dialog);
-                            ToastUtil.showShort(GovernmentServiceInsertActivity.this,"发布成功!");
+                            ToastUtil.showShort(context, "发布成功!");
                             finish();
                         }
                     } catch (JSONException e) {
@@ -124,4 +143,18 @@ public class GovernmentServiceInsertActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1001 && data != null){
+            content = data.getStringExtra("content");
+//            HtmlFromUtils.setTextFromHtml(GovernmentServiceInsertActivity.this, tvContent, content);
+            RichText.from(content).bind(this)
+                    .showBorder(false)
+                    .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)
+                    .into(tvContent);
+        }
+    }
+
 }

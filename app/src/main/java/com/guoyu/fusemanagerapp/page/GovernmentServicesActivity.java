@@ -44,11 +44,7 @@ import butterknife.OnClick;
 public class GovernmentServicesActivity extends BaseActivity {
 
     private Context context = GovernmentServicesActivity.this;
-    private GovernmentServiceListAdapter adapter;
-    private GovernmentServiceTypeAdapter adapters;
-    private List<GovernmentServiceListBean.DataBean> mList;
-    private List<GovernmentServiceTypeBean.DataBean> mLists;
-    private int radio = 0;
+
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
     @BindView(R.id.recycler_viewtype)
@@ -63,10 +59,16 @@ public class GovernmentServicesActivity extends BaseActivity {
     RelativeLayout empty_order_bloacks;
     @BindView(R.id.refreshs)
     SmartRefreshLayout refreshs;
-    private int page = 1;
     @BindView(R.id.et_titles)
     EditText et_titles;
+
+    private int page = 1;
     private int typeId = 0;
+    private GovernmentServiceListAdapter adapter;
+    private GovernmentServiceTypeAdapter adapters;
+    private List<GovernmentServiceListBean.DataBean> mList;
+    private List<GovernmentServiceTypeBean.DataBean> mLists;
+    private int radio = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

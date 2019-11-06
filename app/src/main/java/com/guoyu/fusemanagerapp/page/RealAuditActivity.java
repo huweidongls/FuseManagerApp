@@ -13,6 +13,7 @@ import com.guoyu.fusemanagerapp.adapter.RealAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.RealAuditBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -119,6 +120,7 @@ public class RealAuditActivity extends BaseActivity {
                 ViseUtil.Post(context, NetUrl.AppUserqueryList, map, new ViseUtil.ViseListener() {
                     @Override
                     public void onReturn(String s) {
+                        Logger.e("123123", s);
                         Gson gson = new Gson();
                         RealAuditBean bean = gson.fromJson(s, RealAuditBean.class);
                         mList.addAll(bean.getData());

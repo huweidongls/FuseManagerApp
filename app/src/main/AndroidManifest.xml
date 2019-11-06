@@ -78,7 +78,8 @@
         <activity android:name=".page.FeedbackActivity" />
         <activity android:name=".page.MicroReplyActivity" />
         <activity android:name=".page.RealAuditActivity" />
-        <activity android:name=".page.GovernmentServicesActivity" />
+        <activity android:name=".page.GovernmentServicesActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".page.AcademicResourcesActivity" />
         <activity
             android:name=".page.TicketServiceActivity"
@@ -86,13 +87,15 @@
         <activity
             android:name=".imagepreview.ImagePreviewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".page.GovernmentServiceInsertActivity" />
+        <activity android:name=".page.GovernmentServiceInsertActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".page.AuditWeiguanActivity" />
         <activity
             android:name=".page.ReplyWeiguanActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".page.RealNameActivity" />
-        <activity android:name=".page.AcademicResourcesInsertActivity" />
+        <activity android:name=".page.AcademicResourcesInsertActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".page.FeedbackDetailsActivity" />
         <activity
             android:name=".page.FeedbackContentActivity"
@@ -107,7 +110,7 @@
         <activity android:name=".page.ConvenienceNoticeDetailsActivity" />
         <activity android:name=".page.GobernmentContentActivity" />
         <activity android:name=".page.ModuleWebViewActivity" />
-        <activity android:name=".page.FuwenbenActivity"></activity>
+        <activity android:name=".page.FuwenbenActivity"/>
     </application>
 
 </manifest>

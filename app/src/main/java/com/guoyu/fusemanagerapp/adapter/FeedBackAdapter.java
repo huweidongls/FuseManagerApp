@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,8 +45,10 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         holder.tvTitle.setText(data.get(position).getTitle());
         final int status = data.get(position).getStatusid();
         if(status == 1){
+            holder.llFeedback.setVisibility(View.GONE);
             Glide.with(context).load(R.mipmap.weifankui).into(holder.ivType);
         }else if(status == 3){
+            holder.llFeedback.setVisibility(View.VISIBLE);
             Glide.with(context).load(R.mipmap.yifankui).into(holder.ivType);
             holder.tvFeed.setText(data.get(position).getFeeMemo());
         }
@@ -75,12 +78,14 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         private ImageView ivType;
         private TextView tvTitle;
         private TextView tvFeed;
+        private LinearLayout llFeedback;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivType = itemView.findViewById(R.id.iv_type);
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvFeed = itemView.findViewById(R.id.tv_feed);
+            llFeedback = itemView.findViewById(R.id.ll_feedback);
         }
     }
 

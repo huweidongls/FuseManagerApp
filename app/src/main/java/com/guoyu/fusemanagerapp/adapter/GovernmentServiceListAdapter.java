@@ -19,12 +19,15 @@ import java.util.List;
  * Created by Administrator on 2019/10/15.
  */
 
-public class GovernmentServiceListAdapter extends RecyclerView.Adapter<GovernmentServiceListAdapter.ViewHolder>{
+public class GovernmentServiceListAdapter extends RecyclerView.Adapter<GovernmentServiceListAdapter.ViewHolder> {
+
     private Context context;
     private List<GovernmentServiceListBean.DataBean> data;
+
     public GovernmentServiceListAdapter(List<GovernmentServiceListBean.DataBean> data) {
         this.data = data;
     }
+
     @Override
     public GovernmentServiceListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         this.context = parent.getContext();
@@ -36,13 +39,13 @@ public class GovernmentServiceListAdapter extends RecyclerView.Adapter<Governmen
     @Override
     public void onBindViewHolder(GovernmentServiceListAdapter.ViewHolder holder, final int position) {
         holder.tv_title.setText(data.get(position).getTitle());
-        holder.tv_tag.setText("【"+data.get(position).getGovTypeName()+"】");
+        holder.tv_tag.setText("【" + data.get(position).getGovTypeName() + "】");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, GobernmentContentActivity.class);
-                intent.putExtra("id", data.get(position).getId()+"");
+                intent.putExtra("id", data.get(position).getId() + "");
                 intent.putExtra("title", "政务信息");
                 context.startActivity(intent);
             }
@@ -57,6 +60,7 @@ public class GovernmentServiceListAdapter extends RecyclerView.Adapter<Governmen
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_title;
         private TextView tv_tag;
+
         public ViewHolder(View itemView) {
             super(itemView);
             tv_title = itemView.findViewById(R.id.tv_title);

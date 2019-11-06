@@ -63,6 +63,15 @@ public class PersonBean {
         private int id;
         private String username;
         private int status;
+        private String depName;
+
+        public String getDepName() {
+            return depName;
+        }
+
+        public void setDepName(String depName) {
+            this.depName = depName;
+        }
 
         public String getAppuserPics() {
             return appuserPics;

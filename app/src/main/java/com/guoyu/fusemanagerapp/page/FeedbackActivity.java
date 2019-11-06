@@ -13,6 +13,7 @@ import com.guoyu.fusemanagerapp.adapter.FeedBackAdapter;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.FeedbackListBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 
@@ -57,6 +58,7 @@ public class FeedbackActivity extends BaseActivity {
         ViseUtil.Get(context, NetUrl.AppConsultationInfofindStatusid, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
+                Logger.e("123123", s);
                 Gson gson = new Gson();
                 FeedbackListBean bean = gson.fromJson(s, FeedbackListBean.class);
                 mList = bean.getData();

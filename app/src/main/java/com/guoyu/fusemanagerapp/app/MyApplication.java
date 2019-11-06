@@ -21,6 +21,7 @@ import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.sendtion.xrichtext.IImageLoader;
 import com.sendtion.xrichtext.XRichText;
 import com.vise.xsnow.http.ViseHttp;
+import com.zzhoujay.richtext.RichText;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -44,20 +45,13 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-//        SDKInitializer.initialize(this);
-//        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
-//        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
-//        SDKInitializer.setCoordType(CoordType.BD09LL);
         Map<String, String> map = new LinkedHashMap<>();
         map.put("jnkjToken", SpUtils.getToken(getApplicationContext()));
         ViseHttp.init(this);
         ViseHttp.CONFIG().baseUrl(NetUrl.BASE_URL)
                 .globalHeaders(map);
-//        JPushInterface.setDebugMode(true);
-//        JPushInterface.init(this);
         registerTimeCount = new RegisterTimeCount(60000, 1000);
-
+        RichText.initCacheDir(this);
         XRichText.getInstance().setImageLoader(new IImageLoader() {
             @Override
             public void loadImage(final String imagePath, final ImageView imageView, final int imageHeight) {

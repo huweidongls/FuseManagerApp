@@ -12,6 +12,7 @@ import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.Logger;
+import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.sendtion.xrichtext.RichTextEditor;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -79,20 +80,32 @@ public class FuwenbenActivity extends BaseActivity {
         return content.toString();
     }
 
-    @OnClick({R.id.rl_back, R.id.rl_pic})
+    @OnClick({R.id.rl_back, R.id.rl_pic, R.id.tv_save})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.rl_back:
-                Logger.e("123123", getEditData());
+                finish();
                 break;
             case R.id.rl_pic:
                 //限数量的多选(比喻最多9张)
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(0) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(1) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(FuwenbenActivity.this, REQUEST_CODE); // 打开相册
+                break;
+            case R.id.tv_save:
+                String content = getEditData();
+                if(content.length()<=2000){
+                    Logger.e("123123", content);
+                    Intent intent = new Intent();
+                    intent.putExtra("content", content);
+                    setResult(1002, intent);
+                    finish();
+                }else{
+                    ToastUtil.showShort(context, "内容超出2000字， 请删减之后保存");
+                }
                 break;
         }
     }

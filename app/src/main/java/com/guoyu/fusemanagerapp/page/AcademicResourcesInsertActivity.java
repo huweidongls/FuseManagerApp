@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.donkingliang.imageselector.utils.ImageSelector;
@@ -20,9 +22,12 @@ import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.AcademicResourcesTypeBean;
 import com.guoyu.fusemanagerapp.bean.GovernmentServiceTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
+import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
+import com.sendtion.xrichtext.RichTextEditor;
 import com.vise.utils.assist.Network;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -41,22 +46,30 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AcademicResourcesInsertActivity extends AppCompatActivity {
+
     private Context context = AcademicResourcesInsertActivity.this;
+
     @BindView(R.id.spinner1)
-    Spinner spinnertext ;
+    Spinner spinnertext;
+    @BindView(R.id.et_title)
+    EditText et_title;
+    @BindView(R.id.iv_img)
+    ImageView iv_img;
+    @BindView(R.id.et_sub_title)
+    EditText etSubTitle;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
+
+    private int REQUEST_CODES = 102;
+    private String pic = "";
+    private int typeId = 0;
+    private Dialog dialog;
+    private String content = "";
+
     private ArrayAdapter<String> adapters;
     private List<String> list = new ArrayList<String>();
     private List<AcademicResourcesTypeBean.DataBean> mList;
-    @BindView(R.id.et_title)
-    EditText et_title;
-    @BindView(R.id.et_content)
-    EditText et_content;
-    @BindView(R.id.iv_img)
-    ImageView iv_img;
-    private int REQUEST_CODES=102;
-    private String pic="";
-    private int typeId=0;
-    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,19 +81,22 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 typeId = mList.get(position).getId();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-    private void initData(){
+
+    private void initData() {
+
         ViseUtil.Get(context, NetUrl.AppConsultationInfofindDepartment, null, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
                 Gson gson = new Gson();
-                AcademicResourcesTypeBean bean = gson.fromJson(s,AcademicResourcesTypeBean.class);
+                AcademicResourcesTypeBean bean = gson.fromJson(s, AcademicResourcesTypeBean.class);
                 mList = bean.getData();
-                for (AcademicResourcesTypeBean.DataBean bean2 : bean.getData()){
+                for (AcademicResourcesTypeBean.DataBean bean2 : bean.getData()) {
                     list.add(bean2.getDepName());
                 }
                 adapters = new ArrayAdapter<String>(AcademicResourcesInsertActivity.this, android.R.layout.simple_spinner_item, list);
@@ -91,22 +107,24 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
             }
         });
     }
-    private void SaveInfo(){
-        String s = et_title.getText().toString();
-        String b = et_content.getText().toString();
-        if(s.isEmpty() || b.isEmpty() || typeId==0 ||pic.isEmpty()){
-            ToastUtil.showShort(context,"请把信息填写完整!");
-        }else{
+
+    private void SaveInfo() {
+        String title = et_title.getText().toString();
+        String subTitle = etSubTitle.getText().toString();
+        if (StringUtils.isEmpty(title) || StringUtils.isEmpty(subTitle) || StringUtils.isEmpty(content) || typeId == 0 || StringUtils.isEmpty(pic)) {
+            ToastUtil.showShort(context, "请把信息填写完整!");
+        }else if(title.length()>200){
+            ToastUtil.showShort(context, "标题字数不能超过200!");
+        }else if(subTitle.length()>200){
+            ToastUtil.showShort(context, "简介字数不能超过200!");
+        }else {
             dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待...");
-           /* Map<String,String> map = new LinkedHashMap<>();
-            map.put("title",s);
-            map.put("content",b);
-            map.put("publishDepartment",typeId+"");*/
             File file = new File(pic);
             ViseHttp.UPLOAD(NetUrl.AppEducationInfotoUpdate)
-                    .addParam("title",s)
-                    .addParam("content",b)
-                    .addParam("publishDepartment",typeId+"")
+                    .addParam("title", title)
+                    .addParam("contentTop", subTitle)
+                    .addParam("content", content)
+                    .addParam("publishDepartment", typeId + "")
                     .addFile("file0", file)
                     .request(new ACallback<String>() {
                         @Override
@@ -114,10 +132,10 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
                             //JSONObject jsonObject = null;
                             try {
                                 JSONObject jsonObject = new JSONObject(data);
-                                if(jsonObject.optString("status").equals("200")){
+                                if (jsonObject.optString("status").equals("200")) {
                                     ToastUtil.showShort(context, "发布成功");
                                     finish();
-                                }else {
+                                } else {
                                     ToastUtil.showShort(context, jsonObject.optString("errorMsg"));
                                 }
                                 WeiboDialogUtils.closeDialog(dialog);
@@ -133,26 +151,17 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
                         }
                     });
 
-            /*ViseUtil.Post(context, NetUrl.AppEducationInfotoUpdate, map, new ViseUtil.ViseListener() {
-                @Override
-                public void onReturn(String s) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-                        if(jsonObject.optString("status").equals("200")){
-                            ToastUtil.showShort(context,"发布成功!");
-                            finish();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });*/
         }
     }
-    @OnClick({R.id.iv_black,R.id.btn_canl,R.id.btn_save,R.id.add_img})
-    public void onClick(View view){
+
+    @OnClick({R.id.tv_add_pic, R.id.iv_black, R.id.btn_canl, R.id.btn_save, R.id.add_img})
+    public void onClick(View view) {
         Intent intent = new Intent();
-        switch (view.getId()){
+        switch (view.getId()) {
+            case R.id.tv_add_pic:
+                intent.setClass(context, FuwenbenActivity.class);
+                startActivityForResult(intent, 1001);
+                break;
             case R.id.iv_black:
                 finish();
                 break;
@@ -173,6 +182,7 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -185,6 +195,10 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
                 //iv_del1.setVisibility(View.VISIBLE);
                 pic = images.get(0);
             }
+        }
+        if(requestCode == 1001 && data != null){
+            content = data.getStringExtra("content");
+            HtmlFromUtils.setTextFromHtml(AcademicResourcesInsertActivity.this, tvContent, content);
         }
     }
 }

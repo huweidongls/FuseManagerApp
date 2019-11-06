@@ -11,6 +11,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,6 @@ public class HtmlFromUtils {
                 public void run() {
                     Html.ImageGetter imageGetter = new Html.ImageGetter() {//Html.fromhtml方法中有一个参数 就是ImageGetter 此类负责加载source中的图片
 
-
                         @Override
                         public Drawable getDrawable(String source) {
 //                            source = "http://www.dujiaoshou.com/" + source;//source就是img标签中src属性值，相对路径的此处可以对其进行处理添加头部
@@ -78,15 +78,24 @@ public class HtmlFromUtils {
                                 int w = drawable.getIntrinsicWidth();
                                 int h = drawable.getIntrinsicHeight();
                                 //对图片大小进行等比例放大 此处宽高可自行调整
-                                if (w < h && h > 0) {
-                                    float scale = (400.0f / h);
-                                    w = (int) (scale * w);
-                                    h = (int) (scale * h);
-                                } else if (w > h && w > 0) {
-                                    float scale = (1000.0f / w);
-                                    w = (int) (scale * w);
-                                    h = (int) (scale * h);
-                                }
+//                                if (w < h && h > 0) {
+//                                    float scale = (400.0f / h);
+//                                    w = (int) (scale * w);
+//                                    h = (int) (scale * h);
+//                                } else if (w > h && w > 0) {
+//                                    float scale = (1000.0f / w);
+//                                    w = (int) (scale * w);
+//                                    h = (int) (scale * h);
+//                                }
+//                                int ww = DensityTool.dp2px(context, 20);
+//                                WindowManager wm1 = context.getWindowManager();
+//                                int width1 = wm1.getDefaultDisplay().getWidth();
+//                                Logger.e("123123", width1+"");
+//                                if(w>0){
+//                                    int scale = width1/w;
+//                                    w = scale * w;
+//                                    h = scale * h;
+//                                }
 
                                 drawable.setBounds(0, 0, w, h);
                             } else if (drawable == null) {

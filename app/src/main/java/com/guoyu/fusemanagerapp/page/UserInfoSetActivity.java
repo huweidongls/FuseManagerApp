@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -51,6 +52,13 @@ public class UserInfoSetActivity extends BaseActivity {
     TextView tv_status;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+    @BindView(R.id.tv_bumen)
+    TextView tvBumen;
+    @BindView(R.id.view_bumen)
+    View viewBumen;
+    @BindView(R.id.ll_bumen)
+    LinearLayout llBumen;
+
     private UserInfoSetOpeningAdapter adapter;
 
     private Dialog dialog;
@@ -72,6 +80,14 @@ public class UserInfoSetActivity extends BaseActivity {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 PersonBean bean = gson.fromJson(s, PersonBean.class);
+                if(bean.getData().getDepName()!=null){
+                    viewBumen.setVisibility(View.VISIBLE);
+                    llBumen.setVisibility(View.VISIBLE);
+                    tvBumen.setText(bean.getData().getDepName());
+                }else {
+                    viewBumen.setVisibility(View.GONE);
+                    llBumen.setVisibility(View.GONE);
+                }
                 tv_tel.setText(bean.getData().getUsername());
                 tv_username.setText(bean.getData().getRealName());
                 tv_sex.setText(bean.getData().getUserSex());
