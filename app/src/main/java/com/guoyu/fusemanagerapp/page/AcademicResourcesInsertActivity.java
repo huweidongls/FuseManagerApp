@@ -3,9 +3,8 @@ package com.guoyu.fusemanagerapp.page;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,26 +19,22 @@ import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.AcademicResourcesTypeBean;
-import com.guoyu.fusemanagerapp.bean.GovernmentServiceTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
-import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
 import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
-import com.sendtion.xrichtext.RichTextEditor;
-import com.vise.utils.assist.Network;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
+import com.zzhoujay.richtext.ImageHolder;
+import com.zzhoujay.richtext.RichText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -198,7 +193,11 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
         }
         if(requestCode == 1001 && data != null){
             content = data.getStringExtra("content");
-            HtmlFromUtils.setTextFromHtml(AcademicResourcesInsertActivity.this, tvContent, content);
+//            RichText.from(content).bind(this)
+//                    .showBorder(false)
+//                    .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)
+//                    .into(tvContent);
+            tvContent.setText("已添加内容");
         }
     }
 }

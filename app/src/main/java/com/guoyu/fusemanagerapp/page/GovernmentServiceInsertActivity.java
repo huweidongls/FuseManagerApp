@@ -1,11 +1,9 @@
 package com.guoyu.fusemanagerapp.page;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,13 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.GovernmentServiceTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
-import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
 import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
@@ -149,11 +144,11 @@ public class GovernmentServiceInsertActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1001 && data != null){
             content = data.getStringExtra("content");
-//            HtmlFromUtils.setTextFromHtml(GovernmentServiceInsertActivity.this, tvContent, content);
-            RichText.from(content).bind(this)
-                    .showBorder(false)
-                    .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)
-                    .into(tvContent);
+//            RichText.from(content).bind(this)
+//                    .showBorder(false)
+//                    .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)
+//                    .into(tvContent);
+            tvContent.setText("已添加内容");
         }
     }
 

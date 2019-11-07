@@ -14,8 +14,9 @@ import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.NoticegetOneBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
-import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
+import com.zzhoujay.richtext.ImageHolder;
+import com.zzhoujay.richtext.RichText;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -54,7 +55,10 @@ public class ConvenienceNoticeDetailsActivity extends BaseActivity {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 NoticegetOneBean bean = gson.fromJson(s, NoticegetOneBean.class);
-                HtmlFromUtils.setTextFromHtml(ConvenienceNoticeDetailsActivity.this, tvContent, bean.getData().getContent());
+                RichText.from(bean.getData().getContent()).bind(this)
+                        .showBorder(false)
+                        .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)
+                        .into(tvContent);
                 if(bean.getData().getContentPic() != null){
                     String[] pics = bean.getData().getContentPic().split(",");
                     if(pics.length>0){

@@ -14,7 +14,6 @@ import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.bean.ZwznDetailsBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
-import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
 import com.guoyu.fusemanagerapp.util.ViseUtil;
 import com.zzhoujay.richtext.ImageHolder;
 import com.zzhoujay.richtext.RichText;
@@ -58,7 +57,6 @@ public class GobernmentContentActivity extends BaseActivity {
             public void onReturn(String s) {
                 Gson gson = new Gson();
                 ZwznDetailsBean bean = gson.fromJson(s, ZwznDetailsBean.class);
-//                HtmlFromUtils.setTextFromHtml(GobernmentContentActivity.this, tvContent, bean.getData().getContent());
                 RichText.from(bean.getData().getContent()).bind(this)
                         .showBorder(false)
                         .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)

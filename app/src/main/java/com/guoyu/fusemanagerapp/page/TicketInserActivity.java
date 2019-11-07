@@ -3,8 +3,8 @@ package com.guoyu.fusemanagerapp.page;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,12 +19,13 @@ import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.adapter.ComplaintInsertPicAdapter;
 import com.guoyu.fusemanagerapp.net.NetUrl;
-import com.guoyu.fusemanagerapp.util.HtmlFromUtils;
 import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
 import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
+import com.zzhoujay.richtext.ImageHolder;
+import com.zzhoujay.richtext.RichText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -302,7 +303,11 @@ public class TicketInserActivity extends AppCompatActivity {
         }
         if(requestCode == 1001 && data != null){
             content = data.getStringExtra("content");
-            HtmlFromUtils.setTextFromHtml(TicketInserActivity.this, tvContent, content);
+//            RichText.from(content).bind(this)
+//                    .showBorder(false)
+//                    .size(ImageHolder.MATCH_PARENT, ImageHolder.WRAP_CONTENT)
+//                    .into(tvContent);
+            tvContent.setText("已添加内容");
         }
     }
 }
