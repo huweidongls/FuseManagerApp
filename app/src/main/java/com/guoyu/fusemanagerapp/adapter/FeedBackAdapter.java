@@ -47,7 +47,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         if(status == 1){
             holder.llFeedback.setVisibility(View.GONE);
             Glide.with(context).load(R.mipmap.weifankui).into(holder.ivType);
-        }else if(status == 3){
+        }else if(status == 2){
             holder.llFeedback.setVisibility(View.VISIBLE);
             Glide.with(context).load(R.mipmap.yifankui).into(holder.ivType);
             holder.tvFeed.setText(data.get(position).getFeeMemo());

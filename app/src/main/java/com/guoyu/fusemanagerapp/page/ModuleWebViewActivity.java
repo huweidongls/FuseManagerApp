@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
+import com.guoyu.fusemanagerapp.util.SpUtils;
+import com.guoyu.fusemanagerapp.util.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -97,7 +99,6 @@ public class ModuleWebViewActivity extends BaseActivity {
         });
 
         webview.addJavascriptInterface(new JsInterface(), "android");
-
         webview.loadUrl(url);
 
     }

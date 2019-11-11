@@ -55,12 +55,12 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
                     context.startActivity(intent);
                 }else if(type == 1){
                     intent.setClass(context, ModuleWebViewActivity.class);
-                    intent.putExtra("url", NetUrl.H5BASE_URL+"pages/jd_pages/jd_detail.html?jdId="+data.get(position).getId());
+                    intent.putExtra("url", NetUrl.H5BASE_URL+"pages/jd_pages/jd_detail.html?id="+data.get(position).getId()+"&type=1");
                     //intent.putExtra("title", "便民通知");
                     context.startActivity(intent);
                 }else if(type == 2){
                     intent.setClass(context, ModuleWebViewActivity.class);
-                    intent.putExtra("url", NetUrl.H5BASE_URL+"pages/jyo_pages/jyo_detail.html?jyoId="+data.get(position).getId());
+                    intent.putExtra("url", NetUrl.H5BASE_URL+"pages/jyo_pages/jyo_detail.html?id="+data.get(position).getId()+"&type=1");
                     context.startActivity(intent);
                 }else if(type == 3){
                     intent.setClass(context, GobernmentContentActivity.class);

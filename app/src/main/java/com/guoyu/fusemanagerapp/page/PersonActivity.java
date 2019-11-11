@@ -32,6 +32,7 @@ import com.guoyu.fusemanagerapp.dialog.DialogCustom;
 import com.guoyu.fusemanagerapp.dialog.DialogVersion;
 import com.guoyu.fusemanagerapp.dialog.ProgressDialog;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.GlideUtils;
 import com.guoyu.fusemanagerapp.util.Logger;
 import com.guoyu.fusemanagerapp.util.SpUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
@@ -135,9 +136,12 @@ public class PersonActivity extends BaseActivity {
                 PersonBean bean = gson.fromJson(s, PersonBean.class);
                 tvName.setText(bean.getData().getRealName());
                 tvPhone.setText(bean.getData().getUsername());
-                b = bean.getData().getUSER_PIC();
-                b=b.substring(0, b.lastIndexOf(","));
-                Glide.with(context).load(NetUrl.BASE_URL+b).into(ivHead);
+                if(bean.getData().getUSER_PIC()!=null){
+                    String[] pics = bean.getData().getUSER_PIC().split(",");
+                    if(pics.length>0){
+                        GlideUtils.into(context, NetUrl.BASE_URL+pics[0], ivHead);
+                    }
+                }
             }
         });
 
