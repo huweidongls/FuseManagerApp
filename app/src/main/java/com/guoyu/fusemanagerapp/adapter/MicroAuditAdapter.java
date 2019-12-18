@@ -128,10 +128,11 @@ public class MicroAuditAdapter extends RecyclerView.Adapter<MicroAuditAdapter.Vi
                         intent.putExtra("type", "0");
                         context.startActivity(intent);
                     }else {
-                        intent.setClass(context, AuditWeiguanActivity.class);
-                        intent.putExtra("bean", data.get(position));
-                        intent.putExtra("type", "1");
-                        context.startActivity(intent);
+//                        intent.setClass(context, AuditWeiguanActivity.class);
+//                        intent.putExtra("bean", data.get(position));
+//                        intent.putExtra("type", "1");
+//                        context.startActivity(intent);
+                        ToastUtil.showShort(context, "已审核");
                     }
                 }else {
                     if(status == 2){

@@ -5,9 +5,10 @@ package com.guoyu.fusemanagerapp.net;
  */
 
 public class NetUrl {
-    public static final String BASE_URL = "http://192.168.2.103:8080/";//http://192.168.2.211:8080/
+//    public static final String BASE_URL = "http://192.168.1.101:8080/";
 //    public static final String BASE_URL = "http://122.112.187.234:8888/";//http://192.168.2.211:8080/
     public static final String H5BASE_URL = "http://xfsysh5.5ijiaoyu.cn/";
+    public static final String BASE_URL = "http://112.101.203.127:9999/";
     //app商户登录/管理员登录
     public static final String AppUserappAdmuinLogin = "/AppUser/appAdmuinLogin";
     //管理端用户手机号验证码发送(注册)
@@ -80,6 +81,6 @@ public class NetUrl {
     public static final String AppGovernmentInfogetOne = "/AppGovernmentInfo/getOne";
     //教育发布部门信息
     public static final String AppConsultationInfofindDepartment = "/AppConsultationInfo/findDepartment";
-    //教育发布部门信息
+    //富文本传图片
     public static final String UploadImgappPicture = "UploadImg/appPicture";
 }
