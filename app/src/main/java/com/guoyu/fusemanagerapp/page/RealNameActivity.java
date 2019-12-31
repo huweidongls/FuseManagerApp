@@ -71,6 +71,7 @@ public class RealNameActivity extends BaseActivity {
         ViseUtil.Get(context, NetUrl.CitizenUsergetOne, map, new ViseUtil.ViseListener() {
             @Override
             public void onReturn(String s) {
+                Logger.e("123123", s);
                 Gson gson = new Gson();
                 UserGetoneBean bean = gson.fromJson(s, UserGetoneBean.class);
                 tvName.setText(bean.getData().getRealName());

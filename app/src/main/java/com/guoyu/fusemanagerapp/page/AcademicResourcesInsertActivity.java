@@ -19,6 +19,7 @@ import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.google.gson.Gson;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.bean.AcademicResourcesTypeBean;
+import com.guoyu.fusemanagerapp.bean.AppEducationInfofindTypeBean;
 import com.guoyu.fusemanagerapp.net.NetUrl;
 import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
@@ -54,16 +55,23 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
     EditText etSubTitle;
     @BindView(R.id.tv_content)
     TextView tvContent;
+    @BindView(R.id.spinner_type)
+    Spinner spinnerType;
 
     private int REQUEST_CODES = 102;
     private String pic = "";
     private int typeId = 0;
     private Dialog dialog;
     private String content = "";
+    private int type = 0;
 
     private ArrayAdapter<String> adapters;
     private List<String> list = new ArrayList<String>();
     private List<AcademicResourcesTypeBean.DataBean> mList;
+
+    private ArrayAdapter<String> adapterType;
+    private List<String> listType = new ArrayList<String>();
+    private List<AppEducationInfofindTypeBean.DataBean> mListType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +87,17 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = mListType.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -101,12 +120,30 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
                 spinnertext.setAdapter(adapters);
             }
         });
+
+        ViseUtil.Get(context, NetUrl.AppEducationInfofindType, null, new ViseUtil.ViseListener() {
+            @Override
+            public void onReturn(String s) {
+                Gson gson = new Gson();
+                AppEducationInfofindTypeBean bean = gson.fromJson(s, AppEducationInfofindTypeBean.class);
+                mListType = bean.getData();
+                for (AppEducationInfofindTypeBean.DataBean bean2 : bean.getData()) {
+                    listType.add(bean2.getItemName());
+                }
+                adapterType = new ArrayAdapter<String>(AcademicResourcesInsertActivity.this, android.R.layout.simple_spinner_item, listType);
+                //第三步：设置下拉列表下拉时的菜单样式
+                adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                //第四步：将适配器添加到下拉列表上
+                spinnerType.setAdapter(adapterType);
+            }
+        });
+
     }
 
     private void SaveInfo() {
         String title = et_title.getText().toString();
         String subTitle = etSubTitle.getText().toString();
-        if (StringUtils.isEmpty(title) || StringUtils.isEmpty(subTitle) || StringUtils.isEmpty(content) || typeId == 0 || StringUtils.isEmpty(pic)) {
+        if (StringUtils.isEmpty(title) || StringUtils.isEmpty(subTitle) || StringUtils.isEmpty(content) || typeId == 0 || type == 0 || StringUtils.isEmpty(pic)) {
             ToastUtil.showShort(context, "请把信息填写完整!");
         }else if(title.length()>200){
             ToastUtil.showShort(context, "标题字数不能超过200!");
@@ -120,6 +157,7 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
                     .addParam("contentTop", subTitle)
                     .addParam("content", content)
                     .addParam("publishDepartment", typeId + "")
+                    .addParam("scopeType", type+"")
                     .addFile("file0", file)
                     .request(new ACallback<String>() {
                         @Override
