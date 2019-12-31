@@ -5,9 +5,9 @@ package com.guoyu.fusemanagerapp.net;
  */
 
 public class NetUrl {
-    public static final String BASE_URL = "http://192.168.1.102:8080/";
+//    public static final String BASE_URL = "http://192.168.1.102:8080/";
 //    public static final String BASE_URL = "http://122.112.187.234:8888/";
-//    public static final String BASE_URL = "http://39.98.188.171:8088/";
+    public static final String BASE_URL = "http://39.98.188.171:8088/";
     public static final String H5BASE_URL = "http://xfsysh5.5ijiaoyu.cn/";
 //    public static final String BASE_URL = "http://112.101.203.127:9999/";
     //app商户登录/管理员登录
