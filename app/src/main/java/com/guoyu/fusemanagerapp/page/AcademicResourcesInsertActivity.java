@@ -193,6 +193,7 @@ public class AcademicResourcesInsertActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.tv_add_pic:
                 intent.setClass(context, FuwenbenActivity.class);
+                intent.putExtra("content", content);
                 startActivityForResult(intent, 1001);
                 break;
             case R.id.iv_black:

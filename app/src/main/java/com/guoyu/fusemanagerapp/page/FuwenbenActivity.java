@@ -1,7 +1,9 @@
 package com.guoyu.fusemanagerapp.page;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,8 +13,12 @@ import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.guoyu.fusemanagerapp.R;
 import com.guoyu.fusemanagerapp.base.BaseActivity;
 import com.guoyu.fusemanagerapp.net.NetUrl;
+import com.guoyu.fusemanagerapp.util.ImageUtil;
 import com.guoyu.fusemanagerapp.util.Logger;
+import com.guoyu.fusemanagerapp.util.StringUtil;
+import com.guoyu.fusemanagerapp.util.StringUtils;
 import com.guoyu.fusemanagerapp.util.ToastUtil;
+import com.guoyu.fusemanagerapp.util.WeiboDialogUtils;
 import com.sendtion.xrichtext.RichTextEditor;
 import com.vise.xsnow.http.ViseHttp;
 import com.vise.xsnow.http.callback.ACallback;
@@ -44,11 +50,15 @@ public class FuwenbenActivity extends BaseActivity {
 
     private int REQUEST_CODE = 101;
 
+    private String content = "";
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuwenben);
 
+        content = getIntent().getStringExtra("content");
         ButterKnife.bind(FuwenbenActivity.this);
         initData();
 
@@ -56,8 +66,84 @@ public class FuwenbenActivity extends BaseActivity {
 
     private void initData() {
 
+        if(!StringUtils.isEmpty(content)){
+            dialog = WeiboDialogUtils.createLoadingDialog(context, "请等待");
+            showDataSync(content);
+        }
 
+    }
 
+    /**
+     * 异步方式显示数据
+     */
+    private void showDataSync(final String html){
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) {
+                showEditData(emitter, html);
+            }
+        })
+                //.onBackpressureBuffer()
+                .subscribeOn(Schedulers.io())//生产事件在io
+                .observeOn(AndroidSchedulers.mainThread())//消费事件在UI线程
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onComplete() {
+                        WeiboDialogUtils.closeDialog(dialog);
+                        if (et_new_content != null) {
+                            //在图片全部插入完毕后，再插入一个EditText，防止最后一张图片后无法插入文字
+                            et_new_content.addEditTextAtIndex(et_new_content.getLastIndex(), "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        WeiboDialogUtils.closeDialog(dialog);
+                        ToastUtil.showShort(context, "解析错误：图片不存在或已损坏");
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+//                        subsLoading = d;
+                    }
+
+                    @Override
+                    public void onNext(String text) {
+                        try {
+                            if (et_new_content != null) {
+                                if (text.contains("<img") && text.contains("src=")) {
+                                    //imagePath可能是本地路径，也可能是网络地址
+                                    String imagePath = StringUtil.getImgSrc(text);
+                                    //Log.e("---", "###imagePath=" + imagePath);
+                                    //插入空的EditText，以便在图片前后插入文字
+                                    et_new_content.addEditTextAtIndex(et_new_content.getLastIndex(), "");
+                                    et_new_content.addImageViewAtIndex(et_new_content.getLastIndex(), imagePath);
+                                } else {
+                                    et_new_content.addEditTextAtIndex(et_new_content.getLastIndex(), text);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 显示数据
+     */
+    protected void showEditData(ObservableEmitter<String> emitter, String html) {
+        try{
+            List<String> textList = StringUtil.cutStringByImgTag(html);
+            for (int i = 0; i < textList.size(); i++) {
+                String text = textList.get(i);
+                emitter.onNext(text);
+            }
+            emitter.onComplete();
+        }catch (Exception e){
+            e.printStackTrace();
+            emitter.onError(e);
+        }
     }
 
     /**
