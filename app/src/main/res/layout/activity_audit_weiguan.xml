@@ -216,7 +216,7 @@
                     android:id="@+id/tv_cancel"
                     android:background="@drawable/bg_d62424_bord_23dp"
                     android:gravity="center"
-                    android:textColor="#D62424"
+                    android:textColor="@color/theme"
                     android:textSize="17sp"
                     android:text="审核拒绝"
                     android:layout_marginRight="15dp"

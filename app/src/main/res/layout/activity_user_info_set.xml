@@ -340,7 +340,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="40dp"
-                android:background="#D62424"
+                android:background="@color/theme"
                 android:text="保存个人信息"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp" />

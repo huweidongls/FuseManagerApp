@@ -41,7 +41,7 @@
             android:layout_height="2dp"
             android:layout_below="@+id/tv_t"
             android:layout_centerHorizontal="true"
-            android:background="#F03E3F"></View>
+            android:background="@color/theme"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -102,7 +102,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="46dp"
-        android:background="#D62424"
+        android:background="@color/theme"
         android:text="提交验证码"
         android:textColor="#FFFFFF"
         android:textSize="17sp" />
